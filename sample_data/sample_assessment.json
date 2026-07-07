@@ -1,0 +1,32 @@
+{
+  "sap_system": {
+    "sid": "ECC",
+    "host": "sapeccprd.company.com",
+    "client": "100",
+    "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+    "kernel_version": "753",
+    "hana_version": "SAP HANA 2.0 SP07"
+  },
+  "custom_code_summary": {
+    "total_objects": 116,
+    "total_lines_of_code": 87450,
+    "z_programs": 50,
+    "function_modules": 30,
+    "classes": 20,
+    "custom_tables": 10,
+    "badis": 3,
+    "user_exits": 3
+  },
+  "atc_summary": {
+    "total_findings": 20,
+    "critical": 5,
+    "high": 8,
+    "medium": 4,
+    "low": 3
+  },
+  "risk_summary": {
+    "overall_score": 42.5,
+    "risk_level": "high",
+    "estimated_effort_days": 52
+  }
+}

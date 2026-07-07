@@ -1,0 +1,99 @@
+version: "3.9"
+
+services:
+  # ── PostgreSQL ─────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: sap_migration_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: sap_agent
+      POSTGRES_PASSWORD: sap_agent
+      POSTGRES_DB: sap_migration
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sap_agent -d sap_migration"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── ChromaDB ───────────────────────────────────────────────────────────────
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: sap_migration_chroma
+    restart: unless-stopped
+    ports:
+      - "8001:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER: ""
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+  # ── FastAPI Backend ────────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    container_name: sap_migration_api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: "postgresql+asyncpg://sap_agent:sap_agent@postgres:5432/sap_migration"
+      DATABASE_URL_SYNC: "postgresql://sap_agent:sap_agent@postgres:5432/sap_migration"
+      CHROMA_HOST: "chromadb"
+      CHROMA_PORT: "8000"
+      SAP_USE_MOCK: "true"
+      LOG_LEVEL: "INFO"
+      REPORTS_OUTPUT_DIR: "/app/output/reports"
+    env_file:
+      - .env.example
+    volumes:
+      - ./output:/app/output
+      - .:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+      chromadb:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 20s
+      timeout: 10s
+      retries: 5
+
+  # ── Streamlit Frontend ─────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.frontend
+    container_name: sap_migration_frontend
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    environment:
+      API_BASE_URL: "http://api:8000"
+      SAP_USE_MOCK: "true"
+      REPORTS_OUTPUT_DIR: "/app/output/reports"
+    volumes:
+      - ./output:/app/output
+      - .:/app
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:
+  chroma_data:
+
+networks:
+  default:
+    name: sap_migration_network
