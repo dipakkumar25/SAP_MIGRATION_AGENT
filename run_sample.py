@@ -1,6 +1,9 @@
-﻿"""
+"""
 Run the 9-agent SAP migration assessment pipeline with sample data.
 Stubs ONLY the two problem modules (database + orm_models) and FastAPI.
+
+After the pipeline completes, a self-contained HTML dashboard is written to:
+    output/reports/dashboard_<assessment_id>_static.html
 """
 import sys, json, types
 from pathlib import Path
@@ -53,6 +56,14 @@ print("Mode   : Mock RFC  |  Rule-based AI (no OpenAI key required)")
 print()
 
 state = run_assessment(system, assessment_id="demo-001")
+
+# ── Generate static HTML dashboard ───────────────────────────────────────────
+from app.reports.html_dashboard import generate_static_dashboard
+_dash_path = Path("output/reports") / f"dashboard_{state.assessment_id}_static.html"
+generate_static_dashboard(state, _dash_path)
+print(f"\n{'='*60}")
+print(f" Dashboard written -> {_dash_path}")
+print(f"{'='*60}\n")
 
 SEP = "-" * 60
 print()
