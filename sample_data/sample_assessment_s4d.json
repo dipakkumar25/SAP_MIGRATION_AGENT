@@ -1,0 +1,63 @@
+﻿{
+  "sap_system": {
+    "sid": "S4D",
+    "host": "saps4dev.company.com",
+    "client": "100",
+    "description": "S/4HANA 2023 Sandbox – conversion test system for ECC migration validation",
+    "sap_version": "SAP S/4HANA 2023 (Release 2308)",
+    "kernel_version": "796",
+    "hana_version": "SAP HANA 2.0 SP07",
+    "landscape": {
+      "app_servers": 1,
+      "active_clients": 2,
+      "rfc_destinations": 4,
+      "transport_routes": 1,
+      "installed_components": 6
+    }
+  },
+  "custom_code_summary": {
+    "total_objects": 280,
+    "total_lines_of_code": 312000,
+    "z_programs": 165,
+    "function_modules": 52,
+    "classes": 38,
+    "custom_tables": 18,
+    "badis": 5,
+    "user_exits": 2,
+    "enhancement_spots": 1,
+    "notes": "Subset of ECC objects already adapted and transported to S4D sandbox"
+  },
+  "atc_summary": {
+    "total_findings": 28,
+    "critical": 6,
+    "high": 9,
+    "medium": 10,
+    "low": 3,
+    "objects_checked": 270,
+    "categories": {
+      "OBSOLETE_API": 12,
+      "SECURITY": 6,
+      "PERFORMANCE": 6,
+      "ROBUSTNESS": 4
+    },
+    "notes": "Post-remediation ATC run – critical count reduced from 22 to 6 after first fix wave"
+  },
+  "simplification_summary": {
+    "total_items": 38,
+    "removed_transactions": 6,
+    "deprecated_fms": 7,
+    "deprecated_tables": 8,
+    "compatibility_views": 5,
+    "universal_journal_impacts": 5,
+    "business_partner_items": 4,
+    "material_ledger_items": 3,
+    "notes": "BP migration and Universal Journal migration completed in sandbox"
+  },
+  "risk_summary": {
+    "overall_score": 71.5,
+    "risk_level": "medium",
+    "estimated_effort_days": 42,
+    "critical_areas": ["Remaining SQL injection issues","REUSE_ALV migration","HR infotype FM replacement"],
+    "notes": "Risk improved from HIGH (ECC) to MEDIUM after first remediation sprint"
+  }
+}

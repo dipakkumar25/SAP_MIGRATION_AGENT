@@ -1,32 +1,60 @@
-{
+﻿{
   "sap_system": {
     "sid": "ECC",
     "host": "sapeccprd.company.com",
     "client": "100",
+    "description": "ECC Production – Large enterprise footprint across FI, MM, SD, HR, PP, WM, PM, QM, CO",
     "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
     "kernel_version": "753",
-    "hana_version": "SAP HANA 2.0 SP07"
+    "hana_version": "SAP HANA 2.0 SP07",
+    "landscape": {
+      "app_servers": 2,
+      "active_clients": 5,
+      "rfc_destinations": 10,
+      "transport_routes": 3,
+      "installed_components": 10
+    }
   },
   "custom_code_summary": {
-    "total_objects": 116,
-    "total_lines_of_code": 87450,
-    "z_programs": 50,
-    "function_modules": 30,
-    "classes": 20,
-    "custom_tables": 10,
-    "badis": 3,
-    "user_exits": 3
+    "total_objects": 405,
+    "total_lines_of_code": 498250,
+    "z_programs": 250,
+    "function_modules": 80,
+    "classes": 50,
+    "custom_tables": 25,
+    "badis": 8,
+    "user_exits": 6,
+    "enhancement_spots": 2,
+    "modules_covered": ["FI","MM","SD","HR","PP","WM","PM","QM","CO","INT"]
   },
   "atc_summary": {
-    "total_findings": 20,
-    "critical": 5,
-    "high": 8,
-    "medium": 4,
-    "low": 3
+    "total_findings": 65,
+    "critical": 22,
+    "high": 18,
+    "medium": 16,
+    "low": 9,
+    "objects_checked": 380,
+    "categories": {
+      "OBSOLETE_API": 40,
+      "SECURITY": 15,
+      "PERFORMANCE": 6,
+      "ROBUSTNESS": 4
+    }
+  },
+  "simplification_summary": {
+    "total_items": 46,
+    "removed_transactions": 8,
+    "deprecated_fms": 10,
+    "deprecated_tables": 10,
+    "compatibility_views": 5,
+    "universal_journal_impacts": 5,
+    "business_partner_items": 6,
+    "material_ledger_items": 4
   },
   "risk_summary": {
-    "overall_score": 42.5,
+    "overall_score": 38.5,
     "risk_level": "high",
-    "estimated_effort_days": 52
+    "estimated_effort_days": 95,
+    "critical_areas": ["Universal Journal migration","Business Partner conversion","SQL injection remediation","LIST_FROM_MEMORY replacement"]
   }
 }

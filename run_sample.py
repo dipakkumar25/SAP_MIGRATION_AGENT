@@ -41,7 +41,7 @@ from app.graph.workflow import run_assessment
 from app.models.schemas import SAPSystem
 
 # ── Load sample data ─────────────────────────────────────────────────────────
-sample = json.load(open("sample_data/sample_assessment.json"))
+sample = json.load(open("sample_data/sample_assessment.json", encoding="utf-8-sig"))
 sap    = sample["sap_system"]
 system = SAPSystem(sid=sap["sid"], host=sap["host"], client=sap["client"])
 
