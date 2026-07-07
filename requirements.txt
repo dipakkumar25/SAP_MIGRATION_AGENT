@@ -24,7 +24,7 @@ openai==1.35.3
 sqlalchemy==2.0.31
 alembic==1.13.1
 asyncpg==0.29.0
-psycopg2-binary==2.9.9
+psycopg[binary]==2.9.9
 
 # ── Vector DB ────────────────────────────────────────────────────────────────
 chromadb==0.5.3

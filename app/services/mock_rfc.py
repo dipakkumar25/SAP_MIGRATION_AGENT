@@ -32,8 +32,23 @@ def _transport() -> str:
     return f"{_TRANSPORT_PREFIX}{random.randint(100000, 999999)}"
 
 
+# Module-level dispatch table and decorator — avoids NameError in Python 3.12+
+# where the class name is not available inside the class body during decoration.
+_RFC_DISPATCH: Dict[str, Any] = {}
+
+
+def _register(name: str):
+    """Register a method as handler for the named RFC function module."""
+    def decorator(fn):
+        _RFC_DISPATCH[name] = fn
+        return fn
+    return decorator
+
+
 class MockRFCClient:
     """Drop-in replacement for pyrfc.Connection."""
+
+    _dispatch = _RFC_DISPATCH
 
     def __init__(self, **params: Any) -> None:
         self._params = params
@@ -47,14 +62,6 @@ class MockRFCClient:
         if method is None:
             raise NotImplementedError(f"Mock not implemented for: {func_module}")
         return method(self, **kwargs)
-
-    _dispatch: Dict[str, Any] = {}
-
-    def _register(name: str):  # noqa: N805 (decorator inside class)
-        def decorator(fn):
-            MockRFCClient._dispatch[name] = fn
-            return fn
-        return decorator
 
     # ── RFC handlers ─────────────────────────────────────────────────────────
 
