@@ -1,0 +1,322 @@
+[
+  {
+    "sap_system": {
+      "sid": "SD1",
+      "host": "sapsdprd01.company.com",
+      "client": "100",
+      "description": "SD Production – Order-to-Cash, Billing, Shipping and Credit Management",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 8, "transport_routes": 3, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 340, "total_lines_of_code": 432000, "z_programs": 200, "function_modules": 68, "classes": 44, "custom_tables": 22, "badis": 7, "user_exits": 6, "enhancement_spots": 3, "modules_covered": ["SD","FI","MM","CO","LE"] },
+    "atc_summary": { "total_findings": 56, "critical": 19, "high": 16, "medium": 14, "low": 7, "objects_checked": 328, "categories": { "OBSOLETE_API": 34, "SECURITY": 13, "PERFORMANCE": 6, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 40, "removed_transactions": 7, "deprecated_fms": 10, "deprecated_tables": 10, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 5, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 36.0, "risk_level": "high", "estimated_effort_days": 88, "critical_areas": ["Business Partner migration from Customer", "Pricing procedure custom routines", "SD–FI revenue account determination"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD2",
+      "host": "sapsdprd02.company.com",
+      "client": "200",
+      "description": "SD Global – Multi-region Order-to-Cash with EDI and e-commerce",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 4, "active_clients": 8, "rfc_destinations": 18, "transport_routes": 5, "installed_components": 14 }
+    },
+    "custom_code_summary": { "total_objects": 590, "total_lines_of_code": 780000, "z_programs": 352, "function_modules": 118, "classes": 74, "custom_tables": 38, "badis": 14, "user_exits": 11, "enhancement_spots": 6, "modules_covered": ["SD","FI","MM","CO","LE","EDI","CRM"] },
+    "atc_summary": { "total_findings": 98, "critical": 34, "high": 28, "medium": 24, "low": 12, "objects_checked": 572, "categories": { "OBSOLETE_API": 60, "SECURITY": 22, "PERFORMANCE": 11, "ROBUSTNESS": 5 } },
+    "simplification_summary": { "total_items": 70, "removed_transactions": 13, "deprecated_fms": 18, "deprecated_tables": 16, "compatibility_views": 9, "universal_journal_impacts": 7, "business_partner_items": 8, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 23.0, "risk_level": "critical", "estimated_effort_days": 190, "critical_areas": ["EDI IDOC customer master migration", "e-commerce order ingestion rewrite", "Global pricing engine custom exit"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD3",
+      "host": "sapsddev.company.com",
+      "client": "100",
+      "description": "SD Development – Lean SD sandbox for Fiori order entry testing",
+      "sap_version": "SAP ECC 6.0 EHP6 (Release 730)",
+      "kernel_version": "745",
+      "hana_version": null,
+      "landscape": { "app_servers": 1, "active_clients": 2, "rfc_destinations": 3, "transport_routes": 1, "installed_components": 5 }
+    },
+    "custom_code_summary": { "total_objects": 85, "total_lines_of_code": 90000, "z_programs": 50, "function_modules": 15, "classes": 8, "custom_tables": 5, "badis": 2, "user_exits": 1, "enhancement_spots": 0, "modules_covered": ["SD","MM"] },
+    "atc_summary": { "total_findings": 12, "critical": 3, "high": 3, "medium": 4, "low": 2, "objects_checked": 82, "categories": { "OBSOLETE_API": 7, "SECURITY": 3, "PERFORMANCE": 1, "ROBUSTNESS": 1 } },
+    "simplification_summary": { "total_items": 8, "removed_transactions": 2, "deprecated_fms": 2, "deprecated_tables": 2, "compatibility_views": 1, "universal_journal_impacts": 1, "business_partner_items": 0, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 75.0, "risk_level": "low", "estimated_effort_days": 14, "critical_areas": ["Output determination legacy NACE migration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD4",
+      "host": "sapsdqa.company.com",
+      "client": "300",
+      "description": "SD QA – Regression testing for billing and rebate management",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 1, "active_clients": 3, "rfc_destinations": 5, "transport_routes": 2, "installed_components": 6 }
+    },
+    "custom_code_summary": { "total_objects": 185, "total_lines_of_code": 220000, "z_programs": 110, "function_modules": 36, "classes": 23, "custom_tables": 12, "badis": 4, "user_exits": 3, "enhancement_spots": 1, "modules_covered": ["SD","FI","MM"] },
+    "atc_summary": { "total_findings": 29, "critical": 9, "high": 8, "medium": 8, "low": 4, "objects_checked": 178, "categories": { "OBSOLETE_API": 17, "SECURITY": 7, "PERFORMANCE": 3, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 20, "removed_transactions": 4, "deprecated_fms": 5, "deprecated_tables": 5, "compatibility_views": 2, "universal_journal_impacts": 2, "business_partner_items": 2, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 54.0, "risk_level": "medium", "estimated_effort_days": 42, "critical_areas": ["Rebate settlement custom logic", "Billing plan calendar migration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD5",
+      "host": "sapsd5prd.company.com",
+      "client": "100",
+      "description": "SD Automotive – Vehicle ordering, fleet management and dealer billing",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 3, "active_clients": 6, "rfc_destinations": 13, "transport_routes": 4, "installed_components": 11 }
+    },
+    "custom_code_summary": { "total_objects": 460, "total_lines_of_code": 590000, "z_programs": 275, "function_modules": 92, "classes": 60, "custom_tables": 30, "badis": 10, "user_exits": 8, "enhancement_spots": 4, "modules_covered": ["SD","FI","MM","CO","LE","CRM"] },
+    "atc_summary": { "total_findings": 76, "critical": 26, "high": 22, "medium": 19, "low": 9, "objects_checked": 445, "categories": { "OBSOLETE_API": 46, "SECURITY": 17, "PERFORMANCE": 9, "ROBUSTNESS": 4 } },
+    "simplification_summary": { "total_items": 54, "removed_transactions": 10, "deprecated_fms": 14, "deprecated_tables": 12, "compatibility_views": 7, "universal_journal_impacts": 6, "business_partner_items": 6, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 29.0, "risk_level": "critical", "estimated_effort_days": 125, "critical_areas": ["Vehicle configuration order custom exits", "Dealer commission calculation", "Model year changeover pricing"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD6",
+      "host": "sapsd6prd.company.com",
+      "client": "100",
+      "description": "SD Retail – Wholesale billing, customer returns and promotions",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 2, "active_clients": 5, "rfc_destinations": 10, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 388, "total_lines_of_code": 498000, "z_programs": 230, "function_modules": 76, "classes": 50, "custom_tables": 25, "badis": 8, "user_exits": 6, "enhancement_spots": 3, "modules_covered": ["SD","MM","FI","CO","WM"] },
+    "atc_summary": { "total_findings": 63, "critical": 21, "high": 18, "medium": 16, "low": 8, "objects_checked": 374, "categories": { "OBSOLETE_API": 38, "SECURITY": 14, "PERFORMANCE": 7, "ROBUSTNESS": 4 } },
+    "simplification_summary": { "total_items": 45, "removed_transactions": 8, "deprecated_fms": 11, "deprecated_tables": 11, "compatibility_views": 6, "universal_journal_impacts": 5, "business_partner_items": 4, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 34.0, "risk_level": "high", "estimated_effort_days": 95, "critical_areas": ["Promotional pricing custom condition tables", "Returns processing reversal logic", "POD (Proof of Delivery) integration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD7",
+      "host": "sapsd7prd.company.com",
+      "client": "100",
+      "description": "SD Services – Service order billing and service contract management",
+      "sap_version": "SAP ECC 6.0 EHP7 (Release 731)",
+      "kernel_version": "749",
+      "hana_version": null,
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 7, "transport_routes": 3, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 270, "total_lines_of_code": 338000, "z_programs": 160, "function_modules": 54, "classes": 35, "custom_tables": 18, "badis": 5, "user_exits": 5, "enhancement_spots": 2, "modules_covered": ["SD","CS","FI","CO","PM"] },
+    "atc_summary": { "total_findings": 44, "critical": 14, "high": 13, "medium": 11, "low": 6, "objects_checked": 260, "categories": { "OBSOLETE_API": 26, "SECURITY": 10, "PERFORMANCE": 6, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 30, "removed_transactions": 5, "deprecated_fms": 7, "deprecated_tables": 8, "compatibility_views": 4, "universal_journal_impacts": 3, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 42.0, "risk_level": "high", "estimated_effort_days": 68, "critical_areas": ["Service contract revenue recognition", "Warranty claim billing migration", "CS-SD coupling custom enhancement"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD8",
+      "host": "sapsd8prd.company.com",
+      "client": "100",
+      "description": "SD Pharma – Pharmaceutical distribution with serialisation and batch traceability",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 9, "transport_routes": 3, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 360, "total_lines_of_code": 460000, "z_programs": 214, "function_modules": 72, "classes": 46, "custom_tables": 23, "badis": 8, "user_exits": 6, "enhancement_spots": 3, "modules_covered": ["SD","MM","QM","FI","CO","LE"] },
+    "atc_summary": { "total_findings": 59, "critical": 20, "high": 17, "medium": 15, "low": 7, "objects_checked": 348, "categories": { "OBSOLETE_API": 35, "SECURITY": 14, "PERFORMANCE": 7, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 42, "removed_transactions": 8, "deprecated_fms": 10, "deprecated_tables": 10, "compatibility_views": 6, "universal_journal_impacts": 5, "business_partner_items": 4, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 35.0, "risk_level": "high", "estimated_effort_days": 90, "critical_areas": ["Serialization number migration", "Goods issue batch check exit", "Recall order processing custom logic"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD9",
+      "host": "sapsd9prd.company.com",
+      "client": "100",
+      "description": "SD Subscription – Subscription billing for media/SaaS with MRR tracking",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 9, "transport_routes": 3, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 295, "total_lines_of_code": 375000, "z_programs": 175, "function_modules": 60, "classes": 38, "custom_tables": 19, "badis": 6, "user_exits": 5, "enhancement_spots": 2, "modules_covered": ["SD","FI","CO","CS"] },
+    "atc_summary": { "total_findings": 48, "critical": 16, "high": 14, "medium": 12, "low": 6, "objects_checked": 284, "categories": { "OBSOLETE_API": 29, "SECURITY": 11, "PERFORMANCE": 6, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 33, "removed_transactions": 6, "deprecated_fms": 8, "deprecated_tables": 7, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 40.0, "risk_level": "high", "estimated_effort_days": 72, "critical_areas": ["Revenue recognition IFRS 15 migration", "Deferred billing custom program", "Subscription proration logic"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD10",
+      "host": "sapsd10prd.company.com",
+      "client": "100",
+      "description": "SD Export – Export sales with customs, letter of credit and INCOTERMS",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 10, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 310, "total_lines_of_code": 395000, "z_programs": 184, "function_modules": 63, "classes": 41, "custom_tables": 21, "badis": 6, "user_exits": 5, "enhancement_spots": 2, "modules_covered": ["SD","FI","MM","LE","GTS"] },
+    "atc_summary": { "total_findings": 51, "critical": 17, "high": 14, "medium": 13, "low": 7, "objects_checked": 298, "categories": { "OBSOLETE_API": 31, "SECURITY": 12, "PERFORMANCE": 5, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 35, "removed_transactions": 6, "deprecated_fms": 9, "deprecated_tables": 8, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 38.0, "risk_level": "high", "estimated_effort_days": 80, "critical_areas": ["Foreign trade export license checks", "Letter of credit management", "GTS compliance screening integration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD11",
+      "host": "sapsd11prd.company.com",
+      "client": "100",
+      "description": "SD Small Site – Lean SD instance, domestic sales only",
+      "sap_version": "SAP ECC 6.0 EHP5 (Release 702)",
+      "kernel_version": "742",
+      "hana_version": null,
+      "landscape": { "app_servers": 1, "active_clients": 1, "rfc_destinations": 2, "transport_routes": 1, "installed_components": 4 }
+    },
+    "custom_code_summary": { "total_objects": 62, "total_lines_of_code": 55000, "z_programs": 36, "function_modules": 12, "classes": 5, "custom_tables": 4, "badis": 1, "user_exits": 1, "enhancement_spots": 0, "modules_covered": ["SD","FI"] },
+    "atc_summary": { "total_findings": 8, "critical": 2, "high": 2, "medium": 3, "low": 1, "objects_checked": 60, "categories": { "OBSOLETE_API": 5, "SECURITY": 2, "PERFORMANCE": 1, "ROBUSTNESS": 0 } },
+    "simplification_summary": { "total_items": 6, "removed_transactions": 1, "deprecated_fms": 1, "deprecated_tables": 2, "compatibility_views": 1, "universal_journal_impacts": 1, "business_partner_items": 0, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 80.0, "risk_level": "low", "estimated_effort_days": 10, "critical_areas": ["Legacy smartform billing document migration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD12",
+      "host": "sapsd12prd.company.com",
+      "client": "100",
+      "description": "SD Intercompany – Cross-company sales and internal billing flows",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 5, "rfc_destinations": 12, "transport_routes": 4, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 280, "total_lines_of_code": 355000, "z_programs": 166, "function_modules": 56, "classes": 36, "custom_tables": 18, "badis": 6, "user_exits": 5, "enhancement_spots": 2, "modules_covered": ["SD","FI","CO","MM"] },
+    "atc_summary": { "total_findings": 45, "critical": 15, "high": 13, "medium": 11, "low": 6, "objects_checked": 270, "categories": { "OBSOLETE_API": 27, "SECURITY": 11, "PERFORMANCE": 5, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 32, "removed_transactions": 6, "deprecated_fms": 8, "deprecated_tables": 7, "compatibility_views": 4, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 42.0, "risk_level": "high", "estimated_effort_days": 66, "critical_areas": ["Intercompany billing custom enhancement", "Transfer pricing condition migration", "Cross-system RFC billing flow"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD13",
+      "host": "sapsd13prd.company.com",
+      "client": "100",
+      "description": "SD Leasing – Equipment leasing with milestone billing and asset integration",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 8, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 320, "total_lines_of_code": 410000, "z_programs": 190, "function_modules": 64, "classes": 42, "custom_tables": 21, "badis": 7, "user_exits": 5, "enhancement_spots": 3, "modules_covered": ["SD","FI","AA","CO","CS"] },
+    "atc_summary": { "total_findings": 53, "critical": 18, "high": 15, "medium": 13, "low": 7, "objects_checked": 308, "categories": { "OBSOLETE_API": 32, "SECURITY": 13, "PERFORMANCE": 6, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 37, "removed_transactions": 7, "deprecated_fms": 9, "deprecated_tables": 9, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 36.0, "risk_level": "high", "estimated_effort_days": 85, "critical_areas": ["Leasing contract milestone billing", "Asset value determination at return", "IFRS 16 lease liability integration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD14",
+      "host": "sapsd14prd.company.com",
+      "client": "100",
+      "description": "SD Food & Bev – FMCG order management with trade promotions",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 3, "active_clients": 5, "rfc_destinations": 12, "transport_routes": 3, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 410, "total_lines_of_code": 528000, "z_programs": 244, "function_modules": 82, "classes": 54, "custom_tables": 27, "badis": 9, "user_exits": 7, "enhancement_spots": 4, "modules_covered": ["SD","MM","FI","CO","LE","WM"] },
+    "atc_summary": { "total_findings": 68, "critical": 23, "high": 19, "medium": 17, "low": 9, "objects_checked": 396, "categories": { "OBSOLETE_API": 41, "SECURITY": 16, "PERFORMANCE": 8, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 48, "removed_transactions": 9, "deprecated_fms": 12, "deprecated_tables": 11, "compatibility_views": 7, "universal_journal_impacts": 5, "business_partner_items": 4, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 31.0, "risk_level": "high", "estimated_effort_days": 110, "critical_areas": ["Trade promotion accruals migration", "Variable case size pricing logic", "Customer rebate agreement settlement"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD15",
+      "host": "sapsd15prd.company.com",
+      "client": "100",
+      "description": "SD Telecom – Telco product sales with bundling and commissioning",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 10, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 370, "total_lines_of_code": 472000, "z_programs": 220, "function_modules": 73, "classes": 48, "custom_tables": 24, "badis": 8, "user_exits": 6, "enhancement_spots": 3, "modules_covered": ["SD","FI","CO","CRM","CS"] },
+    "atc_summary": { "total_findings": 61, "critical": 20, "high": 17, "medium": 16, "low": 8, "objects_checked": 356, "categories": { "OBSOLETE_API": 37, "SECURITY": 14, "PERFORMANCE": 7, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 43, "removed_transactions": 8, "deprecated_fms": 11, "deprecated_tables": 10, "compatibility_views": 6, "universal_journal_impacts": 5, "business_partner_items": 4, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 35.0, "risk_level": "high", "estimated_effort_days": 90, "critical_areas": ["Product bundle pricing exit", "Agent commission settlement", "Subscription lifecycle billing"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD16",
+      "host": "sapsd16prd.company.com",
+      "client": "100",
+      "description": "SD Utilities – Utility billing and meter-to-cash processing",
+      "sap_version": "SAP ECC 6.0 EHP7 (Release 731)",
+      "kernel_version": "749",
+      "hana_version": null,
+      "landscape": { "app_servers": 2, "active_clients": 3, "rfc_destinations": 6, "transport_routes": 2, "installed_components": 7 }
+    },
+    "custom_code_summary": { "total_objects": 230, "total_lines_of_code": 285000, "z_programs": 136, "function_modules": 46, "classes": 30, "custom_tables": 15, "badis": 5, "user_exits": 4, "enhancement_spots": 2, "modules_covered": ["SD","FI","IS-U","CO"] },
+    "atc_summary": { "total_findings": 37, "critical": 12, "high": 10, "medium": 10, "low": 5, "objects_checked": 222, "categories": { "OBSOLETE_API": 22, "SECURITY": 9, "PERFORMANCE": 4, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 25, "removed_transactions": 5, "deprecated_fms": 6, "deprecated_tables": 6, "compatibility_views": 3, "universal_journal_impacts": 3, "business_partner_items": 2, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 46.0, "risk_level": "medium", "estimated_effort_days": 56, "critical_areas": ["IS-U device management integration", "Meter read billing migration", "Dunning custom logic"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD17",
+      "host": "sapsd17prd.company.com",
+      "client": "100",
+      "description": "SD Engineering – Project-based sales with WBS billing milestones",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 8, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 290, "total_lines_of_code": 368000, "z_programs": 172, "function_modules": 58, "classes": 38, "custom_tables": 19, "badis": 6, "user_exits": 5, "enhancement_spots": 2, "modules_covered": ["SD","PS","FI","CO","MM"] },
+    "atc_summary": { "total_findings": 47, "critical": 16, "high": 13, "medium": 12, "low": 6, "objects_checked": 278, "categories": { "OBSOLETE_API": 28, "SECURITY": 11, "PERFORMANCE": 6, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 32, "removed_transactions": 6, "deprecated_fms": 8, "deprecated_tables": 7, "compatibility_views": 4, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 41.0, "risk_level": "high", "estimated_effort_days": 70, "critical_areas": ["Project billing plan migration", "Down payment request logic", "Revenue recognition timing"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD18",
+      "host": "sapsd18prd.company.com",
+      "client": "100",
+      "description": "SD Healthcare – Hospital supply sales with tender and contract pricing",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 9, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 335, "total_lines_of_code": 425000, "z_programs": 198, "function_modules": 66, "classes": 44, "custom_tables": 22, "badis": 7, "user_exits": 5, "enhancement_spots": 3, "modules_covered": ["SD","FI","MM","QM","CO"] },
+    "atc_summary": { "total_findings": 55, "critical": 18, "high": 16, "medium": 14, "low": 7, "objects_checked": 322, "categories": { "OBSOLETE_API": 33, "SECURITY": 13, "PERFORMANCE": 7, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 38, "removed_transactions": 7, "deprecated_fms": 10, "deprecated_tables": 9, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 37.0, "risk_level": "high", "estimated_effort_days": 84, "critical_areas": ["Tender price list migration", "Hospital consignment returns", "Sales rep territory commission"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD19",
+      "host": "sapsd19prd.company.com",
+      "client": "100",
+      "description": "SD Digital – E-commerce order fulfilment with API-first order ingestion",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 3, "active_clients": 5, "rfc_destinations": 14, "transport_routes": 4, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 430, "total_lines_of_code": 556000, "z_programs": 257, "function_modules": 86, "classes": 56, "custom_tables": 28, "badis": 9, "user_exits": 7, "enhancement_spots": 4, "modules_covered": ["SD","FI","MM","LE","WM","API"] },
+    "atc_summary": { "total_findings": 70, "critical": 24, "high": 20, "medium": 17, "low": 9, "objects_checked": 415, "categories": { "OBSOLETE_API": 43, "SECURITY": 16, "PERFORMANCE": 8, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 50, "removed_transactions": 9, "deprecated_fms": 13, "deprecated_tables": 11, "compatibility_views": 7, "universal_journal_impacts": 6, "business_partner_items": 5, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 30.0, "risk_level": "critical", "estimated_effort_days": 118, "critical_areas": ["REST API IDOC inbound migration", "Real-time availability check custom FM", "Digital channel pricing interface"] }
+  },
+  {
+    "sap_system": {
+      "sid": "SD20",
+      "host": "sapsd20prd.company.com",
+      "client": "100",
+      "description": "SD Mining – Bulk commodity sales with ship-loading and weight-based billing",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 9, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 315, "total_lines_of_code": 400000, "z_programs": 187, "function_modules": 63, "classes": 42, "custom_tables": 21, "badis": 7, "user_exits": 5, "enhancement_spots": 2, "modules_covered": ["SD","FI","MM","CO","LE"] },
+    "atc_summary": { "total_findings": 52, "critical": 17, "high": 15, "medium": 13, "low": 7, "objects_checked": 304, "categories": { "OBSOLETE_API": 31, "SECURITY": 12, "PERFORMANCE": 6, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 36, "removed_transactions": 7, "deprecated_fms": 9, "deprecated_tables": 8, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 37.5, "risk_level": "high", "estimated_effort_days": 82, "critical_areas": ["Weight bridge integration migration", "Commodity price index billing exit", "Ship-loading schedule custom program"] }
+  }
+]

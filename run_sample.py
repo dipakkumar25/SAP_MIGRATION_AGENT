@@ -43,26 +43,70 @@ for _m in ("fastapi", "starlette", "starlette.status", "starlette.middleware",
 from app.graph.workflow import run_assessment
 from app.models.schemas import SAPSystem
 
-# ── Load sample data ─────────────────────────────────────────────────────────
-sample = json.load(open("sample_data/sample_assessment.json", encoding="utf-8-sig"))
-sap    = sample["sap_system"]
-system = SAPSystem(sid=sap["sid"], host=sap["host"], client=sap["client"])
+# ── Multi-system sample configuration ────────────────────────────────────────
+# Each entry: (sample_json_file, index_into_array_or_None, assessment_id)
+# index=None means the file is a single object (not an array)
+_SYSTEMS = [
+    ("sample_data/sample_assessment.json",       None, "demo-ECC"),
+    ("sample_data/sample_mm_assessments.json",   0,    "demo-MM1"),
+    ("sample_data/sample_hr_assessments.json",   0,    "demo-HR1"),
+    ("sample_data/sample_sd_assessments.json",   0,    "demo-SD1"),
+    ("sample_data/sample_grc_assessments.json",  0,    "demo-GRC1"),
+    ("sample_data/sample_apo_assessments.json",  0,    "demo-APO1"),
+    ("sample_data/sample_crm_assessments.json",  0,    "demo-CRM1"),
+]
 
 print("=" * 60)
-print(" SAP Migration Assessment Agent  --  Sample Run")
+print(" SAP Migration Assessment Agent  --  Multi-System Run")
 print("=" * 60)
-print("System :", system.sid, "@", system.host)
 print("Mode   : Mock RFC  |  Rule-based AI (no OpenAI key required)")
+print(f"Systems: {len(_SYSTEMS)} SAP systems will be assessed")
 print()
 
-state = run_assessment(system, assessment_id="demo-001")
+all_states = []
+for _sample_file, _idx, _aid in _SYSTEMS:
+    _raw = json.load(open(_sample_file, encoding="utf-8-sig"))
+    _entry = _raw[_idx] if isinstance(_raw, list) else _raw
+    _sap   = _entry["sap_system"]
+    _desc  = _sap.get("description", "")
+    _system = SAPSystem(
+        sid=_sap["sid"], host=_sap["host"],
+        client=_sap.get("client", "100"),
+        description=_desc,
+    )
+    print(f"  [{_aid}]  Running assessment for {_system.sid} — {_desc[:60]}")
+    _state = run_assessment(_system, assessment_id=_aid)
+    all_states.append(_state)
+    _score = _state.readiness_score.overall_score if _state.readiness_score else 'N/A'
+    _risk  = _state.readiness_score.risk_level.value.upper() if _state.readiness_score else 'N/A'
+    print(f"           Done  score={_score}  risk={_risk}")
 
-# ── Generate static HTML dashboard ───────────────────────────────────────────
-from app.reports.html_dashboard import generate_static_dashboard
+print()
+
+# Use the first state for the single-system dashboard (backward compat)
+state = all_states[0]
+
+# ── Generate single-system static HTML dashboard (backward compat) ────────────
+from app.reports.html_dashboard import (
+    generate_static_dashboard,
+    generate_multi_system_dashboard,
+    generate_unified_dashboard,
+)
 _dash_path = Path("output/reports") / f"dashboard_{state.assessment_id}_static.html"
 generate_static_dashboard(state, _dash_path)
+
+# ── Generate multi-system comparison dashboard ────────────────────────────────
+_multi_dash_path = Path("output/reports") / "dashboard_multi_system.html"
+generate_multi_system_dashboard(all_states, _multi_dash_path)
+
+# ── Generate unified SAP Agentic AI dashboard (all systems + deep-dive) ───────
+_unified_dash_path = Path("output/reports") / "dashboard_unified_agentic_ai.html"
+generate_unified_dashboard(all_states, _unified_dash_path)
+
 print(f"\n{'='*60}")
-print(f" Dashboard written -> {_dash_path}")
+print(f" Single-system dashboard  -> {_dash_path}")
+print(f" Multi-system dashboard   -> {_multi_dash_path}")
+print(f" Unified Agentic AI dash  -> {_unified_dash_path}")
 print(f"{'='*60}\n")
 
 SEP = "-" * 60
@@ -156,6 +200,10 @@ if state.runbook:
     print("  Duration :", rb.total_estimated_duration_weeks, "weeks")
     if rb.markdown_path:
         print("  Markdown :", rb.markdown_path)
+    if rb.pdf_path:
+        print("  PDF      :", rb.pdf_path)
+    if rb.docx_path:
+        print("  DOCX     :", rb.docx_path)
 
 out_dir = Path("output/reports")
 output_files = sorted(out_dir.glob("*")) if out_dir.exists() else []
@@ -166,6 +214,42 @@ if output_files:
         print("  ", f.name, "(" + str(f.stat().st_size) + " bytes)")
 else:
     print("  (plotly not installed -- dashboard skipped)")
+
+# ── Final output links summary ────────────────────────────────────────────────
+print()
+print("=" * 60)
+print(" OUTPUT LINKS")
+print("=" * 60)
+aid = state.assessment_id[:8]
+_reports = Path("output/reports")
+
+_runbook_links = []
+if state.runbook:
+    if state.runbook.markdown_path:
+        _runbook_links.append(("Runbook (Markdown)", state.runbook.markdown_path))
+    if state.runbook.pdf_path:
+        _runbook_links.append(("Runbook (PDF)     ", state.runbook.pdf_path))
+    if state.runbook.docx_path:
+        _runbook_links.append(("Runbook (DOCX)    ", state.runbook.docx_path))
+
+_dash_html = _reports / f"dashboard_{aid}_static.html"
+_dash_plotly = _reports / f"dashboard_{aid}.html"
+
+for label, link in _runbook_links:
+    print(f"  {label} : {link}")
+
+if _dash_html.exists():
+    print(f"  Dashboard (Single): {_dash_html}")
+elif _dash_plotly.exists():
+    print(f"  Dashboard (Single): {_dash_plotly}")
+else:
+    print("  Dashboard (Single): (not generated — install plotly for interactive dashboard)")
+
+if _multi_dash_path.exists():
+    print(f"  Dashboard (Multi) : {_multi_dash_path}")
+
+if _unified_dash_path.exists():
+    print(f"  Dashboard (Unified Agentic AI) : {_unified_dash_path}")
 
 print()
 print("=" * 60)
