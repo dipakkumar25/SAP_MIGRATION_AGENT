@@ -1,0 +1,322 @@
+[
+  {
+    "sap_system": {
+      "sid": "HR1",
+      "host": "saphrprd01.company.com",
+      "client": "100",
+      "description": "HR Production – Core HR, Payroll, Time Management, Organizational Management",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 7, "transport_routes": 3, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 350, "total_lines_of_code": 445000, "z_programs": 200, "function_modules": 70, "classes": 45, "custom_tables": 22, "badis": 8, "user_exits": 7, "enhancement_spots": 3, "modules_covered": ["HR","PA","PT","PY","OM"] },
+    "atc_summary": { "total_findings": 58, "critical": 20, "high": 16, "medium": 15, "low": 7, "objects_checked": 338, "categories": { "OBSOLETE_API": 35, "SECURITY": 13, "PERFORMANCE": 7, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 42, "removed_transactions": 8, "deprecated_fms": 10, "deprecated_tables": 10, "compatibility_views": 5, "universal_journal_impacts": 3, "business_partner_items": 4, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 34.0, "risk_level": "high", "estimated_effort_days": 90, "critical_areas": ["HR infotype FM replacement", "Payroll PCR migration", "OM hierarchy custom reports"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR2",
+      "host": "saphrprd02.company.com",
+      "client": "200",
+      "description": "HR Global Hub – Multi-country payroll, 42 country legal compliance packages",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 4, "active_clients": 8, "rfc_destinations": 16, "transport_routes": 5, "installed_components": 14 }
+    },
+    "custom_code_summary": { "total_objects": 620, "total_lines_of_code": 820000, "z_programs": 370, "function_modules": 125, "classes": 78, "custom_tables": 40, "badis": 15, "user_exits": 12, "enhancement_spots": 7, "modules_covered": ["HR","PA","PT","PY","OM","TM","ESS","MSS"] },
+    "atc_summary": { "total_findings": 105, "critical": 36, "high": 30, "medium": 26, "low": 13, "objects_checked": 600, "categories": { "OBSOLETE_API": 64, "SECURITY": 24, "PERFORMANCE": 12, "ROBUSTNESS": 5 } },
+    "simplification_summary": { "total_items": 75, "removed_transactions": 14, "deprecated_fms": 19, "deprecated_tables": 18, "compatibility_views": 9, "universal_journal_impacts": 6, "business_partner_items": 7, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 22.0, "risk_level": "critical", "estimated_effort_days": 200, "critical_areas": ["Multi-country legal payroll changes", "ESS/MSS portal migration to Fiori", "Global OM restructuring reports"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR3",
+      "host": "saphrdev.company.com",
+      "client": "100",
+      "description": "HR Development – Core HR sandbox for SuccessFactors integration testing",
+      "sap_version": "SAP ECC 6.0 EHP7 (Release 731)",
+      "kernel_version": "749",
+      "hana_version": null,
+      "landscape": { "app_servers": 1, "active_clients": 2, "rfc_destinations": 3, "transport_routes": 1, "installed_components": 5 }
+    },
+    "custom_code_summary": { "total_objects": 80, "total_lines_of_code": 85000, "z_programs": 46, "function_modules": 14, "classes": 8, "custom_tables": 5, "badis": 2, "user_exits": 1, "enhancement_spots": 0, "modules_covered": ["HR","PA"] },
+    "atc_summary": { "total_findings": 12, "critical": 3, "high": 4, "medium": 3, "low": 2, "objects_checked": 78, "categories": { "OBSOLETE_API": 7, "SECURITY": 3, "PERFORMANCE": 1, "ROBUSTNESS": 1 } },
+    "simplification_summary": { "total_items": 9, "removed_transactions": 2, "deprecated_fms": 2, "deprecated_tables": 2, "compatibility_views": 1, "universal_journal_impacts": 1, "business_partner_items": 1, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 74.0, "risk_level": "low", "estimated_effort_days": 15, "critical_areas": ["BAdI HR_MAST_DATA_CHECK migration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR4",
+      "host": "saphrqa.company.com",
+      "client": "300",
+      "description": "HR QA – Quality assurance for payroll and time management changes",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 1, "active_clients": 3, "rfc_destinations": 4, "transport_routes": 2, "installed_components": 7 }
+    },
+    "custom_code_summary": { "total_objects": 175, "total_lines_of_code": 210000, "z_programs": 104, "function_modules": 35, "classes": 22, "custom_tables": 11, "badis": 4, "user_exits": 3, "enhancement_spots": 1, "modules_covered": ["HR","PA","PT","PY"] },
+    "atc_summary": { "total_findings": 28, "critical": 8, "high": 8, "medium": 8, "low": 4, "objects_checked": 168, "categories": { "OBSOLETE_API": 17, "SECURITY": 6, "PERFORMANCE": 3, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 20, "removed_transactions": 4, "deprecated_fms": 5, "deprecated_tables": 5, "compatibility_views": 2, "universal_journal_impacts": 2, "business_partner_items": 2, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 55.0, "risk_level": "medium", "estimated_effort_days": 42, "critical_areas": ["Payroll simulation custom enhancements", "Time schema driver modifications"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR5",
+      "host": "saphr5prd.company.com",
+      "client": "100",
+      "description": "HR APAC – Asia-Pacific HR with localisation for AU, NZ, SG, IN, CN, JP",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 3, "active_clients": 7, "rfc_destinations": 12, "transport_routes": 4, "installed_components": 12 }
+    },
+    "custom_code_summary": { "total_objects": 520, "total_lines_of_code": 688000, "z_programs": 312, "function_modules": 105, "classes": 66, "custom_tables": 33, "badis": 12, "user_exits": 9, "enhancement_spots": 6, "modules_covered": ["HR","PA","PY","PT","OM","TM"] },
+    "atc_summary": { "total_findings": 88, "critical": 30, "high": 25, "medium": 22, "low": 11, "objects_checked": 502, "categories": { "OBSOLETE_API": 53, "SECURITY": 20, "PERFORMANCE": 10, "ROBUSTNESS": 5 } },
+    "simplification_summary": { "total_items": 62, "removed_transactions": 12, "deprecated_fms": 16, "deprecated_tables": 14, "compatibility_views": 8, "universal_journal_impacts": 6, "business_partner_items": 5, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 26.0, "risk_level": "critical", "estimated_effort_days": 160, "critical_areas": ["Country-specific legal payroll packages", "Leave accrual custom logic", "Provident fund integration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR6",
+      "host": "saphr6prd.company.com",
+      "client": "100",
+      "description": "HR Payroll Standalone – Dedicated payroll processing system",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 3, "rfc_destinations": 5, "transport_routes": 2, "installed_components": 6 }
+    },
+    "custom_code_summary": { "total_objects": 280, "total_lines_of_code": 355000, "z_programs": 165, "function_modules": 58, "classes": 37, "custom_tables": 18, "badis": 6, "user_exits": 5, "enhancement_spots": 2, "modules_covered": ["HR","PY","FI"] },
+    "atc_summary": { "total_findings": 46, "critical": 15, "high": 13, "medium": 12, "low": 6, "objects_checked": 270, "categories": { "OBSOLETE_API": 28, "SECURITY": 10, "PERFORMANCE": 6, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 32, "removed_transactions": 6, "deprecated_fms": 8, "deprecated_tables": 7, "compatibility_views": 4, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 40.0, "risk_level": "high", "estimated_effort_days": 72, "critical_areas": ["Payroll wage type migration", "Bank transfer custom file format", "Payroll journal posting logic"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR7",
+      "host": "saphr7prd.company.com",
+      "client": "100",
+      "description": "HR Time Management – Dedicated time recording and absence management",
+      "sap_version": "SAP ECC 6.0 EHP7 (Release 731)",
+      "kernel_version": "749",
+      "hana_version": null,
+      "landscape": { "app_servers": 2, "active_clients": 3, "rfc_destinations": 5, "transport_routes": 2, "installed_components": 6 }
+    },
+    "custom_code_summary": { "total_objects": 195, "total_lines_of_code": 238000, "z_programs": 116, "function_modules": 40, "classes": 25, "custom_tables": 12, "badis": 4, "user_exits": 4, "enhancement_spots": 1, "modules_covered": ["HR","PT","PA"] },
+    "atc_summary": { "total_findings": 32, "critical": 10, "high": 9, "medium": 9, "low": 4, "objects_checked": 188, "categories": { "OBSOLETE_API": 19, "SECURITY": 7, "PERFORMANCE": 4, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 22, "removed_transactions": 4, "deprecated_fms": 6, "deprecated_tables": 5, "compatibility_views": 3, "universal_journal_impacts": 2, "business_partner_items": 2, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 48.0, "risk_level": "medium", "estimated_effort_days": 50, "critical_areas": ["Time schema PCR custom rules", "Shift planning integration", "Absence quota migration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR8",
+      "host": "saphr8prd.company.com",
+      "client": "100",
+      "description": "HR Small – Minimal HR instance, 500 employees, basic PA/PT only",
+      "sap_version": "SAP ECC 6.0 EHP5 (Release 702)",
+      "kernel_version": "742",
+      "hana_version": null,
+      "landscape": { "app_servers": 1, "active_clients": 1, "rfc_destinations": 2, "transport_routes": 1, "installed_components": 4 }
+    },
+    "custom_code_summary": { "total_objects": 55, "total_lines_of_code": 48000, "z_programs": 30, "function_modules": 10, "classes": 5, "custom_tables": 3, "badis": 1, "user_exits": 1, "enhancement_spots": 0, "modules_covered": ["HR","PA","PT"] },
+    "atc_summary": { "total_findings": 7, "critical": 2, "high": 2, "medium": 2, "low": 1, "objects_checked": 52, "categories": { "OBSOLETE_API": 4, "SECURITY": 2, "PERFORMANCE": 1, "ROBUSTNESS": 0 } },
+    "simplification_summary": { "total_items": 5, "removed_transactions": 1, "deprecated_fms": 1, "deprecated_tables": 1, "compatibility_views": 1, "universal_journal_impacts": 1, "business_partner_items": 0, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 82.0, "risk_level": "low", "estimated_effort_days": 9, "critical_areas": ["Legacy headcount report replacement"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR9",
+      "host": "saphr9prd.company.com",
+      "client": "100",
+      "description": "HR SuccessFactors Integration – HCM on-premise connected to SF Employee Central",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 9, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 310, "total_lines_of_code": 398000, "z_programs": 185, "function_modules": 62, "classes": 40, "custom_tables": 20, "badis": 7, "user_exits": 6, "enhancement_spots": 3, "modules_covered": ["HR","PA","PY","OM","SF"] },
+    "atc_summary": { "total_findings": 52, "critical": 17, "high": 14, "medium": 14, "low": 7, "objects_checked": 298, "categories": { "OBSOLETE_API": 32, "SECURITY": 11, "PERFORMANCE": 6, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 36, "removed_transactions": 7, "deprecated_fms": 9, "deprecated_tables": 8, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 38.0, "risk_level": "high", "estimated_effort_days": 82, "critical_areas": ["SF-HCM replication scenarios", "Custom infotype transfer", "Delta load middleware migration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR10",
+      "host": "saphr10prd.company.com",
+      "client": "100",
+      "description": "HR Public Sector – Government HR with civil service payroll",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 2, "active_clients": 5, "rfc_destinations": 8, "transport_routes": 3, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 420, "total_lines_of_code": 540000, "z_programs": 250, "function_modules": 85, "classes": 55, "custom_tables": 27, "badis": 9, "user_exits": 8, "enhancement_spots": 4, "modules_covered": ["HR","PA","PY","PT","OM","PSM"] },
+    "atc_summary": { "total_findings": 70, "critical": 24, "high": 20, "medium": 18, "low": 8, "objects_checked": 405, "categories": { "OBSOLETE_API": 43, "SECURITY": 16, "PERFORMANCE": 8, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 50, "removed_transactions": 9, "deprecated_fms": 13, "deprecated_tables": 12, "compatibility_views": 6, "universal_journal_impacts": 5, "business_partner_items": 5, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 30.0, "risk_level": "critical", "estimated_effort_days": 125, "critical_areas": ["Civil service grade structure migration", "Pension deduction custom rules", "Government reporting interfaces"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR11",
+      "host": "saphr11prd.company.com",
+      "client": "100",
+      "description": "HR Travel – Employee travel and expense management system",
+      "sap_version": "SAP ECC 6.0 EHP7 (Release 731)",
+      "kernel_version": "749",
+      "hana_version": null,
+      "landscape": { "app_servers": 1, "active_clients": 3, "rfc_destinations": 4, "transport_routes": 2, "installed_components": 6 }
+    },
+    "custom_code_summary": { "total_objects": 140, "total_lines_of_code": 165000, "z_programs": 82, "function_modules": 28, "classes": 18, "custom_tables": 9, "badis": 3, "user_exits": 2, "enhancement_spots": 1, "modules_covered": ["HR","TV","FI"] },
+    "atc_summary": { "total_findings": 22, "critical": 7, "high": 6, "medium": 6, "low": 3, "objects_checked": 134, "categories": { "OBSOLETE_API": 13, "SECURITY": 5, "PERFORMANCE": 3, "ROBUSTNESS": 1 } },
+    "simplification_summary": { "total_items": 15, "removed_transactions": 3, "deprecated_fms": 4, "deprecated_tables": 3, "compatibility_views": 2, "universal_journal_impacts": 2, "business_partner_items": 1, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 58.0, "risk_level": "medium", "estimated_effort_days": 35, "critical_areas": ["Travel expense form migration", "Per-diem rate table migration", "Expense approval workflow"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR12",
+      "host": "saphr12prd.company.com",
+      "client": "100",
+      "description": "HR Pharma – Life sciences HR with SOX compliance and audit trail",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 7, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 370, "total_lines_of_code": 472000, "z_programs": 220, "function_modules": 72, "classes": 48, "custom_tables": 24, "badis": 8, "user_exits": 6, "enhancement_spots": 3, "modules_covered": ["HR","PA","PY","OM","PT","AUDIT"] },
+    "atc_summary": { "total_findings": 61, "critical": 21, "high": 17, "medium": 15, "low": 8, "objects_checked": 356, "categories": { "OBSOLETE_API": 37, "SECURITY": 14, "PERFORMANCE": 7, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 43, "removed_transactions": 8, "deprecated_fms": 11, "deprecated_tables": 10, "compatibility_views": 6, "universal_journal_impacts": 4, "business_partner_items": 4, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 35.0, "risk_level": "high", "estimated_effort_days": 92, "critical_areas": ["Audit trail custom logging migration", "Role-based access separation", "SOX control documentation"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR13",
+      "host": "saphr13prd.company.com",
+      "client": "100",
+      "description": "HR Retail – Large retail HR, shift workers, high turnover management",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 3, "active_clients": 5, "rfc_destinations": 10, "transport_routes": 3, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 445, "total_lines_of_code": 575000, "z_programs": 265, "function_modules": 90, "classes": 58, "custom_tables": 29, "badis": 10, "user_exits": 8, "enhancement_spots": 5, "modules_covered": ["HR","PA","PT","PY","TM","OM"] },
+    "atc_summary": { "total_findings": 74, "critical": 25, "high": 21, "medium": 19, "low": 9, "objects_checked": 428, "categories": { "OBSOLETE_API": 45, "SECURITY": 17, "PERFORMANCE": 9, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 53, "removed_transactions": 10, "deprecated_fms": 13, "deprecated_tables": 13, "compatibility_views": 7, "universal_journal_impacts": 5, "business_partner_items": 5, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 29.0, "risk_level": "critical", "estimated_effort_days": 132, "critical_areas": ["Shift planning mass upload migration", "Part-time salary calculation", "Workforce scheduling integration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR14",
+      "host": "saphr14prd.company.com",
+      "client": "100",
+      "description": "HR Banking – Finance sector HR with regulatory compliance reporting",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 8, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 395, "total_lines_of_code": 505000, "z_programs": 235, "function_modules": 78, "classes": 52, "custom_tables": 26, "badis": 8, "user_exits": 7, "enhancement_spots": 3, "modules_covered": ["HR","PA","PY","OM","AUDIT","FI"] },
+    "atc_summary": { "total_findings": 65, "critical": 22, "high": 18, "medium": 17, "low": 8, "objects_checked": 380, "categories": { "OBSOLETE_API": 39, "SECURITY": 15, "PERFORMANCE": 8, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 46, "removed_transactions": 8, "deprecated_fms": 12, "deprecated_tables": 11, "compatibility_views": 6, "universal_journal_impacts": 5, "business_partner_items": 4, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 33.0, "risk_level": "high", "estimated_effort_days": 98, "critical_areas": ["Bonus scheme migration", "Regulatory headcount reporting", "CRD IV compliance data"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR15",
+      "host": "saphr15prd.company.com",
+      "client": "100",
+      "description": "HR Manufacturing – Factory floor HR with plant-specific time recording",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 7, "transport_routes": 3, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 330, "total_lines_of_code": 420000, "z_programs": 195, "function_modules": 65, "classes": 44, "custom_tables": 22, "badis": 7, "user_exits": 6, "enhancement_spots": 3, "modules_covered": ["HR","PA","PT","PP","PY"] },
+    "atc_summary": { "total_findings": 54, "critical": 18, "high": 15, "medium": 14, "low": 7, "objects_checked": 318, "categories": { "OBSOLETE_API": 33, "SECURITY": 12, "PERFORMANCE": 6, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 38, "removed_transactions": 7, "deprecated_fms": 9, "deprecated_tables": 9, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 4, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 37.0, "risk_level": "high", "estimated_effort_days": 86, "critical_areas": ["Plant time terminal integration", "Overtime calculation rules", "Shift allowance custom wage types"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR16",
+      "host": "saphr16prd.company.com",
+      "client": "100",
+      "description": "HR Oil & Gas – Offshore/onshore rotation management, expat payroll",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 5, "rfc_destinations": 9, "transport_routes": 3, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 400, "total_lines_of_code": 518000, "z_programs": 238, "function_modules": 80, "classes": 52, "custom_tables": 26, "badis": 9, "user_exits": 7, "enhancement_spots": 4, "modules_covered": ["HR","PA","PT","PY","TM","OM"] },
+    "atc_summary": { "total_findings": 67, "critical": 23, "high": 19, "medium": 17, "low": 8, "objects_checked": 385, "categories": { "OBSOLETE_API": 41, "SECURITY": 15, "PERFORMANCE": 8, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 48, "removed_transactions": 9, "deprecated_fms": 12, "deprecated_tables": 11, "compatibility_views": 6, "universal_journal_impacts": 5, "business_partner_items": 5, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 32.0, "risk_level": "high", "estimated_effort_days": 105, "critical_areas": ["Offshore rotation cycle management", "Split payroll multi-country", "Expat tax equalisation logic"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR17",
+      "host": "saphr17prd.company.com",
+      "client": "100",
+      "description": "HR Shared Services – Centralised HR shared service centre model",
+      "sap_version": "SAP ECC 6.0 EHP7 (Release 731)",
+      "kernel_version": "749",
+      "hana_version": null,
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 7, "transport_routes": 3, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 285, "total_lines_of_code": 362000, "z_programs": 168, "function_modules": 58, "classes": 38, "custom_tables": 19, "badis": 6, "user_exits": 5, "enhancement_spots": 2, "modules_covered": ["HR","PA","PY","OM","ADMIN"] },
+    "atc_summary": { "total_findings": 46, "critical": 15, "high": 13, "medium": 12, "low": 6, "objects_checked": 274, "categories": { "OBSOLETE_API": 28, "SECURITY": 10, "PERFORMANCE": 6, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 32, "removed_transactions": 6, "deprecated_fms": 8, "deprecated_tables": 7, "compatibility_views": 4, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 42.0, "risk_level": "high", "estimated_effort_days": 70, "critical_areas": ["HR case management migration", "Employee self-service Fiori migration", "HR ticketing tool integration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR18",
+      "host": "saphr18prd.company.com",
+      "client": "100",
+      "description": "HR Education – University HR with academic staff grading system",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 7, "transport_routes": 2, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 255, "total_lines_of_code": 315000, "z_programs": 150, "function_modules": 52, "classes": 33, "custom_tables": 17, "badis": 5, "user_exits": 4, "enhancement_spots": 2, "modules_covered": ["HR","PA","PY","PT","OM"] },
+    "atc_summary": { "total_findings": 41, "critical": 13, "high": 11, "medium": 11, "low": 6, "objects_checked": 245, "categories": { "OBSOLETE_API": 25, "SECURITY": 9, "PERFORMANCE": 5, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 28, "removed_transactions": 5, "deprecated_fms": 7, "deprecated_tables": 7, "compatibility_views": 4, "universal_journal_impacts": 3, "business_partner_items": 2, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 44.0, "risk_level": "medium", "estimated_effort_days": 60, "critical_areas": ["Academic grading scale migration", "Semester-based contract renewals", "Research grant linkage to payroll"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR19",
+      "host": "saphr19prd.company.com",
+      "client": "100",
+      "description": "HR Insurance – Actuarial staff HR with variable commission payroll",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 2, "active_clients": 3, "rfc_destinations": 6, "transport_routes": 2, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 302, "total_lines_of_code": 385000, "z_programs": 178, "function_modules": 62, "classes": 40, "custom_tables": 20, "badis": 6, "user_exits": 5, "enhancement_spots": 2, "modules_covered": ["HR","PA","PY","FI","SALES"] },
+    "atc_summary": { "total_findings": 50, "critical": 16, "high": 14, "medium": 13, "low": 7, "objects_checked": 290, "categories": { "OBSOLETE_API": 30, "SECURITY": 12, "PERFORMANCE": 6, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 34, "removed_transactions": 6, "deprecated_fms": 8, "deprecated_tables": 8, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 40.0, "risk_level": "high", "estimated_effort_days": 75, "critical_areas": ["Commission calculation custom wage type", "Variable bonus split scheme", "Sales performance incentive engine"] }
+  },
+  {
+    "sap_system": {
+      "sid": "HR20",
+      "host": "saphr20prd.company.com",
+      "client": "100",
+      "description": "HR Telecom – Large telco HR with field technician workforce management",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 3, "active_clients": 5, "rfc_destinations": 11, "transport_routes": 4, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 455, "total_lines_of_code": 590000, "z_programs": 272, "function_modules": 92, "classes": 60, "custom_tables": 30, "badis": 10, "user_exits": 8, "enhancement_spots": 5, "modules_covered": ["HR","PA","PT","PY","TM","OM","WFM"] },
+    "atc_summary": { "total_findings": 76, "critical": 26, "high": 22, "medium": 19, "low": 9, "objects_checked": 438, "categories": { "OBSOLETE_API": 46, "SECURITY": 18, "PERFORMANCE": 9, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 55, "removed_transactions": 10, "deprecated_fms": 14, "deprecated_tables": 13, "compatibility_views": 7, "universal_journal_impacts": 6, "business_partner_items": 5, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 28.0, "risk_level": "critical", "estimated_effort_days": 145, "critical_areas": ["Field force scheduling integration", "Mobile time recording sync", "Geo-location shift tracking"] }
+  }
+]

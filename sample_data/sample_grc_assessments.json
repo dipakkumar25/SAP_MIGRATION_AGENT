@@ -1,0 +1,322 @@
+[
+  {
+    "sap_system": {
+      "sid": "GRC1",
+      "host": "sapgrcprd01.company.com",
+      "client": "100",
+      "description": "GRC Production – SAP GRC 10.1, Access Control, Process Control, Risk Management",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 3, "rfc_destinations": 10, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 240, "total_lines_of_code": 295000, "z_programs": 142, "function_modules": 48, "classes": 30, "custom_tables": 15, "badis": 6, "user_exits": 4, "enhancement_spots": 2, "modules_covered": ["GRC","AC","PC","RM","AUTH"] },
+    "atc_summary": { "total_findings": 38, "critical": 13, "high": 11, "medium": 10, "low": 4, "objects_checked": 232, "categories": { "OBSOLETE_API": 22, "SECURITY": 10, "PERFORMANCE": 4, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 26, "removed_transactions": 5, "deprecated_fms": 6, "deprecated_tables": 6, "compatibility_views": 3, "universal_journal_impacts": 2, "business_partner_items": 2, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 44.0, "risk_level": "medium", "estimated_effort_days": 62, "critical_areas": ["GRC AC role migration to S/4", "PFCG role cleanup before migration", "SOD rule set upgrade"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC2",
+      "host": "sapgrcprd02.company.com",
+      "client": "200",
+      "description": "GRC Global – Enterprise-wide GRC suite with 5000+ roles and SOX controls",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 4, "active_clients": 7, "rfc_destinations": 20, "transport_routes": 5, "installed_components": 13 }
+    },
+    "custom_code_summary": { "total_objects": 510, "total_lines_of_code": 660000, "z_programs": 305, "function_modules": 102, "classes": 65, "custom_tables": 33, "badis": 12, "user_exits": 9, "enhancement_spots": 5, "modules_covered": ["GRC","AC","PC","RM","AUTH","FI","HR","MM","SD"] },
+    "atc_summary": { "total_findings": 84, "critical": 29, "high": 24, "medium": 21, "low": 10, "objects_checked": 492, "categories": { "OBSOLETE_API": 51, "SECURITY": 19, "PERFORMANCE": 10, "ROBUSTNESS": 4 } },
+    "simplification_summary": { "total_items": 60, "removed_transactions": 11, "deprecated_fms": 15, "deprecated_tables": 14, "compatibility_views": 8, "universal_journal_impacts": 6, "business_partner_items": 5, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 25.0, "risk_level": "critical", "estimated_effort_days": 165, "critical_areas": ["SOX control mapping migration", "Cross-system SOD conflict analysis", "5000+ role re-certification cycle"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC3",
+      "host": "sapgrcdev.company.com",
+      "client": "100",
+      "description": "GRC Development – GRC sandbox for role design and access testing",
+      "sap_version": "SAP ECC 6.0 EHP7 (Release 731) + GRC 10.1",
+      "kernel_version": "749",
+      "hana_version": null,
+      "landscape": { "app_servers": 1, "active_clients": 2, "rfc_destinations": 3, "transport_routes": 1, "installed_components": 5 }
+    },
+    "custom_code_summary": { "total_objects": 70, "total_lines_of_code": 72000, "z_programs": 40, "function_modules": 12, "classes": 6, "custom_tables": 4, "badis": 2, "user_exits": 1, "enhancement_spots": 0, "modules_covered": ["GRC","AC","AUTH"] },
+    "atc_summary": { "total_findings": 10, "critical": 3, "high": 3, "medium": 3, "low": 1, "objects_checked": 68, "categories": { "OBSOLETE_API": 6, "SECURITY": 2, "PERFORMANCE": 1, "ROBUSTNESS": 1 } },
+    "simplification_summary": { "total_items": 7, "removed_transactions": 1, "deprecated_fms": 2, "deprecated_tables": 2, "compatibility_views": 1, "universal_journal_impacts": 1, "business_partner_items": 0, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 76.0, "risk_level": "low", "estimated_effort_days": 12, "critical_areas": ["PFCG custom report migration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC4",
+      "host": "sapgrcqa.company.com",
+      "client": "300",
+      "description": "GRC QA – Regression testing for SOD rules and compliance reports",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 1, "active_clients": 2, "rfc_destinations": 5, "transport_routes": 2, "installed_components": 6 }
+    },
+    "custom_code_summary": { "total_objects": 120, "total_lines_of_code": 138000, "z_programs": 70, "function_modules": 22, "classes": 14, "custom_tables": 7, "badis": 3, "user_exits": 2, "enhancement_spots": 1, "modules_covered": ["GRC","AC","PC","AUTH"] },
+    "atc_summary": { "total_findings": 19, "critical": 6, "high": 5, "medium": 5, "low": 3, "objects_checked": 115, "categories": { "OBSOLETE_API": 11, "SECURITY": 5, "PERFORMANCE": 2, "ROBUSTNESS": 1 } },
+    "simplification_summary": { "total_items": 14, "removed_transactions": 3, "deprecated_fms": 3, "deprecated_tables": 4, "compatibility_views": 2, "universal_journal_impacts": 1, "business_partner_items": 1, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 60.0, "risk_level": "medium", "estimated_effort_days": 28, "critical_areas": ["SOD rule regression after S/4 upgrade"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC5",
+      "host": "sapgrc5prd.company.com",
+      "client": "100",
+      "description": "GRC Pharma – GxP process controls and FDA 21 CFR Part 11 compliance",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 10, "transport_routes": 3, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 345, "total_lines_of_code": 440000, "z_programs": 206, "function_modules": 68, "classes": 44, "custom_tables": 22, "badis": 8, "user_exits": 6, "enhancement_spots": 3, "modules_covered": ["GRC","AC","PC","RM","AUTH","QM","AUDIT"] },
+    "atc_summary": { "total_findings": 57, "critical": 19, "high": 16, "medium": 15, "low": 7, "objects_checked": 332, "categories": { "OBSOLETE_API": 34, "SECURITY": 13, "PERFORMANCE": 7, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 40, "removed_transactions": 7, "deprecated_fms": 10, "deprecated_tables": 10, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 36.0, "risk_level": "high", "estimated_effort_days": 88, "critical_areas": ["Electronic signature migration", "GxP access log migration", "21 CFR Part 11 audit trail"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC6",
+      "host": "sapgrc6prd.company.com",
+      "client": "100",
+      "description": "GRC Banking – Financial regulatory compliance (Basel III, DORA, SOX)",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 3, "active_clients": 5, "rfc_destinations": 13, "transport_routes": 4, "installed_components": 12 }
+    },
+    "custom_code_summary": { "total_objects": 435, "total_lines_of_code": 562000, "z_programs": 260, "function_modules": 87, "classes": 56, "custom_tables": 28, "badis": 10, "user_exits": 8, "enhancement_spots": 4, "modules_covered": ["GRC","AC","RM","PC","AUTH","FI","AUDIT"] },
+    "atc_summary": { "total_findings": 72, "critical": 24, "high": 21, "medium": 18, "low": 9, "objects_checked": 420, "categories": { "OBSOLETE_API": 44, "SECURITY": 17, "PERFORMANCE": 8, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 51, "removed_transactions": 9, "deprecated_fms": 13, "deprecated_tables": 12, "compatibility_views": 7, "universal_journal_impacts": 5, "business_partner_items": 5, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 30.0, "risk_level": "critical", "estimated_effort_days": 130, "critical_areas": ["Basel III risk reporting migration", "DORA ICT risk controls", "MiFID II transaction reporting"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC7",
+      "host": "sapgrc7prd.company.com",
+      "client": "100",
+      "description": "GRC Process Control – Automated controls monitoring with SAP Process Control",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 2, "active_clients": 3, "rfc_destinations": 8, "transport_routes": 2, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 265, "total_lines_of_code": 330000, "z_programs": 157, "function_modules": 52, "classes": 34, "custom_tables": 17, "badis": 6, "user_exits": 4, "enhancement_spots": 2, "modules_covered": ["GRC","PC","RM","AUTH","FI"] },
+    "atc_summary": { "total_findings": 43, "critical": 14, "high": 12, "medium": 11, "low": 6, "objects_checked": 255, "categories": { "OBSOLETE_API": 26, "SECURITY": 10, "PERFORMANCE": 5, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 29, "removed_transactions": 5, "deprecated_fms": 7, "deprecated_tables": 7, "compatibility_views": 4, "universal_journal_impacts": 3, "business_partner_items": 2, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 43.0, "risk_level": "medium", "estimated_effort_days": 64, "critical_areas": ["Automated control rule migration", "Exception monitoring dashboards", "Control test evidence workflow"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC8",
+      "host": "sapgrc8prd.company.com",
+      "client": "100",
+      "description": "GRC Small – Lean GRC deployment, Access Control only, 800 roles",
+      "sap_version": "SAP ECC 6.0 EHP5 (Release 702) + GRC 10.1",
+      "kernel_version": "742",
+      "hana_version": null,
+      "landscape": { "app_servers": 1, "active_clients": 1, "rfc_destinations": 3, "transport_routes": 1, "installed_components": 4 }
+    },
+    "custom_code_summary": { "total_objects": 72, "total_lines_of_code": 68000, "z_programs": 42, "function_modules": 12, "classes": 6, "custom_tables": 4, "badis": 2, "user_exits": 1, "enhancement_spots": 0, "modules_covered": ["GRC","AC","AUTH"] },
+    "atc_summary": { "total_findings": 9, "critical": 2, "high": 3, "medium": 3, "low": 1, "objects_checked": 70, "categories": { "OBSOLETE_API": 5, "SECURITY": 2, "PERFORMANCE": 1, "ROBUSTNESS": 1 } },
+    "simplification_summary": { "total_items": 6, "removed_transactions": 1, "deprecated_fms": 2, "deprecated_tables": 1, "compatibility_views": 1, "universal_journal_impacts": 1, "business_partner_items": 0, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 78.0, "risk_level": "low", "estimated_effort_days": 11, "critical_areas": ["Role transport migration to S/4"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC9",
+      "host": "sapgrc9prd.company.com",
+      "client": "100",
+      "description": "GRC Risk – Enterprise Risk Management with SAP Risk Management module",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 8, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 300, "total_lines_of_code": 382000, "z_programs": 178, "function_modules": 60, "classes": 39, "custom_tables": 20, "badis": 7, "user_exits": 5, "enhancement_spots": 2, "modules_covered": ["GRC","RM","PC","AUTH","FI","CO"] },
+    "atc_summary": { "total_findings": 49, "critical": 16, "high": 14, "medium": 13, "low": 6, "objects_checked": 290, "categories": { "OBSOLETE_API": 30, "SECURITY": 11, "PERFORMANCE": 6, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 34, "removed_transactions": 6, "deprecated_fms": 8, "deprecated_tables": 8, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 2, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 40.0, "risk_level": "high", "estimated_effort_days": 74, "critical_areas": ["Risk scenario model migration", "KRI threshold custom reports", "Risk aggregation custom program"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC10",
+      "host": "sapgrc10prd.company.com",
+      "client": "100",
+      "description": "GRC Public Sector – Government compliance with GDPR and national regulations",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 5, "rfc_destinations": 10, "transport_routes": 3, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 360, "total_lines_of_code": 460000, "z_programs": 215, "function_modules": 72, "classes": 46, "custom_tables": 23, "badis": 8, "user_exits": 6, "enhancement_spots": 3, "modules_covered": ["GRC","AC","RM","PC","AUTH","PSM","GDPR"] },
+    "atc_summary": { "total_findings": 59, "critical": 20, "high": 17, "medium": 15, "low": 7, "objects_checked": 348, "categories": { "OBSOLETE_API": 36, "SECURITY": 13, "PERFORMANCE": 7, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 42, "removed_transactions": 7, "deprecated_fms": 10, "deprecated_tables": 10, "compatibility_views": 6, "universal_journal_impacts": 5, "business_partner_items": 4, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 34.0, "risk_level": "high", "estimated_effort_days": 90, "critical_areas": ["GDPR data masking migration", "Government audit trail requirements", "Access recertification workflow migration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC11",
+      "host": "sapgrc11prd.company.com",
+      "client": "100",
+      "description": "GRC Oil & Gas – HSSE process controls and environmental compliance",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 9, "transport_routes": 3, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 325, "total_lines_of_code": 415000, "z_programs": 193, "function_modules": 65, "classes": 42, "custom_tables": 21, "badis": 7, "user_exits": 5, "enhancement_spots": 3, "modules_covered": ["GRC","PC","RM","AUTH","EHS","PM"] },
+    "atc_summary": { "total_findings": 53, "critical": 18, "high": 15, "medium": 13, "low": 7, "objects_checked": 314, "categories": { "OBSOLETE_API": 32, "SECURITY": 12, "PERFORMANCE": 7, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 37, "removed_transactions": 7, "deprecated_fms": 9, "deprecated_tables": 9, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 38.0, "risk_level": "high", "estimated_effort_days": 82, "critical_areas": ["HSSE incident reporting migration", "Environmental emission control rules", "Safety critical role separation"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC12",
+      "host": "sapgrc12prd.company.com",
+      "client": "100",
+      "description": "GRC Utilities – Energy regulatory compliance and ISO 50001 controls",
+      "sap_version": "SAP ECC 6.0 EHP7 (Release 731) + GRC 10.1",
+      "kernel_version": "749",
+      "hana_version": null,
+      "landscape": { "app_servers": 2, "active_clients": 3, "rfc_destinations": 7, "transport_routes": 2, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 225, "total_lines_of_code": 278000, "z_programs": 133, "function_modules": 44, "classes": 29, "custom_tables": 15, "badis": 5, "user_exits": 4, "enhancement_spots": 2, "modules_covered": ["GRC","PC","RM","AUTH","IS-U"] },
+    "atc_summary": { "total_findings": 36, "critical": 12, "high": 10, "medium": 9, "low": 5, "objects_checked": 218, "categories": { "OBSOLETE_API": 22, "SECURITY": 8, "PERFORMANCE": 4, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 25, "removed_transactions": 5, "deprecated_fms": 6, "deprecated_tables": 6, "compatibility_views": 3, "universal_journal_impacts": 3, "business_partner_items": 2, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 46.0, "risk_level": "medium", "estimated_effort_days": 55, "critical_areas": ["Energy trading compliance controls", "NERC CIP access restrictions", "ISO 50001 monitoring migration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC13",
+      "host": "sapgrc13prd.company.com",
+      "client": "100",
+      "description": "GRC Superuser Privilege Manager – Emergency access management (Firefighter)",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 1, "active_clients": 3, "rfc_destinations": 6, "transport_routes": 2, "installed_components": 6 }
+    },
+    "custom_code_summary": { "total_objects": 150, "total_lines_of_code": 175000, "z_programs": 88, "function_modules": 28, "classes": 18, "custom_tables": 9, "badis": 3, "user_exits": 3, "enhancement_spots": 1, "modules_covered": ["GRC","EAM","AUTH","AUDIT"] },
+    "atc_summary": { "total_findings": 24, "critical": 8, "high": 7, "medium": 6, "low": 3, "objects_checked": 144, "categories": { "OBSOLETE_API": 14, "SECURITY": 6, "PERFORMANCE": 3, "ROBUSTNESS": 1 } },
+    "simplification_summary": { "total_items": 17, "removed_transactions": 3, "deprecated_fms": 4, "deprecated_tables": 4, "compatibility_views": 3, "universal_journal_impacts": 2, "business_partner_items": 1, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 54.0, "risk_level": "medium", "estimated_effort_days": 36, "critical_areas": ["Firefighter log migration to S/4", "EAM session logging custom exit", "Emergency role recertification"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC14",
+      "host": "sapgrc14prd.company.com",
+      "client": "100",
+      "description": "GRC Audit – SAP Audit Management with internal audit planning and execution",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 3, "rfc_destinations": 7, "transport_routes": 2, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 200, "total_lines_of_code": 245000, "z_programs": 118, "function_modules": 40, "classes": 26, "custom_tables": 13, "badis": 5, "user_exits": 3, "enhancement_spots": 2, "modules_covered": ["GRC","IAM","PC","AUTH","AUDIT"] },
+    "atc_summary": { "total_findings": 32, "critical": 10, "high": 9, "medium": 9, "low": 4, "objects_checked": 192, "categories": { "OBSOLETE_API": 19, "SECURITY": 8, "PERFORMANCE": 4, "ROBUSTNESS": 1 } },
+    "simplification_summary": { "total_items": 22, "removed_transactions": 4, "deprecated_fms": 5, "deprecated_tables": 5, "compatibility_views": 3, "universal_journal_impacts": 3, "business_partner_items": 2, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 50.0, "risk_level": "medium", "estimated_effort_days": 46, "critical_areas": ["Audit finding workflow migration", "Audit workpaper document link migration", "Control effectiveness rating schema"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC15",
+      "host": "sapgrc15prd.company.com",
+      "client": "100",
+      "description": "GRC Trade Compliance – Global Trade Services and export control screening",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 + GTS (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 10, "transport_routes": 3, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 310, "total_lines_of_code": 398000, "z_programs": 184, "function_modules": 62, "classes": 40, "custom_tables": 20, "badis": 7, "user_exits": 5, "enhancement_spots": 3, "modules_covered": ["GRC","GTS","AC","AUTH","SD","MM"] },
+    "atc_summary": { "total_findings": 51, "critical": 17, "high": 15, "medium": 13, "low": 6, "objects_checked": 298, "categories": { "OBSOLETE_API": 31, "SECURITY": 12, "PERFORMANCE": 6, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 35, "removed_transactions": 6, "deprecated_fms": 9, "deprecated_tables": 8, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 38.0, "risk_level": "high", "estimated_effort_days": 80, "critical_areas": ["Denied party list screening migration", "Export classification custom logic", "Licence management workflow"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC16",
+      "host": "sapgrc16prd.company.com",
+      "client": "100",
+      "description": "GRC Privacy – GDPR Data Privacy with consent management",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 1, "active_clients": 3, "rfc_destinations": 5, "transport_routes": 2, "installed_components": 7 }
+    },
+    "custom_code_summary": { "total_objects": 180, "total_lines_of_code": 215000, "z_programs": 106, "function_modules": 35, "classes": 23, "custom_tables": 12, "badis": 4, "user_exits": 3, "enhancement_spots": 1, "modules_covered": ["GRC","GDPR","AUTH","HR","SD"] },
+    "atc_summary": { "total_findings": 29, "critical": 9, "high": 8, "medium": 8, "low": 4, "objects_checked": 174, "categories": { "OBSOLETE_API": 17, "SECURITY": 7, "PERFORMANCE": 3, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 20, "removed_transactions": 4, "deprecated_fms": 5, "deprecated_tables": 5, "compatibility_views": 2, "universal_journal_impacts": 2, "business_partner_items": 2, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 52.0, "risk_level": "medium", "estimated_effort_days": 40, "critical_areas": ["Consent record migration", "Data subject request workflow", "Retention policy custom rules"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC17",
+      "host": "sapgrc17prd.company.com",
+      "client": "100",
+      "description": "GRC Insurance – Solvency II, IFRS 17 and actuarial compliance controls",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 9, "transport_routes": 3, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 355, "total_lines_of_code": 452000, "z_programs": 212, "function_modules": 70, "classes": 46, "custom_tables": 23, "badis": 8, "user_exits": 6, "enhancement_spots": 3, "modules_covered": ["GRC","PC","RM","AUTH","FI","IFRS"] },
+    "atc_summary": { "total_findings": 58, "critical": 19, "high": 17, "medium": 15, "low": 7, "objects_checked": 342, "categories": { "OBSOLETE_API": 35, "SECURITY": 14, "PERFORMANCE": 7, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 41, "removed_transactions": 7, "deprecated_fms": 10, "deprecated_tables": 10, "compatibility_views": 6, "universal_journal_impacts": 5, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 35.0, "risk_level": "high", "estimated_effort_days": 87, "critical_areas": ["Solvency II pillar 2 control mapping", "IFRS 17 actuarial data governance", "Model validation audit trail"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC18",
+      "host": "sapgrc18prd.company.com",
+      "client": "100",
+      "description": "GRC Healthcare – HIPAA compliance and clinical data access controls",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 8, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 290, "total_lines_of_code": 368000, "z_programs": 173, "function_modules": 57, "classes": 38, "custom_tables": 19, "badis": 6, "user_exits": 5, "enhancement_spots": 2, "modules_covered": ["GRC","AC","PC","AUTH","HIPAA","QM"] },
+    "atc_summary": { "total_findings": 47, "critical": 16, "high": 13, "medium": 12, "low": 6, "objects_checked": 280, "categories": { "OBSOLETE_API": 29, "SECURITY": 11, "PERFORMANCE": 5, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 33, "removed_transactions": 6, "deprecated_fms": 8, "deprecated_tables": 8, "compatibility_views": 4, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 39.0, "risk_level": "high", "estimated_effort_days": 76, "critical_areas": ["PHI access role segregation", "HIPAA audit log custom program", "Minimum necessary access validation"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC19",
+      "host": "sapgrc19prd.company.com",
+      "client": "100",
+      "description": "GRC Retail – Retail PCI-DSS compliance and payment data controls",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 8, "transport_routes": 2, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 270, "total_lines_of_code": 340000, "z_programs": 160, "function_modules": 54, "classes": 35, "custom_tables": 18, "badis": 6, "user_exits": 4, "enhancement_spots": 2, "modules_covered": ["GRC","AC","AUTH","PC","SD","FI"] },
+    "atc_summary": { "total_findings": 44, "critical": 14, "high": 13, "medium": 11, "low": 6, "objects_checked": 260, "categories": { "OBSOLETE_API": 27, "SECURITY": 10, "PERFORMANCE": 5, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 30, "removed_transactions": 5, "deprecated_fms": 7, "deprecated_tables": 7, "compatibility_views": 4, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 42.0, "risk_level": "high", "estimated_effort_days": 66, "critical_areas": ["PCI-DSS cardholder data access controls", "Payment terminal role migration", "Fraud detection custom logic"] }
+  },
+  {
+    "sap_system": {
+      "sid": "GRC20",
+      "host": "sapgrc20prd.company.com",
+      "client": "100",
+      "description": "GRC Manufacturing – ISO 9001 and AS9100 quality management system controls",
+      "sap_version": "SAP ECC 6.0 EHP8 + GRC 10.1 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 9, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 330, "total_lines_of_code": 420000, "z_programs": 196, "function_modules": 66, "classes": 43, "custom_tables": 21, "badis": 7, "user_exits": 5, "enhancement_spots": 3, "modules_covered": ["GRC","PC","RM","AUTH","QM","PP","MM"] },
+    "atc_summary": { "total_findings": 54, "critical": 18, "high": 15, "medium": 14, "low": 7, "objects_checked": 318, "categories": { "OBSOLETE_API": 33, "SECURITY": 12, "PERFORMANCE": 6, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 38, "removed_transactions": 7, "deprecated_fms": 9, "deprecated_tables": 9, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 4, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 37.0, "risk_level": "high", "estimated_effort_days": 82, "critical_areas": ["AS9100 quality record traceability", "Document control approval workflow", "Non-conformance risk escalation"] }
+  }
+]

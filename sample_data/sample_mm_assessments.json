@@ -1,0 +1,322 @@
+[
+  {
+    "sap_system": {
+      "sid": "MM1",
+      "host": "sapmmprd01.company.com",
+      "client": "100",
+      "description": "MM Production – Procurement and Inventory Management, full MRP scope",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 8, "transport_routes": 3, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 320, "total_lines_of_code": 415000, "z_programs": 190, "function_modules": 65, "classes": 40, "custom_tables": 20, "badis": 7, "user_exits": 5, "enhancement_spots": 3, "modules_covered": ["MM","FI","WM","PP"] },
+    "atc_summary": { "total_findings": 55, "critical": 18, "high": 15, "medium": 14, "low": 8, "objects_checked": 310, "categories": { "OBSOLETE_API": 32, "SECURITY": 12, "PERFORMANCE": 7, "ROBUSTNESS": 4 } },
+    "simplification_summary": { "total_items": 38, "removed_transactions": 7, "deprecated_fms": 9, "deprecated_tables": 9, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 2, "material_ledger_items": 2 },
+    "risk_summary": { "overall_score": 35.0, "risk_level": "high", "estimated_effort_days": 85, "critical_areas": ["BAPI_GOODSMVT_CREATE replacement", "ME21N user-exit migration", "Inventory posting sequence"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM2",
+      "host": "sapmmprd02.company.com",
+      "client": "200",
+      "description": "MM System – Global Procurement Hub with SRM integration",
+      "sap_version": "SAP ECC 6.0 EHP7 (Release 731)",
+      "kernel_version": "749",
+      "hana_version": null,
+      "landscape": { "app_servers": 3, "active_clients": 6, "rfc_destinations": 14, "transport_routes": 4, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 480, "total_lines_of_code": 620000, "z_programs": 290, "function_modules": 95, "classes": 60, "custom_tables": 30, "badis": 10, "user_exits": 8, "enhancement_spots": 5, "modules_covered": ["MM","WM","PP","QM","FI"] },
+    "atc_summary": { "total_findings": 82, "critical": 28, "high": 22, "medium": 20, "low": 12, "objects_checked": 460, "categories": { "OBSOLETE_API": 50, "SECURITY": 18, "PERFORMANCE": 10, "ROBUSTNESS": 4 } },
+    "simplification_summary": { "total_items": 55, "removed_transactions": 10, "deprecated_fms": 14, "deprecated_tables": 13, "compatibility_views": 7, "universal_journal_impacts": 6, "business_partner_items": 3, "material_ledger_items": 2 },
+    "risk_summary": { "overall_score": 28.0, "risk_level": "critical", "estimated_effort_days": 140, "critical_areas": ["SRM RFC interface rewrites", "Batch classification migration", "WM to EWM transition"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM3",
+      "host": "sapmmdev.company.com",
+      "client": "100",
+      "description": "MM Development – Lean procurement footprint, pilot S/4 conversion",
+      "sap_version": "SAP ECC 6.0 EHP6 (Release 730)",
+      "kernel_version": "745",
+      "hana_version": null,
+      "landscape": { "app_servers": 1, "active_clients": 2, "rfc_destinations": 3, "transport_routes": 1, "installed_components": 5 }
+    },
+    "custom_code_summary": { "total_objects": 95, "total_lines_of_code": 98000, "z_programs": 55, "function_modules": 18, "classes": 10, "custom_tables": 6, "badis": 2, "user_exits": 1, "enhancement_spots": 0, "modules_covered": ["MM","FI"] },
+    "atc_summary": { "total_findings": 14, "critical": 3, "high": 4, "medium": 5, "low": 2, "objects_checked": 90, "categories": { "OBSOLETE_API": 8, "SECURITY": 3, "PERFORMANCE": 2, "ROBUSTNESS": 1 } },
+    "simplification_summary": { "total_items": 10, "removed_transactions": 2, "deprecated_fms": 2, "deprecated_tables": 3, "compatibility_views": 1, "universal_journal_impacts": 1, "business_partner_items": 1, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 72.0, "risk_level": "low", "estimated_effort_days": 18, "critical_areas": ["MB51 custom report replacement"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM4",
+      "host": "sapmmqa.company.com",
+      "client": "300",
+      "description": "MM QA – Quality Assurance system for procurement regression testing",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 1, "active_clients": 3, "rfc_destinations": 5, "transport_routes": 2, "installed_components": 7 }
+    },
+    "custom_code_summary": { "total_objects": 200, "total_lines_of_code": 225000, "z_programs": 120, "function_modules": 38, "classes": 25, "custom_tables": 12, "badis": 4, "user_exits": 3, "enhancement_spots": 2, "modules_covered": ["MM","QM","WM"] },
+    "atc_summary": { "total_findings": 30, "critical": 9, "high": 8, "medium": 9, "low": 4, "objects_checked": 190, "categories": { "OBSOLETE_API": 18, "SECURITY": 6, "PERFORMANCE": 4, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 22, "removed_transactions": 4, "deprecated_fms": 5, "deprecated_tables": 6, "compatibility_views": 3, "universal_journal_impacts": 2, "business_partner_items": 1, "material_ledger_items": 1 },
+    "risk_summary": { "overall_score": 54.0, "risk_level": "medium", "estimated_effort_days": 45, "critical_areas": ["QM inspection lot migration", "Valuation class handling"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM5",
+      "host": "sapmm5prd.company.com",
+      "client": "100",
+      "description": "MM APAC – Asia-Pacific Procurement, multi-currency, multi-plant",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 4, "active_clients": 8, "rfc_destinations": 18, "transport_routes": 5, "installed_components": 12 }
+    },
+    "custom_code_summary": { "total_objects": 560, "total_lines_of_code": 740000, "z_programs": 340, "function_modules": 110, "classes": 70, "custom_tables": 35, "badis": 12, "user_exits": 9, "enhancement_spots": 6, "modules_covered": ["MM","FI","CO","PP","WM","QM"] },
+    "atc_summary": { "total_findings": 95, "critical": 32, "high": 28, "medium": 22, "low": 13, "objects_checked": 540, "categories": { "OBSOLETE_API": 58, "SECURITY": 22, "PERFORMANCE": 10, "ROBUSTNESS": 5 } },
+    "simplification_summary": { "total_items": 64, "removed_transactions": 12, "deprecated_fms": 16, "deprecated_tables": 15, "compatibility_views": 8, "universal_journal_impacts": 7, "business_partner_items": 4, "material_ledger_items": 2 },
+    "risk_summary": { "overall_score": 24.0, "risk_level": "critical", "estimated_effort_days": 175, "critical_areas": ["Multi-currency valuation", "Plant-level MRP custom logic", "WM physical inventory"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM6",
+      "host": "sapmm6prd.company.com",
+      "client": "100",
+      "description": "MM EMEA – Europe, Middle East and Africa Procurement",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP05",
+      "landscape": { "app_servers": 3, "active_clients": 7, "rfc_destinations": 12, "transport_routes": 4, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 410, "total_lines_of_code": 510000, "z_programs": 245, "function_modules": 80, "classes": 52, "custom_tables": 26, "badis": 9, "user_exits": 6, "enhancement_spots": 4, "modules_covered": ["MM","FI","SD","WM"] },
+    "atc_summary": { "total_findings": 68, "critical": 22, "high": 19, "medium": 18, "low": 9, "objects_checked": 395, "categories": { "OBSOLETE_API": 40, "SECURITY": 16, "PERFORMANCE": 8, "ROBUSTNESS": 4 } },
+    "simplification_summary": { "total_items": 47, "removed_transactions": 9, "deprecated_fms": 11, "deprecated_tables": 12, "compatibility_views": 6, "universal_journal_impacts": 5, "business_partner_items": 3, "material_ledger_items": 1 },
+    "risk_summary": { "overall_score": 33.0, "risk_level": "high", "estimated_effort_days": 100, "critical_areas": ["VAT handling in goods receipts", "INTRASTAT custom reports", "Vendor invoice matching"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM7",
+      "host": "sapmm7.company.com",
+      "client": "100",
+      "description": "MM Warehouse – WM-heavy system, warehouse complex integration",
+      "sap_version": "SAP ECC 6.0 EHP7 (Release 731)",
+      "kernel_version": "749",
+      "hana_version": null,
+      "landscape": { "app_servers": 2, "active_clients": 3, "rfc_destinations": 7, "transport_routes": 2, "installed_components": 7 }
+    },
+    "custom_code_summary": { "total_objects": 270, "total_lines_of_code": 340000, "z_programs": 160, "function_modules": 55, "classes": 35, "custom_tables": 18, "badis": 5, "user_exits": 4, "enhancement_spots": 2, "modules_covered": ["MM","WM","PP"] },
+    "atc_summary": { "total_findings": 44, "critical": 14, "high": 13, "medium": 11, "low": 6, "objects_checked": 260, "categories": { "OBSOLETE_API": 26, "SECURITY": 10, "PERFORMANCE": 5, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 30, "removed_transactions": 6, "deprecated_fms": 7, "deprecated_tables": 7, "compatibility_views": 4, "universal_journal_impacts": 3, "business_partner_items": 2, "material_ledger_items": 1 },
+    "risk_summary": { "overall_score": 40.0, "risk_level": "high", "estimated_effort_days": 70, "critical_areas": ["WM to EWM migration", "Transfer order automation", "Lean WM to EWM delta"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM8",
+      "host": "sapmm8prd.company.com",
+      "client": "100",
+      "description": "MM Small Site – minimal procurement instance, single plant",
+      "sap_version": "SAP ECC 6.0 EHP5 (Release 702)",
+      "kernel_version": "742",
+      "hana_version": null,
+      "landscape": { "app_servers": 1, "active_clients": 1, "rfc_destinations": 2, "transport_routes": 1, "installed_components": 4 }
+    },
+    "custom_code_summary": { "total_objects": 60, "total_lines_of_code": 52000, "z_programs": 34, "function_modules": 12, "classes": 5, "custom_tables": 4, "badis": 1, "user_exits": 1, "enhancement_spots": 0, "modules_covered": ["MM"] },
+    "atc_summary": { "total_findings": 8, "critical": 2, "high": 2, "medium": 2, "low": 2, "objects_checked": 58, "categories": { "OBSOLETE_API": 5, "SECURITY": 2, "PERFORMANCE": 1, "ROBUSTNESS": 0 } },
+    "simplification_summary": { "total_items": 5, "removed_transactions": 1, "deprecated_fms": 1, "deprecated_tables": 1, "compatibility_views": 1, "universal_journal_impacts": 1, "business_partner_items": 0, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 80.0, "risk_level": "low", "estimated_effort_days": 10, "critical_areas": ["Legacy print output forms"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM9",
+      "host": "sapmm9prd.company.com",
+      "client": "100",
+      "description": "MM External Procurement – Subcontracting and External Services",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 9, "transport_routes": 2, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 235, "total_lines_of_code": 288000, "z_programs": 140, "function_modules": 48, "classes": 30, "custom_tables": 15, "badis": 5, "user_exits": 4, "enhancement_spots": 2, "modules_covered": ["MM","FI","CO","PP"] },
+    "atc_summary": { "total_findings": 38, "critical": 12, "high": 10, "medium": 11, "low": 5, "objects_checked": 225, "categories": { "OBSOLETE_API": 22, "SECURITY": 9, "PERFORMANCE": 5, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 26, "removed_transactions": 5, "deprecated_fms": 6, "deprecated_tables": 6, "compatibility_views": 4, "universal_journal_impacts": 3, "business_partner_items": 2, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 48.0, "risk_level": "medium", "estimated_effort_days": 52, "critical_areas": ["Subcontracting components BOM migration", "Service entry sheet custom enhancements"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM10",
+      "host": "sapmm10prd.company.com",
+      "client": "100",
+      "description": "MM Retail – Procurement for retail and merchandise management",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 3, "active_clients": 5, "rfc_destinations": 11, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 360, "total_lines_of_code": 460000, "z_programs": 210, "function_modules": 72, "classes": 48, "custom_tables": 22, "badis": 8, "user_exits": 6, "enhancement_spots": 4, "modules_covered": ["MM","SD","FI","WM"] },
+    "atc_summary": { "total_findings": 60, "critical": 20, "high": 17, "medium": 15, "low": 8, "objects_checked": 348, "categories": { "OBSOLETE_API": 35, "SECURITY": 14, "PERFORMANCE": 8, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 42, "removed_transactions": 8, "deprecated_fms": 10, "deprecated_tables": 10, "compatibility_views": 5, "universal_journal_impacts": 5, "business_partner_items": 2, "material_ledger_items": 2 },
+    "risk_summary": { "overall_score": 37.0, "risk_level": "high", "estimated_effort_days": 90, "critical_areas": ["Retail price list migration", "Vendor consignment stock handling"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM11",
+      "host": "sapmm11prd.company.com",
+      "client": "100",
+      "description": "MM Chemical – Hazardous goods procurement with batch management",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 8, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 290, "total_lines_of_code": 372000, "z_programs": 175, "function_modules": 60, "classes": 38, "custom_tables": 19, "badis": 6, "user_exits": 5, "enhancement_spots": 2, "modules_covered": ["MM","QM","PP","FI"] },
+    "atc_summary": { "total_findings": 48, "critical": 16, "high": 13, "medium": 12, "low": 7, "objects_checked": 280, "categories": { "OBSOLETE_API": 28, "SECURITY": 11, "PERFORMANCE": 6, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 34, "removed_transactions": 6, "deprecated_fms": 8, "deprecated_tables": 8, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 2, "material_ledger_items": 1 },
+    "risk_summary": { "overall_score": 42.0, "risk_level": "high", "estimated_effort_days": 78, "critical_areas": ["Batch classification migration", "Hazardous goods labeling prints", "QM usage decision migration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM12",
+      "host": "sapmm12prd.company.com",
+      "client": "100",
+      "description": "MM Pharma – Pharmaceutical procurement with GxP compliance",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 5, "rfc_destinations": 10, "transport_routes": 3, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 380, "total_lines_of_code": 490000, "z_programs": 225, "function_modules": 75, "classes": 50, "custom_tables": 24, "badis": 8, "user_exits": 6, "enhancement_spots": 3, "modules_covered": ["MM","QM","FI","CO","PP"] },
+    "atc_summary": { "total_findings": 62, "critical": 21, "high": 17, "medium": 16, "low": 8, "objects_checked": 368, "categories": { "OBSOLETE_API": 37, "SECURITY": 14, "PERFORMANCE": 7, "ROBUSTNESS": 4 } },
+    "simplification_summary": { "total_items": 44, "removed_transactions": 8, "deprecated_fms": 11, "deprecated_tables": 10, "compatibility_views": 6, "universal_journal_impacts": 5, "business_partner_items": 3, "material_ledger_items": 1 },
+    "risk_summary": { "overall_score": 34.0, "risk_level": "high", "estimated_effort_days": 95, "critical_areas": ["GxP audit trail custom code", "Batch record management", "Serialization tracking"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM13",
+      "host": "sapmm13prd.company.com",
+      "client": "100",
+      "description": "MM Public Sector – Government procurement with special approval workflows",
+      "sap_version": "SAP ECC 6.0 EHP7 (Release 731)",
+      "kernel_version": "749",
+      "hana_version": null,
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 7, "transport_routes": 2, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 310, "total_lines_of_code": 395000, "z_programs": 185, "function_modules": 62, "classes": 40, "custom_tables": 20, "badis": 6, "user_exits": 5, "enhancement_spots": 3, "modules_covered": ["MM","FI","CO"] },
+    "atc_summary": { "total_findings": 52, "critical": 17, "high": 14, "medium": 14, "low": 7, "objects_checked": 298, "categories": { "OBSOLETE_API": 30, "SECURITY": 13, "PERFORMANCE": 6, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 36, "removed_transactions": 7, "deprecated_fms": 9, "deprecated_tables": 9, "compatibility_views": 4, "universal_journal_impacts": 4, "business_partner_items": 2, "material_ledger_items": 1 },
+    "risk_summary": { "overall_score": 38.0, "risk_level": "high", "estimated_effort_days": 82, "critical_areas": ["Multi-level approval workflow migration", "Budget availability control custom code"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM14",
+      "host": "sapmm14prd.company.com",
+      "client": "100",
+      "description": "MM Automotive – JIT/JIS procurement with Kanban integration",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 3, "active_clients": 5, "rfc_destinations": 13, "transport_routes": 4, "installed_components": 11 }
+    },
+    "custom_code_summary": { "total_objects": 430, "total_lines_of_code": 558000, "z_programs": 258, "function_modules": 85, "classes": 55, "custom_tables": 27, "badis": 10, "user_exits": 7, "enhancement_spots": 4, "modules_covered": ["MM","PP","WM","SD","FI"] },
+    "atc_summary": { "total_findings": 71, "critical": 24, "high": 20, "medium": 18, "low": 9, "objects_checked": 415, "categories": { "OBSOLETE_API": 43, "SECURITY": 16, "PERFORMANCE": 8, "ROBUSTNESS": 4 } },
+    "simplification_summary": { "total_items": 50, "removed_transactions": 9, "deprecated_fms": 13, "deprecated_tables": 12, "compatibility_views": 7, "universal_journal_impacts": 5, "business_partner_items": 3, "material_ledger_items": 1 },
+    "risk_summary": { "overall_score": 30.0, "risk_level": "critical", "estimated_effort_days": 118, "critical_areas": ["JIT call scheduling migration", "Kanban replenishment triggers", "Scheduling agreement delivery schedule"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM15",
+      "host": "sapmm15prd.company.com",
+      "client": "100",
+      "description": "MM Energy – Utilities procurement with contract management",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 9, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 265, "total_lines_of_code": 330000, "z_programs": 155, "function_modules": 52, "classes": 34, "custom_tables": 16, "badis": 5, "user_exits": 4, "enhancement_spots": 2, "modules_covered": ["MM","FI","CO","PM"] },
+    "atc_summary": { "total_findings": 42, "critical": 13, "high": 12, "medium": 11, "low": 6, "objects_checked": 254, "categories": { "OBSOLETE_API": 25, "SECURITY": 10, "PERFORMANCE": 5, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 29, "removed_transactions": 5, "deprecated_fms": 7, "deprecated_tables": 7, "compatibility_views": 4, "universal_journal_impacts": 3, "business_partner_items": 2, "material_ledger_items": 1 },
+    "risk_summary": { "overall_score": 46.0, "risk_level": "medium", "estimated_effort_days": 58, "critical_areas": ["Long-term contract validity migration", "Plant maintenance integration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM16",
+      "host": "sapmm16prd.company.com",
+      "client": "100",
+      "description": "MM Textile – Seasonal procurement with variant configuration",
+      "sap_version": "SAP ECC 6.0 EHP7 (Release 731)",
+      "kernel_version": "749",
+      "hana_version": null,
+      "landscape": { "app_servers": 2, "active_clients": 3, "rfc_destinations": 6, "transport_routes": 2, "installed_components": 7 }
+    },
+    "custom_code_summary": { "total_objects": 220, "total_lines_of_code": 272000, "z_programs": 130, "function_modules": 44, "classes": 28, "custom_tables": 14, "badis": 4, "user_exits": 3, "enhancement_spots": 2, "modules_covered": ["MM","SD","FI"] },
+    "atc_summary": { "total_findings": 35, "critical": 11, "high": 10, "medium": 9, "low": 5, "objects_checked": 210, "categories": { "OBSOLETE_API": 21, "SECURITY": 8, "PERFORMANCE": 4, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 24, "removed_transactions": 4, "deprecated_fms": 6, "deprecated_tables": 6, "compatibility_views": 3, "universal_journal_impacts": 3, "business_partner_items": 1, "material_ledger_items": 1 },
+    "risk_summary": { "overall_score": 50.0, "risk_level": "medium", "estimated_effort_days": 48, "critical_areas": ["Variant configuration material master migration", "Season-based price list handling"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM17",
+      "host": "sapmm17prd.company.com",
+      "client": "100",
+      "description": "MM Food – Food industry procurement with shelf-life management",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 8, "transport_routes": 3, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 248, "total_lines_of_code": 305000, "z_programs": 148, "function_modules": 50, "classes": 32, "custom_tables": 16, "badis": 5, "user_exits": 4, "enhancement_spots": 2, "modules_covered": ["MM","QM","PP","FI"] },
+    "atc_summary": { "total_findings": 40, "critical": 13, "high": 11, "medium": 10, "low": 6, "objects_checked": 238, "categories": { "OBSOLETE_API": 23, "SECURITY": 10, "PERFORMANCE": 5, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 28, "removed_transactions": 5, "deprecated_fms": 7, "deprecated_tables": 7, "compatibility_views": 3, "universal_journal_impacts": 3, "business_partner_items": 2, "material_ledger_items": 1 },
+    "risk_summary": { "overall_score": 44.0, "risk_level": "medium", "estimated_effort_days": 60, "critical_areas": ["Shelf-life expiry date checks", "FEFO picking strategy migration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM18",
+      "host": "sapmm18prd.company.com",
+      "client": "100",
+      "description": "MM Mining – Mining equipment procurement and spare parts management",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 10, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 300, "total_lines_of_code": 385000, "z_programs": 180, "function_modules": 62, "classes": 40, "custom_tables": 20, "badis": 6, "user_exits": 5, "enhancement_spots": 3, "modules_covered": ["MM","PM","FI","CO","WM"] },
+    "atc_summary": { "total_findings": 50, "critical": 16, "high": 14, "medium": 13, "low": 7, "objects_checked": 288, "categories": { "OBSOLETE_API": 30, "SECURITY": 12, "PERFORMANCE": 6, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 34, "removed_transactions": 6, "deprecated_fms": 8, "deprecated_tables": 8, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 2, "material_ledger_items": 1 },
+    "risk_summary": { "overall_score": 40.0, "risk_level": "high", "estimated_effort_days": 75, "critical_areas": ["Equipment BOM migration", "Spare parts cataloging", "PM order integration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM19",
+      "host": "sapmm19prd.company.com",
+      "client": "100",
+      "description": "MM Healthcare – Medical supplies procurement with regulated items",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 9, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 330, "total_lines_of_code": 422000, "z_programs": 195, "function_modules": 66, "classes": 44, "custom_tables": 22, "badis": 7, "user_exits": 5, "enhancement_spots": 3, "modules_covered": ["MM","QM","FI","CO","SD"] },
+    "atc_summary": { "total_findings": 55, "critical": 18, "high": 15, "medium": 15, "low": 7, "objects_checked": 318, "categories": { "OBSOLETE_API": 33, "SECURITY": 13, "PERFORMANCE": 6, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 38, "removed_transactions": 7, "deprecated_fms": 9, "deprecated_tables": 9, "compatibility_views": 5, "universal_journal_impacts": 5, "business_partner_items": 2, "material_ledger_items": 1 },
+    "risk_summary": { "overall_score": 36.5, "risk_level": "high", "estimated_effort_days": 88, "critical_areas": ["Medical device tracking", "Recall management custom code", "Lot/serial number handling"] }
+  },
+  {
+    "sap_system": {
+      "sid": "MM20",
+      "host": "sapmm20prd.company.com",
+      "client": "100",
+      "description": "MM Construction – Project-based procurement with WBS element integration",
+      "sap_version": "SAP ECC 6.0 EHP8 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 5, "rfc_destinations": 10, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 345, "total_lines_of_code": 440000, "z_programs": 205, "function_modules": 70, "classes": 45, "custom_tables": 22, "badis": 7, "user_exits": 5, "enhancement_spots": 3, "modules_covered": ["MM","PS","CO","FI","WM"] },
+    "atc_summary": { "total_findings": 57, "critical": 19, "high": 16, "medium": 14, "low": 8, "objects_checked": 332, "categories": { "OBSOLETE_API": 34, "SECURITY": 13, "PERFORMANCE": 7, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 40, "removed_transactions": 7, "deprecated_fms": 10, "deprecated_tables": 10, "compatibility_views": 5, "universal_journal_impacts": 5, "business_partner_items": 2, "material_ledger_items": 1 },
+    "risk_summary": { "overall_score": 35.5, "risk_level": "high", "estimated_effort_days": 92, "critical_areas": ["WBS element assignment migration", "Project stock custom reports", "Budget carry-forward logic"] }
+  }
+]

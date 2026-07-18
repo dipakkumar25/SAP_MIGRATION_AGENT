@@ -1,0 +1,322 @@
+[
+  {
+    "sap_system": {
+      "sid": "CRM1",
+      "host": "sapcrmprd01.company.com",
+      "client": "100",
+      "description": "CRM Production – SAP CRM 7.0, Sales, Service, Marketing, Interaction Centre",
+      "sap_version": "SAP CRM 7.0 EHP3 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 10, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 355, "total_lines_of_code": 452000, "z_programs": 210, "function_modules": 70, "classes": 46, "custom_tables": 23, "badis": 8, "user_exits": 6, "enhancement_spots": 3, "modules_covered": ["CRM","SLS","SRV","MKT","IC","ECC"] },
+    "atc_summary": { "total_findings": 58, "critical": 20, "high": 16, "medium": 15, "low": 7, "objects_checked": 342, "categories": { "OBSOLETE_API": 35, "SECURITY": 13, "PERFORMANCE": 7, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 41, "removed_transactions": 7, "deprecated_fms": 10, "deprecated_tables": 10, "compatibility_views": 6, "universal_journal_impacts": 4, "business_partner_items": 5, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 35.0, "risk_level": "high", "estimated_effort_days": 88, "critical_areas": ["CRM to S/4 Business Partner migration", "IC WinClient to Fiori migration", "Opportunity pipeline custom reports"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM2",
+      "host": "sapcrmprd02.company.com",
+      "client": "200",
+      "description": "CRM Global – Multinational CRM with 15 country sales organisations",
+      "sap_version": "SAP CRM 7.0 EHP4 (Release 750)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 4, "active_clients": 8, "rfc_destinations": 20, "transport_routes": 5, "installed_components": 14 }
+    },
+    "custom_code_summary": { "total_objects": 580, "total_lines_of_code": 760000, "z_programs": 346, "function_modules": 116, "classes": 74, "custom_tables": 37, "badis": 14, "user_exits": 11, "enhancement_spots": 6, "modules_covered": ["CRM","SLS","SRV","MKT","IC","ECC","BI","GRC"] },
+    "atc_summary": { "total_findings": 96, "critical": 33, "high": 27, "medium": 24, "low": 12, "objects_checked": 562, "categories": { "OBSOLETE_API": 58, "SECURITY": 22, "PERFORMANCE": 12, "ROBUSTNESS": 4 } },
+    "simplification_summary": { "total_items": 68, "removed_transactions": 13, "deprecated_fms": 17, "deprecated_tables": 16, "compatibility_views": 9, "universal_journal_impacts": 7, "business_partner_items": 8, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 23.0, "risk_level": "critical", "estimated_effort_days": 185, "critical_areas": ["Multi-org BP migration from KUNNR/LIFNR", "Global IC Fiori migration", "Marketing campaign engine rewrite"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM3",
+      "host": "sapcrmdev.company.com",
+      "client": "100",
+      "description": "CRM Development – CRM sandbox for C4C integration testing",
+      "sap_version": "SAP CRM 7.0 EHP2 (Release 731)",
+      "kernel_version": "749",
+      "hana_version": null,
+      "landscape": { "app_servers": 1, "active_clients": 2, "rfc_destinations": 3, "transport_routes": 1, "installed_components": 5 }
+    },
+    "custom_code_summary": { "total_objects": 82, "total_lines_of_code": 87000, "z_programs": 48, "function_modules": 15, "classes": 8, "custom_tables": 5, "badis": 2, "user_exits": 1, "enhancement_spots": 0, "modules_covered": ["CRM","SLS","ECC"] },
+    "atc_summary": { "total_findings": 12, "critical": 3, "high": 4, "medium": 3, "low": 2, "objects_checked": 78, "categories": { "OBSOLETE_API": 7, "SECURITY": 3, "PERFORMANCE": 1, "ROBUSTNESS": 1 } },
+    "simplification_summary": { "total_items": 8, "removed_transactions": 2, "deprecated_fms": 2, "deprecated_tables": 2, "compatibility_views": 1, "universal_journal_impacts": 1, "business_partner_items": 0, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 74.0, "risk_level": "low", "estimated_effort_days": 14, "critical_areas": ["CRM BOL/GenIL migration compatibility"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM4",
+      "host": "sapcrmqa.company.com",
+      "client": "300",
+      "description": "CRM QA – Quality assurance for CRM service and marketing changes",
+      "sap_version": "SAP CRM 7.0 EHP3 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 1, "active_clients": 2, "rfc_destinations": 5, "transport_routes": 2, "installed_components": 6 }
+    },
+    "custom_code_summary": { "total_objects": 178, "total_lines_of_code": 212000, "z_programs": 105, "function_modules": 35, "classes": 23, "custom_tables": 12, "badis": 4, "user_exits": 3, "enhancement_spots": 1, "modules_covered": ["CRM","SLS","SRV","MKT","ECC"] },
+    "atc_summary": { "total_findings": 29, "critical": 9, "high": 8, "medium": 8, "low": 4, "objects_checked": 172, "categories": { "OBSOLETE_API": 17, "SECURITY": 7, "PERFORMANCE": 3, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 20, "removed_transactions": 4, "deprecated_fms": 5, "deprecated_tables": 5, "compatibility_views": 2, "universal_journal_impacts": 2, "business_partner_items": 2, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 55.0, "risk_level": "medium", "estimated_effort_days": 40, "critical_areas": ["Service order follow-up migration", "Marketing segmentation rules"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM5",
+      "host": "sapcrm5prd.company.com",
+      "client": "100",
+      "description": "CRM Automotive – Vehicle dealer management and aftersales service",
+      "sap_version": "SAP CRM 7.0 EHP3 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 3, "active_clients": 5, "rfc_destinations": 14, "transport_routes": 4, "installed_components": 12 }
+    },
+    "custom_code_summary": { "total_objects": 470, "total_lines_of_code": 608000, "z_programs": 280, "function_modules": 94, "classes": 62, "custom_tables": 31, "badis": 11, "user_exits": 8, "enhancement_spots": 4, "modules_covered": ["CRM","SLS","SRV","MKT","IC","ECC","SD","MM"] },
+    "atc_summary": { "total_findings": 78, "critical": 26, "high": 23, "medium": 20, "low": 9, "objects_checked": 455, "categories": { "OBSOLETE_API": 47, "SECURITY": 18, "PERFORMANCE": 10, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 55, "removed_transactions": 10, "deprecated_fms": 14, "deprecated_tables": 13, "compatibility_views": 7, "universal_journal_impacts": 6, "business_partner_items": 6, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 27.0, "risk_level": "critical", "estimated_effort_days": 145, "critical_areas": ["Vehicle order dealer portal migration", "Warranty claim service order migration", "Dealer incentive programme logic"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM6",
+      "host": "sapcrm6prd.company.com",
+      "client": "100",
+      "description": "CRM Pharma – Medical representative management and call reporting",
+      "sap_version": "SAP CRM 7.0 EHP3 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 9, "transport_routes": 3, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 370, "total_lines_of_code": 472000, "z_programs": 220, "function_modules": 73, "classes": 48, "custom_tables": 24, "badis": 8, "user_exits": 6, "enhancement_spots": 3, "modules_covered": ["CRM","SLS","MKT","IC","ECC","QM","GRC"] },
+    "atc_summary": { "total_findings": 61, "critical": 21, "high": 17, "medium": 16, "low": 7, "objects_checked": 356, "categories": { "OBSOLETE_API": 37, "SECURITY": 14, "PERFORMANCE": 7, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 43, "removed_transactions": 8, "deprecated_fms": 11, "deprecated_tables": 10, "compatibility_views": 6, "universal_journal_impacts": 5, "business_partner_items": 4, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 34.0, "risk_level": "high", "estimated_effort_days": 92, "critical_areas": ["Med-rep call report migration to Fiori", "Healthcare professional relationship migration", "Sample tracking regulatory integration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM7",
+      "host": "sapcrm7prd.company.com",
+      "client": "100",
+      "description": "CRM Service – Field service management with mobile technician dispatch",
+      "sap_version": "SAP CRM 7.0 EHP2 (Release 731)",
+      "kernel_version": "749",
+      "hana_version": null,
+      "landscape": { "app_servers": 2, "active_clients": 3, "rfc_destinations": 7, "transport_routes": 2, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 280, "total_lines_of_code": 355000, "z_programs": 166, "function_modules": 55, "classes": 36, "custom_tables": 18, "badis": 6, "user_exits": 5, "enhancement_spots": 2, "modules_covered": ["CRM","SRV","IC","ECC","CS","PM"] },
+    "atc_summary": { "total_findings": 46, "critical": 15, "high": 13, "medium": 12, "low": 6, "objects_checked": 270, "categories": { "OBSOLETE_API": 28, "SECURITY": 10, "PERFORMANCE": 6, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 32, "removed_transactions": 6, "deprecated_fms": 8, "deprecated_tables": 7, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 40.0, "risk_level": "high", "estimated_effort_days": 70, "critical_areas": ["Field service scheduling migration to FSM", "CRM service order to S/4 CS", "Mobile client offline capability rewrite"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM8",
+      "host": "sapcrm8prd.company.com",
+      "client": "100",
+      "description": "CRM Small – Lean CRM, sales pipeline only, 50 users",
+      "sap_version": "SAP CRM 7.0 EHP1 (Release 702)",
+      "kernel_version": "742",
+      "hana_version": null,
+      "landscape": { "app_servers": 1, "active_clients": 1, "rfc_destinations": 2, "transport_routes": 1, "installed_components": 4 }
+    },
+    "custom_code_summary": { "total_objects": 65, "total_lines_of_code": 58000, "z_programs": 38, "function_modules": 12, "classes": 5, "custom_tables": 4, "badis": 1, "user_exits": 1, "enhancement_spots": 0, "modules_covered": ["CRM","SLS","ECC"] },
+    "atc_summary": { "total_findings": 9, "critical": 2, "high": 3, "medium": 3, "low": 1, "objects_checked": 62, "categories": { "OBSOLETE_API": 5, "SECURITY": 2, "PERFORMANCE": 1, "ROBUSTNESS": 1 } },
+    "simplification_summary": { "total_items": 6, "removed_transactions": 1, "deprecated_fms": 1, "deprecated_tables": 2, "compatibility_views": 1, "universal_journal_impacts": 1, "business_partner_items": 0, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 78.0, "risk_level": "low", "estimated_effort_days": 12, "critical_areas": ["Sales pipeline custom report migration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM9",
+      "host": "sapcrm9prd.company.com",
+      "client": "100",
+      "description": "CRM Marketing – Campaign management with segmentation and loyalty",
+      "sap_version": "SAP CRM 7.0 EHP3 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 9, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 320, "total_lines_of_code": 408000, "z_programs": 190, "function_modules": 63, "classes": 42, "custom_tables": 21, "badis": 7, "user_exits": 5, "enhancement_spots": 3, "modules_covered": ["CRM","MKT","IC","ECC","BI","SD"] },
+    "atc_summary": { "total_findings": 52, "critical": 17, "high": 15, "medium": 13, "low": 7, "objects_checked": 308, "categories": { "OBSOLETE_API": 32, "SECURITY": 12, "PERFORMANCE": 6, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 36, "removed_transactions": 7, "deprecated_fms": 9, "deprecated_tables": 8, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 4, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 38.0, "risk_level": "high", "estimated_effort_days": 80, "critical_areas": ["Loyalty points balance migration", "Campaign execution trigger rewrite", "Customer segmentation attribute migration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM10",
+      "host": "sapcrm10prd.company.com",
+      "client": "100",
+      "description": "CRM Interaction Centre – Call centre operations with CTI and script workflows",
+      "sap_version": "SAP CRM 7.0 EHP3 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 3, "active_clients": 5, "rfc_destinations": 12, "transport_routes": 3, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 405, "total_lines_of_code": 522000, "z_programs": 241, "function_modules": 80, "classes": 53, "custom_tables": 27, "badis": 9, "user_exits": 7, "enhancement_spots": 4, "modules_covered": ["CRM","IC","SRV","MKT","ECC","BI"] },
+    "atc_summary": { "total_findings": 67, "critical": 22, "high": 19, "medium": 18, "low": 8, "objects_checked": 390, "categories": { "OBSOLETE_API": 41, "SECURITY": 15, "PERFORMANCE": 8, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 47, "removed_transactions": 8, "deprecated_fms": 12, "deprecated_tables": 11, "compatibility_views": 6, "universal_journal_impacts": 5, "business_partner_items": 5, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 31.0, "risk_level": "high", "estimated_effort_days": 108, "critical_areas": ["CTI integration rewrite", "IC WinClient to Fiori Agent Desktop", "Case management custom workflow migration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM11",
+      "host": "sapcrm11prd.company.com",
+      "client": "100",
+      "description": "CRM Telecoms – Telco customer management with product bundling and SIM lifecycle",
+      "sap_version": "SAP CRM 7.0 EHP3 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 11, "transport_routes": 3, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 430, "total_lines_of_code": 558000, "z_programs": 257, "function_modules": 85, "classes": 56, "custom_tables": 28, "badis": 10, "user_exits": 7, "enhancement_spots": 4, "modules_covered": ["CRM","SLS","SRV","IC","ECC","BI","IS-T"] },
+    "atc_summary": { "total_findings": 71, "critical": 24, "high": 20, "medium": 18, "low": 9, "objects_checked": 415, "categories": { "OBSOLETE_API": 43, "SECURITY": 16, "PERFORMANCE": 9, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 50, "removed_transactions": 9, "deprecated_fms": 13, "deprecated_tables": 12, "compatibility_views": 7, "universal_journal_impacts": 5, "business_partner_items": 5, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 29.0, "risk_level": "critical", "estimated_effort_days": 128, "critical_areas": ["SIM lifecycle event migration", "Telecom product bundle pricing migration", "Number portability custom exit"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM12",
+      "host": "sapcrm12prd.company.com",
+      "client": "100",
+      "description": "CRM Banking – Relationship banking with product recommendations and compliance",
+      "sap_version": "SAP CRM 7.0 EHP4 (Release 750)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 3, "active_clients": 5, "rfc_destinations": 13, "transport_routes": 4, "installed_components": 12 }
+    },
+    "custom_code_summary": { "total_objects": 455, "total_lines_of_code": 588000, "z_programs": 272, "function_modules": 90, "classes": 59, "custom_tables": 29, "badis": 11, "user_exits": 8, "enhancement_spots": 4, "modules_covered": ["CRM","SLS","MKT","IC","ECC","BI","GRC","FI"] },
+    "atc_summary": { "total_findings": 75, "critical": 25, "high": 22, "medium": 19, "low": 9, "objects_checked": 438, "categories": { "OBSOLETE_API": 46, "SECURITY": 17, "PERFORMANCE": 9, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 53, "removed_transactions": 10, "deprecated_fms": 13, "deprecated_tables": 13, "compatibility_views": 7, "universal_journal_impacts": 6, "business_partner_items": 6, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 28.0, "risk_level": "critical", "estimated_effort_days": 138, "critical_areas": ["KYC customer onboarding migration", "Product suitability recommendation engine", "Regulatory complaint handling workflow"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM13",
+      "host": "sapcrm13prd.company.com",
+      "client": "100",
+      "description": "CRM Insurance – Policy-holder CRM with claims and renewal management",
+      "sap_version": "SAP CRM 7.0 EHP3 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 10, "transport_routes": 3, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 390, "total_lines_of_code": 502000, "z_programs": 232, "function_modules": 77, "classes": 51, "custom_tables": 26, "badis": 9, "user_exits": 7, "enhancement_spots": 3, "modules_covered": ["CRM","SLS","SRV","IC","ECC","BI","FI"] },
+    "atc_summary": { "total_findings": 64, "critical": 21, "high": 18, "medium": 17, "low": 8, "objects_checked": 376, "categories": { "OBSOLETE_API": 39, "SECURITY": 15, "PERFORMANCE": 7, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 45, "removed_transactions": 8, "deprecated_fms": 11, "deprecated_tables": 11, "compatibility_views": 6, "universal_journal_impacts": 5, "business_partner_items": 5, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 33.0, "risk_level": "high", "estimated_effort_days": 96, "critical_areas": ["Policyholder lifecycle migration", "Claims follow-up automation rewrite", "Renewal propensity model integration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM14",
+      "host": "sapcrm14prd.company.com",
+      "client": "100",
+      "description": "CRM Utilities – Energy supplier customer portal and meter-to-cash integration",
+      "sap_version": "SAP CRM 7.0 EHP2 (Release 731)",
+      "kernel_version": "749",
+      "hana_version": null,
+      "landscape": { "app_servers": 2, "active_clients": 3, "rfc_destinations": 7, "transport_routes": 2, "installed_components": 8 }
+    },
+    "custom_code_summary": { "total_objects": 258, "total_lines_of_code": 322000, "z_programs": 153, "function_modules": 51, "classes": 34, "custom_tables": 17, "badis": 5, "user_exits": 4, "enhancement_spots": 2, "modules_covered": ["CRM","SLS","SRV","IC","ECC","IS-U","FI"] },
+    "atc_summary": { "total_findings": 42, "critical": 14, "high": 12, "medium": 10, "low": 6, "objects_checked": 248, "categories": { "OBSOLETE_API": 25, "SECURITY": 10, "PERFORMANCE": 5, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 29, "removed_transactions": 5, "deprecated_fms": 7, "deprecated_tables": 7, "compatibility_views": 4, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 42.0, "risk_level": "high", "estimated_effort_days": 66, "critical_areas": ["IS-U account integration migration", "Meter-to-cash CRM interaction", "Smart meter event integration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM15",
+      "host": "sapcrm15prd.company.com",
+      "client": "100",
+      "description": "CRM Public Sector – Citizen services portal and case management",
+      "sap_version": "SAP CRM 7.0 EHP3 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP06",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 9, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 330, "total_lines_of_code": 422000, "z_programs": 195, "function_modules": 66, "classes": 44, "custom_tables": 22, "badis": 7, "user_exits": 5, "enhancement_spots": 3, "modules_covered": ["CRM","SRV","IC","ECC","PSM","GRC"] },
+    "atc_summary": { "total_findings": 54, "critical": 18, "high": 15, "medium": 14, "low": 7, "objects_checked": 318, "categories": { "OBSOLETE_API": 33, "SECURITY": 12, "PERFORMANCE": 6, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 37, "removed_transactions": 7, "deprecated_fms": 9, "deprecated_tables": 9, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 4, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 37.0, "risk_level": "high", "estimated_effort_days": 83, "critical_areas": ["Citizen case management migration to S/4", "Government portal SOAP interface rewrite", "GDPR data minimisation in CRM records"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM16",
+      "host": "sapcrm16prd.company.com",
+      "client": "100",
+      "description": "CRM Oil & Gas – B2B energy sales and contract lifecycle management",
+      "sap_version": "SAP CRM 7.0 EHP3 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 10, "transport_routes": 3, "installed_components": 10 }
+    },
+    "custom_code_summary": { "total_objects": 360, "total_lines_of_code": 460000, "z_programs": 214, "function_modules": 71, "classes": 47, "custom_tables": 24, "badis": 8, "user_exits": 6, "enhancement_spots": 3, "modules_covered": ["CRM","SLS","SRV","MKT","ECC","FI","CO","GTS"] },
+    "atc_summary": { "total_findings": 59, "critical": 20, "high": 17, "medium": 15, "low": 7, "objects_checked": 348, "categories": { "OBSOLETE_API": 36, "SECURITY": 13, "PERFORMANCE": 7, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 41, "removed_transactions": 7, "deprecated_fms": 10, "deprecated_tables": 10, "compatibility_views": 6, "universal_journal_impacts": 5, "business_partner_items": 4, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 35.0, "risk_level": "high", "estimated_effort_days": 87, "critical_areas": ["Energy contract pricing migration", "B2B portal API integration rewrite", "Commodity price-linked billing migration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM17",
+      "host": "sapcrm17prd.company.com",
+      "client": "100",
+      "description": "CRM Construction – Contractor relationship management and bid management",
+      "sap_version": "SAP CRM 7.0 EHP2 (Release 731)",
+      "kernel_version": "749",
+      "hana_version": null,
+      "landscape": { "app_servers": 2, "active_clients": 3, "rfc_destinations": 7, "transport_routes": 2, "installed_components": 7 }
+    },
+    "custom_code_summary": { "total_objects": 240, "total_lines_of_code": 296000, "z_programs": 142, "function_modules": 48, "classes": 31, "custom_tables": 16, "badis": 5, "user_exits": 4, "enhancement_spots": 2, "modules_covered": ["CRM","SLS","SRV","ECC","PS","FI"] },
+    "atc_summary": { "total_findings": 39, "critical": 12, "high": 11, "medium": 11, "low": 5, "objects_checked": 230, "categories": { "OBSOLETE_API": 23, "SECURITY": 9, "PERFORMANCE": 5, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 27, "removed_transactions": 5, "deprecated_fms": 6, "deprecated_tables": 7, "compatibility_views": 4, "universal_journal_impacts": 3, "business_partner_items": 2, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 44.0, "risk_level": "medium", "estimated_effort_days": 58, "critical_areas": ["Bid management pipeline to S/4 CRM", "Sub-contractor evaluation migration", "Project-linked opportunity tracking"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM18",
+      "host": "sapcrm18prd.company.com",
+      "client": "100",
+      "description": "CRM Retail – Shopper loyalty and omnichannel engagement platform",
+      "sap_version": "SAP CRM 7.0 EHP4 (Release 750)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 3, "active_clients": 5, "rfc_destinations": 13, "transport_routes": 4, "installed_components": 12 }
+    },
+    "custom_code_summary": { "total_objects": 490, "total_lines_of_code": 635000, "z_programs": 292, "function_modules": 98, "classes": 64, "custom_tables": 32, "badis": 12, "user_exits": 9, "enhancement_spots": 5, "modules_covered": ["CRM","MKT","IC","SLS","ECC","BI","SD","WM"] },
+    "atc_summary": { "total_findings": 80, "critical": 27, "high": 23, "medium": 20, "low": 10, "objects_checked": 474, "categories": { "OBSOLETE_API": 49, "SECURITY": 18, "PERFORMANCE": 10, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 57, "removed_transactions": 10, "deprecated_fms": 14, "deprecated_tables": 14, "compatibility_views": 8, "universal_journal_impacts": 6, "business_partner_items": 6, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 26.0, "risk_level": "critical", "estimated_effort_days": 150, "critical_areas": ["Omnichannel order history migration", "Loyalty tier recalculation engine", "Personalisation rule migration to C4C"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM19",
+      "host": "sapcrm19prd.company.com",
+      "client": "100",
+      "description": "CRM Mining – Bulk commodity contract management and customer pricing",
+      "sap_version": "SAP CRM 7.0 EHP3 (Release 740)",
+      "kernel_version": "753",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 2, "active_clients": 4, "rfc_destinations": 9, "transport_routes": 3, "installed_components": 9 }
+    },
+    "custom_code_summary": { "total_objects": 295, "total_lines_of_code": 376000, "z_programs": 175, "function_modules": 59, "classes": 39, "custom_tables": 20, "badis": 6, "user_exits": 5, "enhancement_spots": 2, "modules_covered": ["CRM","SLS","SRV","ECC","SD","MM","FI"] },
+    "atc_summary": { "total_findings": 48, "critical": 16, "high": 14, "medium": 12, "low": 6, "objects_checked": 284, "categories": { "OBSOLETE_API": 29, "SECURITY": 11, "PERFORMANCE": 6, "ROBUSTNESS": 2 } },
+    "simplification_summary": { "total_items": 33, "removed_transactions": 6, "deprecated_fms": 8, "deprecated_tables": 8, "compatibility_views": 5, "universal_journal_impacts": 4, "business_partner_items": 3, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 40.0, "risk_level": "high", "estimated_effort_days": 72, "critical_areas": ["Commodity index pricing migration", "Offtake contract milestone tracking", "Port demurrage claim integration"] }
+  },
+  {
+    "sap_system": {
+      "sid": "CRM20",
+      "host": "sapcrm20prd.company.com",
+      "client": "100",
+      "description": "CRM Manufacturing – B2B spare parts ordering and dealer network management",
+      "sap_version": "SAP CRM 7.0 EHP3 (Release 740)",
+      "kernel_version": "756",
+      "hana_version": "SAP HANA 2.0 SP07",
+      "landscape": { "app_servers": 3, "active_clients": 5, "rfc_destinations": 12, "transport_routes": 4, "installed_components": 11 }
+    },
+    "custom_code_summary": { "total_objects": 425, "total_lines_of_code": 548000, "z_programs": 254, "function_modules": 84, "classes": 55, "custom_tables": 28, "badis": 10, "user_exits": 7, "enhancement_spots": 4, "modules_covered": ["CRM","SLS","SRV","IC","ECC","SD","MM","CS"] },
+    "atc_summary": { "total_findings": 70, "critical": 23, "high": 20, "medium": 18, "low": 9, "objects_checked": 410, "categories": { "OBSOLETE_API": 43, "SECURITY": 16, "PERFORMANCE": 8, "ROBUSTNESS": 3 } },
+    "simplification_summary": { "total_items": 50, "removed_transactions": 9, "deprecated_fms": 13, "deprecated_tables": 12, "compatibility_views": 7, "universal_journal_impacts": 5, "business_partner_items": 5, "material_ledger_items": 0 },
+    "risk_summary": { "overall_score": 30.0, "risk_level": "critical", "estimated_effort_days": 120, "critical_areas": ["Dealer ordering portal migration to Commerce Cloud", "Spare part cross-reference BOL migration", "After-sales warranty registration engine"] }
+  }
+]
