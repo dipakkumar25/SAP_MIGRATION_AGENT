@@ -12,12 +12,14 @@ build/
 venv/
 env/
 
-# -- Output: keep HTML dashboards, JSON, Markdown; ignore binary blobs --------
-# Ignore large binary outputs that are regenerated on every run
+# -- Output: ignore HTML (may contain rendered config), PDF, DOCX, PNG --------
+# These are regenerated artefacts; run run_sample.py to recreate them locally.
+output/reports/*.html
 output/reports/*.pdf
 output/reports/*.docx
 output/reports/*.png
-# HTML dashboards, JSON data files, Markdown runbooks are tracked
+# JSON dashboard data and Markdown runbooks are safe to track
+# .gitkeep files keep directory structure in git
 
 # -- Environment: NEVER commit real secrets -----------------------------------
 .env
