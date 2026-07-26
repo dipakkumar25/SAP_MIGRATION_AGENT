@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SAP S/4HANA Migration — Multi-System Dashboard</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:13px;line-height:1.55;background:#eef0f4;color:#1f2328}
+.page{max-width:1100px;margin:0 auto;padding:20px 14px 60px}
+
+.hdr{background:linear-gradient(135deg,#1a1f26 0%,#2d3748 100%);border-radius:10px;padding:20px 24px;margin-bottom:16px}
+.hdr .t1{font-size:18px;font-weight:700;color:#fff;margin-bottom:4px}
+.hdr .t2{font-size:11px;color:#8b949e}
+.hdr .t3{font-size:12px;color:#3b82d4;margin-top:6px;font-weight:600}
+
+/* section title */
+.sec-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#57606a;
+           margin:18px 0 10px;display:flex;align-items:center;gap:7px}
+.sec-title-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+/* summary comparison table */
+.cmp-wrap{overflow-x:auto;margin-bottom:18px}
+.cmp{width:100%;border-collapse:collapse;font-size:12px}
+.cmp th{background:#f7f8fa;padding:8px 10px;text-align:left;border-bottom:2px solid #e5e7eb;
+        font-size:10px;color:#57606a;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.cmp td{padding:8px 10px;border-bottom:1px solid #f0f2f5;vertical-align:middle}
+.cmp tr:last-child td{border-bottom:none}
+.cmp tr:hover td{background:#fafbfc}
+.cmp .sid-cell{font-weight:700;font-size:13px;color:#1f2328;white-space:nowrap}
+.cmp .module-tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;
+                 color:#fff;margin-right:3px;white-space:nowrap}
+.score-bar-wrap{display:flex;align-items:center;gap:7px;min-width:130px}
+.score-bar-track{flex:1;background:#f0f2f5;border-radius:4px;height:10px;overflow:hidden}
+.score-bar-fill{height:100%;border-radius:4px}
+.score-num{width:28px;text-align:right;font-size:11px;font-weight:700;flex-shrink:0}
+
+/* risk badge */
+.rb{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;white-space:nowrap}
+.rb-crit{background:#fee2e2;color:#991b1b}
+.rb-hi{background:#ffedd5;color:#9a3412}
+.rb-med{background:#fef3c7;color:#92400e}
+.rb-low{background:#d1fae5;color:#065f46}
+
+/* system cards grid */
+.sys-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px;margin-bottom:18px}
+.sys-card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden}
+.sys-card-hdr{padding:12px 14px 10px;border-bottom:1px solid #f0f2f5;display:flex;justify-content:space-between;align-items:flex-start}
+.sys-card-sid{font-size:20px;font-weight:800;color:#1f2328;letter-spacing:-0.5px;line-height:1}
+.sys-card-desc{font-size:10px;color:#57606a;margin-top:3px;line-height:1.4}
+.sys-card-body{padding:12px 14px}
+
+/* mini stat row */
+.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
+.mini-stat{background:#f7f8fa;border:1px solid #e5e7eb;border-radius:6px;padding:7px 8px;text-align:center}
+.mini-stat .mv{font-size:17px;font-weight:700;line-height:1}
+.mini-stat .ml{font-size:9px;color:#57606a;margin-top:2px}
+
+/* mini bar */
+.m-bar-row{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.m-bar-lbl{width:110px;flex-shrink:0;font-size:10px;color:#57606a}
+.m-bar-track{flex:1;background:#f0f2f5;border-radius:3px;height:9px;overflow:hidden}
+.m-bar-fill{height:100%;border-radius:3px}
+.m-bar-val{width:24px;text-align:right;font-size:10px;color:#57606a;flex-shrink:0}
+
+/* critical areas */
+.crit-list{list-style:none;margin-top:8px}
+.crit-list li{font-size:10px;color:#57606a;padding:3px 0;border-bottom:1px solid #f0f2f5;
+              display:flex;align-items:flex-start;gap:5px}
+.crit-list li:last-child{border-bottom:none}
+.crit-list li::before{content:"⚠";color:#f97316;flex-shrink:0;margin-top:1px}
+
+/* effort bar chart */
+.effort-chart{margin-bottom:18px}
+.eff-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.eff-lbl{width:90px;flex-shrink:0;font-size:11px;font-weight:600;color:#1f2328}
+.eff-track{flex:1;background:#f0f2f5;border-radius:4px;height:18px;overflow:hidden}
+.eff-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;
+          font-size:10px;font-weight:700;color:#fff;white-space:nowrap}
+.eff-days{width:55px;text-align:right;font-size:11px;color:#57606a;flex-shrink:0}
+
+/* objects comparison */
+.obj-chart{margin-bottom:18px}
+
+/* summary KPI strip */
+.sum-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:18px}
+.sum-kpi{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:12px;text-align:center;border-top:3px solid #e5e7eb}
+.sum-kpi .sk-val{font-size:22px;font-weight:700;line-height:1.1}
+.sum-kpi .sk-lbl{font-size:9px;color:#57606a;text-transform:uppercase;letter-spacing:.05em;margin-top:4px}
+
+footer{text-align:center;font-size:11px;color:#8b949e;padding-top:14px;border-top:1px solid #e5e7eb;margin-top:20px}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="t1">SAP ECC → S/4HANA Migration — Multi-System Assessment Dashboard</div>
+    <div class="t2">Generated: 2026-07-26 12:57 UTC &nbsp;·&nbsp; 7 systems assessed &nbsp;·&nbsp; SAP Migration Agent (9-agent LangGraph pipeline)</div>
+    <div class="t3">Systems: ECC, MM1, HR1, SD1, GRC1, APO1, CRM1</div>
+  </div>
+
+  <!-- SUMMARY KPIs -->
+  <div class="sec-title"><span class="sec-title-dot" style="background:#3b82d4"></span>Portfolio Summary — All 7 Systems</div>
+  
+    <div class="sum-strip">
+      <div class="sum-kpi" style="border-top-color:#3b82d4">
+        <div class="sk-val" style="color:#3b82d4">7</div>
+        <div class="sk-lbl">SAP Systems</div>
+      </div>
+      <div class="sum-kpi" style="border-top-color:#7c5cd8">
+        <div class="sk-val" style="color:#7c5cd8">2,933</div>
+        <div class="sk-lbl">Custom Objects</div>
+      </div>
+      <div class="sum-kpi" style="border-top-color:#dc2626">
+        <div class="sk-val" style="color:#dc2626">455</div>
+        <div class="sk-lbl">ATC Findings</div>
+      </div>
+      <div class="sum-kpi" style="border-top-color:#ef4444">
+        <div class="sk-val" style="color:#ef4444">182</div>
+        <div class="sk-lbl">Critical Findings</div>
+      </div>
+      <div class="sum-kpi" style="border-top-color:#f97316">
+        <div class="sk-val" style="color:#f97316">210</div>
+        <div class="sk-lbl">Total Effort Days</div>
+      </div>
+      <div class="sum-kpi" style="border-top-color:#10b981">
+        <div class="sk-val" style="color:#10b981">336</div>
+        <div class="sk-lbl">Simplif. Items</div>
+      </div>
+    </div>
+
+  <!-- COMPARISON TABLE -->
+  <div class="sec-title"><span class="sec-title-dot" style="background:#7c5cd8"></span>System-by-System Comparison (sorted by readiness score ↑ = most risk)</div>
+  
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th>System</th>
+            <th>Description</th>
+            <th style="min-width:150px">Readiness Score</th>
+            <th>Risk Level</th>
+            <th style="text-align:right">Objects</th>
+            <th style="text-align:right">LOC</th>
+            <th style="text-align:right">Critical</th>
+            <th style="text-align:right">High</th>
+            <th style="text-align:right">ATC Total</th>
+            <th style="text-align:right">Simplif.</th>
+            <th style="text-align:right">Effort (days)</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        <tr>
+          <td class="sid-cell"><span class="module-tag" style="background:#3b82d4">MM</span> ECC</td>
+          <td style="font-size:11px;color:#57606a;max-width:220px">ECC Production – Large enterprise footprint across FI, MM, SD, HR, PP, WM, PM, Q</td>
+          <td><div class="score-bar-wrap">
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:66.6%;background:#10b981"></div></div>
+      <span class="score-num" style="color:#10b981">67</span>
+    </div></td>
+          <td><span class="rb rb-med">MEDIUM</span></td>
+          <td style="text-align:right;font-weight:600">419</td>
+          <td style="text-align:right;color:#57606a;font-size:11px">688,585</td>
+          <td style="text-align:right;color:#dc2626;font-weight:700">26</td>
+          <td style="text-align:right;color:#f97316;font-weight:600">28</td>
+          <td style="text-align:right">65</td>
+          <td style="text-align:right">48</td>
+          <td style="text-align:right;font-weight:600;color:#f97316">30</td>
+        </tr>
+        <tr>
+          <td class="sid-cell"><span class="module-tag" style="background:#3b82d4">MM</span> MM1</td>
+          <td style="font-size:11px;color:#57606a;max-width:220px">MM Production – Procurement and Inventory Management, full MRP scope</td>
+          <td><div class="score-bar-wrap">
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:66.6%;background:#10b981"></div></div>
+      <span class="score-num" style="color:#10b981">67</span>
+    </div></td>
+          <td><span class="rb rb-med">MEDIUM</span></td>
+          <td style="text-align:right;font-weight:600">419</td>
+          <td style="text-align:right;color:#57606a;font-size:11px">688,585</td>
+          <td style="text-align:right;color:#dc2626;font-weight:700">26</td>
+          <td style="text-align:right;color:#f97316;font-weight:600">28</td>
+          <td style="text-align:right">65</td>
+          <td style="text-align:right">48</td>
+          <td style="text-align:right;font-weight:600;color:#f97316">30</td>
+        </tr>
+        <tr>
+          <td class="sid-cell"><span class="module-tag" style="background:#10b981">HR</span> HR1</td>
+          <td style="font-size:11px;color:#57606a;max-width:220px">HR Production – Core HR, Payroll, Time Management, Organizational Management</td>
+          <td><div class="score-bar-wrap">
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:66.6%;background:#10b981"></div></div>
+      <span class="score-num" style="color:#10b981">67</span>
+    </div></td>
+          <td><span class="rb rb-med">MEDIUM</span></td>
+          <td style="text-align:right;font-weight:600">419</td>
+          <td style="text-align:right;color:#57606a;font-size:11px">688,585</td>
+          <td style="text-align:right;color:#dc2626;font-weight:700">26</td>
+          <td style="text-align:right;color:#f97316;font-weight:600">28</td>
+          <td style="text-align:right">65</td>
+          <td style="text-align:right">48</td>
+          <td style="text-align:right;font-weight:600;color:#f97316">30</td>
+        </tr>
+        <tr>
+          <td class="sid-cell"><span class="module-tag" style="background:#f97316">SD</span> SD1</td>
+          <td style="font-size:11px;color:#57606a;max-width:220px">SD Production – Order-to-Cash, Billing, Shipping and Credit Management</td>
+          <td><div class="score-bar-wrap">
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:66.6%;background:#10b981"></div></div>
+      <span class="score-num" style="color:#10b981">67</span>
+    </div></td>
+          <td><span class="rb rb-med">MEDIUM</span></td>
+          <td style="text-align:right;font-weight:600">419</td>
+          <td style="text-align:right;color:#57606a;font-size:11px">688,585</td>
+          <td style="text-align:right;color:#dc2626;font-weight:700">26</td>
+          <td style="text-align:right;color:#f97316;font-weight:600">28</td>
+          <td style="text-align:right">65</td>
+          <td style="text-align:right">48</td>
+          <td style="text-align:right;font-weight:600;color:#f97316">30</td>
+        </tr>
+        <tr>
+          <td class="sid-cell"><span class="module-tag" style="background:#dc2626">GRC</span> GRC1</td>
+          <td style="font-size:11px;color:#57606a;max-width:220px">GRC Production – SAP GRC 10.1, Access Control, Process Control, Risk Management</td>
+          <td><div class="score-bar-wrap">
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:66.6%;background:#10b981"></div></div>
+      <span class="score-num" style="color:#10b981">67</span>
+    </div></td>
+          <td><span class="rb rb-med">MEDIUM</span></td>
+          <td style="text-align:right;font-weight:600">419</td>
+          <td style="text-align:right;color:#57606a;font-size:11px">688,585</td>
+          <td style="text-align:right;color:#dc2626;font-weight:700">26</td>
+          <td style="text-align:right;color:#f97316;font-weight:600">28</td>
+          <td style="text-align:right">65</td>
+          <td style="text-align:right">48</td>
+          <td style="text-align:right;font-weight:600;color:#f97316">30</td>
+        </tr>
+        <tr>
+          <td class="sid-cell"><span class="module-tag" style="background:#7c5cd8">APO</span> APO1</td>
+          <td style="font-size:11px;color:#57606a;max-width:220px">APO Production – SAP APO 7.0, Demand Planning, Supply Network Planning, GATP</td>
+          <td><div class="score-bar-wrap">
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:66.6%;background:#10b981"></div></div>
+      <span class="score-num" style="color:#10b981">67</span>
+    </div></td>
+          <td><span class="rb rb-med">MEDIUM</span></td>
+          <td style="text-align:right;font-weight:600">419</td>
+          <td style="text-align:right;color:#57606a;font-size:11px">688,585</td>
+          <td style="text-align:right;color:#dc2626;font-weight:700">26</td>
+          <td style="text-align:right;color:#f97316;font-weight:600">28</td>
+          <td style="text-align:right">65</td>
+          <td style="text-align:right">48</td>
+          <td style="text-align:right;font-weight:600;color:#f97316">30</td>
+        </tr>
+        <tr>
+          <td class="sid-cell"><span class="module-tag" style="background:#06b6d4">CRM</span> CRM1</td>
+          <td style="font-size:11px;color:#57606a;max-width:220px">CRM Production – SAP CRM 7.0, Sales, Service, Marketing, Interaction Centre</td>
+          <td><div class="score-bar-wrap">
+      <div class="score-bar-track"><div class="score-bar-fill" style="width:66.6%;background:#10b981"></div></div>
+      <span class="score-num" style="color:#10b981">67</span>
+    </div></td>
+          <td><span class="rb rb-med">MEDIUM</span></td>
+          <td style="text-align:right;font-weight:600">419</td>
+          <td style="text-align:right;color:#57606a;font-size:11px">688,585</td>
+          <td style="text-align:right;color:#dc2626;font-weight:700">26</td>
+          <td style="text-align:right;color:#f97316;font-weight:600">28</td>
+          <td style="text-align:right">65</td>
+          <td style="text-align:right">48</td>
+          <td style="text-align:right;font-weight:600;color:#f97316">30</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  <!-- EFFORT CHART -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
+    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:14px 16px">
+      <div class="sec-title" style="margin-top:0"><span class="sec-title-dot" style="background:#f97316"></span>Remediation Effort by System (days)</div>
+      <div class="effort-chart">
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#3b82d4">MM</span> ECC</div>
+          <div class="eff-track"><div class="eff-fill" style="width:100%;background:#3b82d4">30 days</div></div>
+          <div class="eff-days">30 days</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#3b82d4">MM</span> MM1</div>
+          <div class="eff-track"><div class="eff-fill" style="width:100%;background:#3b82d4">30 days</div></div>
+          <div class="eff-days">30 days</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#10b981">HR</span> HR1</div>
+          <div class="eff-track"><div class="eff-fill" style="width:100%;background:#10b981">30 days</div></div>
+          <div class="eff-days">30 days</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#f97316">SD</span> SD1</div>
+          <div class="eff-track"><div class="eff-fill" style="width:100%;background:#f97316">30 days</div></div>
+          <div class="eff-days">30 days</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#dc2626">GRC</span> GRC1</div>
+          <div class="eff-track"><div class="eff-fill" style="width:100%;background:#dc2626">30 days</div></div>
+          <div class="eff-days">30 days</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#7c5cd8">APO</span> APO1</div>
+          <div class="eff-track"><div class="eff-fill" style="width:100%;background:#7c5cd8">30 days</div></div>
+          <div class="eff-days">30 days</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#06b6d4">CRM</span> CRM1</div>
+          <div class="eff-track"><div class="eff-fill" style="width:100%;background:#06b6d4">30 days</div></div>
+          <div class="eff-days">30 days</div>
+        </div></div>
+    </div>
+    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:14px 16px">
+      <div class="sec-title" style="margin-top:0"><span class="sec-title-dot" style="background:#7c5cd8"></span>Custom Objects by System</div>
+      <div class="obj-chart">
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#3b82d4">MM</span> ECC</div>
+          <div class="eff-track"><div class="eff-fill" style="width:100%;background:#3b82d4">419 objects</div></div>
+          <div class="eff-days">419</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#3b82d4">MM</span> MM1</div>
+          <div class="eff-track"><div class="eff-fill" style="width:100%;background:#3b82d4">419 objects</div></div>
+          <div class="eff-days">419</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#10b981">HR</span> HR1</div>
+          <div class="eff-track"><div class="eff-fill" style="width:100%;background:#10b981">419 objects</div></div>
+          <div class="eff-days">419</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#f97316">SD</span> SD1</div>
+          <div class="eff-track"><div class="eff-fill" style="width:100%;background:#f97316">419 objects</div></div>
+          <div class="eff-days">419</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#dc2626">GRC</span> GRC1</div>
+          <div class="eff-track"><div class="eff-fill" style="width:100%;background:#dc2626">419 objects</div></div>
+          <div class="eff-days">419</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#7c5cd8">APO</span> APO1</div>
+          <div class="eff-track"><div class="eff-fill" style="width:100%;background:#7c5cd8">419 objects</div></div>
+          <div class="eff-days">419</div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#06b6d4">CRM</span> CRM1</div>
+          <div class="eff-track"><div class="eff-fill" style="width:100%;background:#06b6d4">419 objects</div></div>
+          <div class="eff-days">419</div>
+        </div></div>
+    </div>
+  </div>
+
+  <!-- ATC CHART -->
+  <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:14px 16px;margin-bottom:18px">
+    <div class="sec-title" style="margin-top:0">
+      <span class="sec-title-dot" style="background:#dc2626"></span>
+      ATC Findings by System
+      <span style="font-size:10px;color:#57606a;font-weight:400;margin-left:6px">
+        ■ Critical &nbsp; ■ High &nbsp; ■ Medium &nbsp; ■ Low
+      </span>
+      <span style="font-size:10px;color:#57606a;margin-left:4px">
+        (<span style="color:#dc2626">■</span>
+         <span style="color:#f97316">■</span>
+         <span style="color:#eab308">■</span>
+         <span style="color:#22c55e">■</span>)
+      </span>
+    </div>
+    <div class="effort-chart">
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#3b82d4">MM</span> ECC</div>
+          <div class="eff-track" style="height:14px">
+            <div style="display:flex;height:100%;width:100%">
+              <div style="width:40%;background:#dc2626;height:100%" title="Critical: 26"></div>
+              <div style="width:43%;background:#f97316;height:100%" title="High: 28"></div>
+              <div style="width:17%;background:#eab308;height:100%" title="Medium: 11"></div>
+              <div style="width:0%;background:#22c55e;height:100%" title="Low: 0"></div>
+            </div>
+          </div>
+          <div class="eff-days">65 <span style="font-size:9px;color:#dc2626">(26C)</span></div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#3b82d4">MM</span> MM1</div>
+          <div class="eff-track" style="height:14px">
+            <div style="display:flex;height:100%;width:100%">
+              <div style="width:40%;background:#dc2626;height:100%" title="Critical: 26"></div>
+              <div style="width:43%;background:#f97316;height:100%" title="High: 28"></div>
+              <div style="width:17%;background:#eab308;height:100%" title="Medium: 11"></div>
+              <div style="width:0%;background:#22c55e;height:100%" title="Low: 0"></div>
+            </div>
+          </div>
+          <div class="eff-days">65 <span style="font-size:9px;color:#dc2626">(26C)</span></div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#10b981">HR</span> HR1</div>
+          <div class="eff-track" style="height:14px">
+            <div style="display:flex;height:100%;width:100%">
+              <div style="width:40%;background:#dc2626;height:100%" title="Critical: 26"></div>
+              <div style="width:43%;background:#f97316;height:100%" title="High: 28"></div>
+              <div style="width:17%;background:#eab308;height:100%" title="Medium: 11"></div>
+              <div style="width:0%;background:#22c55e;height:100%" title="Low: 0"></div>
+            </div>
+          </div>
+          <div class="eff-days">65 <span style="font-size:9px;color:#dc2626">(26C)</span></div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#f97316">SD</span> SD1</div>
+          <div class="eff-track" style="height:14px">
+            <div style="display:flex;height:100%;width:100%">
+              <div style="width:40%;background:#dc2626;height:100%" title="Critical: 26"></div>
+              <div style="width:43%;background:#f97316;height:100%" title="High: 28"></div>
+              <div style="width:17%;background:#eab308;height:100%" title="Medium: 11"></div>
+              <div style="width:0%;background:#22c55e;height:100%" title="Low: 0"></div>
+            </div>
+          </div>
+          <div class="eff-days">65 <span style="font-size:9px;color:#dc2626">(26C)</span></div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#dc2626">GRC</span> GRC1</div>
+          <div class="eff-track" style="height:14px">
+            <div style="display:flex;height:100%;width:100%">
+              <div style="width:40%;background:#dc2626;height:100%" title="Critical: 26"></div>
+              <div style="width:43%;background:#f97316;height:100%" title="High: 28"></div>
+              <div style="width:17%;background:#eab308;height:100%" title="Medium: 11"></div>
+              <div style="width:0%;background:#22c55e;height:100%" title="Low: 0"></div>
+            </div>
+          </div>
+          <div class="eff-days">65 <span style="font-size:9px;color:#dc2626">(26C)</span></div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#7c5cd8">APO</span> APO1</div>
+          <div class="eff-track" style="height:14px">
+            <div style="display:flex;height:100%;width:100%">
+              <div style="width:40%;background:#dc2626;height:100%" title="Critical: 26"></div>
+              <div style="width:43%;background:#f97316;height:100%" title="High: 28"></div>
+              <div style="width:17%;background:#eab308;height:100%" title="Medium: 11"></div>
+              <div style="width:0%;background:#22c55e;height:100%" title="Low: 0"></div>
+            </div>
+          </div>
+          <div class="eff-days">65 <span style="font-size:9px;color:#dc2626">(26C)</span></div>
+        </div>
+        <div class="eff-row">
+          <div class="eff-lbl"><span class="module-tag" style="background:#06b6d4">CRM</span> CRM1</div>
+          <div class="eff-track" style="height:14px">
+            <div style="display:flex;height:100%;width:100%">
+              <div style="width:40%;background:#dc2626;height:100%" title="Critical: 26"></div>
+              <div style="width:43%;background:#f97316;height:100%" title="High: 28"></div>
+              <div style="width:17%;background:#eab308;height:100%" title="Medium: 11"></div>
+              <div style="width:0%;background:#22c55e;height:100%" title="Low: 0"></div>
+            </div>
+          </div>
+          <div class="eff-days">65 <span style="font-size:9px;color:#dc2626">(26C)</span></div>
+        </div></div>
+  </div>
+
+  <!-- PER-SYSTEM CARDS -->
+  <div class="sec-title"><span class="sec-title-dot" style="background:#06b6d4"></span>Individual System Details</div>
+  <div class="sys-grid">
+    
+        <div class="sys-card">
+          <div class="sys-card-hdr" style="border-left:4px solid #3b82d4">
+            <div>
+              <div style="display:flex;align-items:center;gap:7px">
+                <span class="module-tag" style="background:#3b82d4">MM</span>
+                <span class="sys-card-sid">ECC</span>
+              </div>
+              <div class="sys-card-desc">ECC Production – Large enterprise footprint across FI, MM, SD, HR, PP, WM, PM, QM, CO</div>
+              <div style="font-size:10px;color:#57606a;margin-top:4px">SAP ECC 6.0 EHP8 (Release 740)</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:10px">
+              <div style="font-size:26px;font-weight:800;color:#10b981;line-height:1">66.6</div>
+              <div style="font-size:9px;color:#57606a">/ 100</div>
+              <span class="rb rb-med">MEDIUM</span>
+            </div>
+          </div>
+          <div class="sys-card-body">
+            <div class="mini-stats">
+              <div class="mini-stat">
+                <div class="mv" style="color:#7c5cd8">419</div>
+                <div class="ml">Objects</div>
+              </div>
+              <div class="mini-stat">
+                <div class="mv" style="color:#dc2626">65</div>
+                <div class="ml">ATC Findings</div>
+              </div>
+              <div class="mini-stat">
+                <div class="mv" style="color:#f97316">30</div>
+                <div class="ml">Effort Days</div>
+              </div>
+            </div>
+            
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Critical</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:93%;background:#dc2626"></div></div>
+              <div class="m-bar-val">26</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">High</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:100%;background:#f97316"></div></div>
+              <div class="m-bar-val">28</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Medium</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:39%;background:#eab308"></div></div>
+              <div class="m-bar-val">11</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Low</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:0%;background:#22c55e"></div></div>
+              <div class="m-bar-val">0</div>
+            </div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin:8px 0 4px">
+              Critical Areas
+            </div>
+            <ul class="crit-list"><li>No critical areas identified</li></ul>
+          </div>
+        </div>
+        <div class="sys-card">
+          <div class="sys-card-hdr" style="border-left:4px solid #3b82d4">
+            <div>
+              <div style="display:flex;align-items:center;gap:7px">
+                <span class="module-tag" style="background:#3b82d4">MM</span>
+                <span class="sys-card-sid">MM1</span>
+              </div>
+              <div class="sys-card-desc">MM Production – Procurement and Inventory Management, full MRP scope</div>
+              <div style="font-size:10px;color:#57606a;margin-top:4px">SAP ECC 6.0 EHP8 (Release 740)</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:10px">
+              <div style="font-size:26px;font-weight:800;color:#10b981;line-height:1">66.6</div>
+              <div style="font-size:9px;color:#57606a">/ 100</div>
+              <span class="rb rb-med">MEDIUM</span>
+            </div>
+          </div>
+          <div class="sys-card-body">
+            <div class="mini-stats">
+              <div class="mini-stat">
+                <div class="mv" style="color:#7c5cd8">419</div>
+                <div class="ml">Objects</div>
+              </div>
+              <div class="mini-stat">
+                <div class="mv" style="color:#dc2626">65</div>
+                <div class="ml">ATC Findings</div>
+              </div>
+              <div class="mini-stat">
+                <div class="mv" style="color:#f97316">30</div>
+                <div class="ml">Effort Days</div>
+              </div>
+            </div>
+            
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Critical</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:93%;background:#dc2626"></div></div>
+              <div class="m-bar-val">26</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">High</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:100%;background:#f97316"></div></div>
+              <div class="m-bar-val">28</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Medium</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:39%;background:#eab308"></div></div>
+              <div class="m-bar-val">11</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Low</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:0%;background:#22c55e"></div></div>
+              <div class="m-bar-val">0</div>
+            </div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin:8px 0 4px">
+              Critical Areas
+            </div>
+            <ul class="crit-list"><li>No critical areas identified</li></ul>
+          </div>
+        </div>
+        <div class="sys-card">
+          <div class="sys-card-hdr" style="border-left:4px solid #10b981">
+            <div>
+              <div style="display:flex;align-items:center;gap:7px">
+                <span class="module-tag" style="background:#10b981">HR</span>
+                <span class="sys-card-sid">HR1</span>
+              </div>
+              <div class="sys-card-desc">HR Production – Core HR, Payroll, Time Management, Organizational Management</div>
+              <div style="font-size:10px;color:#57606a;margin-top:4px">SAP ECC 6.0 EHP8 (Release 740)</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:10px">
+              <div style="font-size:26px;font-weight:800;color:#10b981;line-height:1">66.6</div>
+              <div style="font-size:9px;color:#57606a">/ 100</div>
+              <span class="rb rb-med">MEDIUM</span>
+            </div>
+          </div>
+          <div class="sys-card-body">
+            <div class="mini-stats">
+              <div class="mini-stat">
+                <div class="mv" style="color:#7c5cd8">419</div>
+                <div class="ml">Objects</div>
+              </div>
+              <div class="mini-stat">
+                <div class="mv" style="color:#dc2626">65</div>
+                <div class="ml">ATC Findings</div>
+              </div>
+              <div class="mini-stat">
+                <div class="mv" style="color:#f97316">30</div>
+                <div class="ml">Effort Days</div>
+              </div>
+            </div>
+            
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Critical</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:93%;background:#dc2626"></div></div>
+              <div class="m-bar-val">26</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">High</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:100%;background:#f97316"></div></div>
+              <div class="m-bar-val">28</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Medium</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:39%;background:#eab308"></div></div>
+              <div class="m-bar-val">11</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Low</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:0%;background:#22c55e"></div></div>
+              <div class="m-bar-val">0</div>
+            </div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin:8px 0 4px">
+              Critical Areas
+            </div>
+            <ul class="crit-list"><li>No critical areas identified</li></ul>
+          </div>
+        </div>
+        <div class="sys-card">
+          <div class="sys-card-hdr" style="border-left:4px solid #f97316">
+            <div>
+              <div style="display:flex;align-items:center;gap:7px">
+                <span class="module-tag" style="background:#f97316">SD</span>
+                <span class="sys-card-sid">SD1</span>
+              </div>
+              <div class="sys-card-desc">SD Production – Order-to-Cash, Billing, Shipping and Credit Management</div>
+              <div style="font-size:10px;color:#57606a;margin-top:4px">SAP ECC 6.0 EHP8 (Release 740)</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:10px">
+              <div style="font-size:26px;font-weight:800;color:#10b981;line-height:1">66.6</div>
+              <div style="font-size:9px;color:#57606a">/ 100</div>
+              <span class="rb rb-med">MEDIUM</span>
+            </div>
+          </div>
+          <div class="sys-card-body">
+            <div class="mini-stats">
+              <div class="mini-stat">
+                <div class="mv" style="color:#7c5cd8">419</div>
+                <div class="ml">Objects</div>
+              </div>
+              <div class="mini-stat">
+                <div class="mv" style="color:#dc2626">65</div>
+                <div class="ml">ATC Findings</div>
+              </div>
+              <div class="mini-stat">
+                <div class="mv" style="color:#f97316">30</div>
+                <div class="ml">Effort Days</div>
+              </div>
+            </div>
+            
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Critical</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:93%;background:#dc2626"></div></div>
+              <div class="m-bar-val">26</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">High</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:100%;background:#f97316"></div></div>
+              <div class="m-bar-val">28</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Medium</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:39%;background:#eab308"></div></div>
+              <div class="m-bar-val">11</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Low</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:0%;background:#22c55e"></div></div>
+              <div class="m-bar-val">0</div>
+            </div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin:8px 0 4px">
+              Critical Areas
+            </div>
+            <ul class="crit-list"><li>No critical areas identified</li></ul>
+          </div>
+        </div>
+        <div class="sys-card">
+          <div class="sys-card-hdr" style="border-left:4px solid #dc2626">
+            <div>
+              <div style="display:flex;align-items:center;gap:7px">
+                <span class="module-tag" style="background:#dc2626">GRC</span>
+                <span class="sys-card-sid">GRC1</span>
+              </div>
+              <div class="sys-card-desc">GRC Production – SAP GRC 10.1, Access Control, Process Control, Risk Management</div>
+              <div style="font-size:10px;color:#57606a;margin-top:4px">SAP ECC 6.0 EHP8 (Release 740)</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:10px">
+              <div style="font-size:26px;font-weight:800;color:#10b981;line-height:1">66.6</div>
+              <div style="font-size:9px;color:#57606a">/ 100</div>
+              <span class="rb rb-med">MEDIUM</span>
+            </div>
+          </div>
+          <div class="sys-card-body">
+            <div class="mini-stats">
+              <div class="mini-stat">
+                <div class="mv" style="color:#7c5cd8">419</div>
+                <div class="ml">Objects</div>
+              </div>
+              <div class="mini-stat">
+                <div class="mv" style="color:#dc2626">65</div>
+                <div class="ml">ATC Findings</div>
+              </div>
+              <div class="mini-stat">
+                <div class="mv" style="color:#f97316">30</div>
+                <div class="ml">Effort Days</div>
+              </div>
+            </div>
+            
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Critical</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:93%;background:#dc2626"></div></div>
+              <div class="m-bar-val">26</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">High</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:100%;background:#f97316"></div></div>
+              <div class="m-bar-val">28</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Medium</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:39%;background:#eab308"></div></div>
+              <div class="m-bar-val">11</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Low</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:0%;background:#22c55e"></div></div>
+              <div class="m-bar-val">0</div>
+            </div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin:8px 0 4px">
+              Critical Areas
+            </div>
+            <ul class="crit-list"><li>No critical areas identified</li></ul>
+          </div>
+        </div>
+        <div class="sys-card">
+          <div class="sys-card-hdr" style="border-left:4px solid #7c5cd8">
+            <div>
+              <div style="display:flex;align-items:center;gap:7px">
+                <span class="module-tag" style="background:#7c5cd8">APO</span>
+                <span class="sys-card-sid">APO1</span>
+              </div>
+              <div class="sys-card-desc">APO Production – SAP APO 7.0, Demand Planning, Supply Network Planning, GATP</div>
+              <div style="font-size:10px;color:#57606a;margin-top:4px">SAP ECC 6.0 EHP8 (Release 740)</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:10px">
+              <div style="font-size:26px;font-weight:800;color:#10b981;line-height:1">66.6</div>
+              <div style="font-size:9px;color:#57606a">/ 100</div>
+              <span class="rb rb-med">MEDIUM</span>
+            </div>
+          </div>
+          <div class="sys-card-body">
+            <div class="mini-stats">
+              <div class="mini-stat">
+                <div class="mv" style="color:#7c5cd8">419</div>
+                <div class="ml">Objects</div>
+              </div>
+              <div class="mini-stat">
+                <div class="mv" style="color:#dc2626">65</div>
+                <div class="ml">ATC Findings</div>
+              </div>
+              <div class="mini-stat">
+                <div class="mv" style="color:#f97316">30</div>
+                <div class="ml">Effort Days</div>
+              </div>
+            </div>
+            
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Critical</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:93%;background:#dc2626"></div></div>
+              <div class="m-bar-val">26</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">High</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:100%;background:#f97316"></div></div>
+              <div class="m-bar-val">28</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Medium</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:39%;background:#eab308"></div></div>
+              <div class="m-bar-val">11</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Low</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:0%;background:#22c55e"></div></div>
+              <div class="m-bar-val">0</div>
+            </div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin:8px 0 4px">
+              Critical Areas
+            </div>
+            <ul class="crit-list"><li>No critical areas identified</li></ul>
+          </div>
+        </div>
+        <div class="sys-card">
+          <div class="sys-card-hdr" style="border-left:4px solid #06b6d4">
+            <div>
+              <div style="display:flex;align-items:center;gap:7px">
+                <span class="module-tag" style="background:#06b6d4">CRM</span>
+                <span class="sys-card-sid">CRM1</span>
+              </div>
+              <div class="sys-card-desc">CRM Production – SAP CRM 7.0, Sales, Service, Marketing, Interaction Centre</div>
+              <div style="font-size:10px;color:#57606a;margin-top:4px">SAP ECC 6.0 EHP8 (Release 740)</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0;margin-left:10px">
+              <div style="font-size:26px;font-weight:800;color:#10b981;line-height:1">66.6</div>
+              <div style="font-size:9px;color:#57606a">/ 100</div>
+              <span class="rb rb-med">MEDIUM</span>
+            </div>
+          </div>
+          <div class="sys-card-body">
+            <div class="mini-stats">
+              <div class="mini-stat">
+                <div class="mv" style="color:#7c5cd8">419</div>
+                <div class="ml">Objects</div>
+              </div>
+              <div class="mini-stat">
+                <div class="mv" style="color:#dc2626">65</div>
+                <div class="ml">ATC Findings</div>
+              </div>
+              <div class="mini-stat">
+                <div class="mv" style="color:#f97316">30</div>
+                <div class="ml">Effort Days</div>
+              </div>
+            </div>
+            
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Critical</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:93%;background:#dc2626"></div></div>
+              <div class="m-bar-val">26</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">High</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:100%;background:#f97316"></div></div>
+              <div class="m-bar-val">28</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Medium</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:39%;background:#eab308"></div></div>
+              <div class="m-bar-val">11</div>
+            </div>
+            <div class="m-bar-row">
+              <div class="m-bar-lbl">Low</div>
+              <div class="m-bar-track"><div class="m-bar-fill" style="width:0%;background:#22c55e"></div></div>
+              <div class="m-bar-val">0</div>
+            </div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin:8px 0 4px">
+              Critical Areas
+            </div>
+            <ul class="crit-list"><li>No critical areas identified</li></ul>
+          </div>
+        </div>
+  </div>
+
+  <footer>
+    Multi-System Dashboard &nbsp;·&nbsp; 7 SAP systems &nbsp;·&nbsp;
+    Generated: 2026-07-26 12:57 UTC &nbsp;·&nbsp; SAP Migration Agent
+    <br><span style="font-size:10px;color:#aab">Made with IBM Bob</span>
+  </footer>
+
+</div>
+</body>
+</html>

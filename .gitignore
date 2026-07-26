@@ -12,14 +12,12 @@ build/
 venv/
 env/
 
-# -- Output: ignore HTML (may contain rendered config), PDF, DOCX, PNG --------
-# These are regenerated artefacts; run run_sample.py to recreate them locally.
-output/reports/*.html
-output/reports/*.pdf
-output/reports/*.docx
-output/reports/*.png
-# JSON dashboard data and Markdown runbooks are safe to track
-# .gitkeep files keep directory structure in git
+# -- Output: Plotly-generated dashboards (4.7 MB each, Plotly.js embedded) ---
+# These contain Plotly minified JS which trips secret scanners.
+# Regenerate locally with: python run_sample.py
+output/reports/dashboard_demo-*.html
+
+# All other output files (static HTML dashboards, PDF, DOCX, JSON, MD) are tracked.
 
 # -- Environment: NEVER commit real secrets -----------------------------------
 .env
