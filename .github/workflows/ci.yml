@@ -11,10 +11,10 @@ env:
   IMAGE_NAME: sap-migration-agent
 
 jobs:
-  # ── Lint & Format ────────────────────────────────────────────────────────────
   lint:
     name: Lint & Type Check
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -28,12 +28,14 @@ jobs:
         run: pip install ruff mypy
 
       - name: Ruff lint
-        run: ruff check SAP_MIGRATION_AGENT/
+        run: ruff check .
 
       - name: Ruff format check
-        run: ruff format --check SAP_MIGRATION_AGENT/
+        run: ruff format --check .
 
-  # ── Tests ────────────────────────────────────────────────────────────────────
+      - name: Mypy type check
+        run: mypy .
+
   test:
     name: Unit & Integration Tests
     runs-on: ubuntu-latest
@@ -64,11 +66,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd SAP_MIGRATION_AGENT
           pip install -r requirements.txt
 
       - name: Run tests
-        working-directory: SAP_MIGRATION_AGENT
         env:
           SAP_USE_MOCK: "true"
           DATABASE_URL: "postgresql+asyncpg://sap_agent:sap_agent@localhost:5432/sap_migration"
@@ -76,16 +76,14 @@ jobs:
           OPENAI_API_KEY: "sk-dummy-test-key"
           REPORTS_OUTPUT_DIR: "/tmp/reports"
         run: |
-          pytest tests/ -v --cov=app --cov-report=xml --cov-report=term-missing \
-            --cov-fail-under=80
+          pytest tests/ -v --cov=app --cov-report=xml --cov-report=term-missing --cov-fail-under=80
 
       - name: Upload coverage
         uses: codecov/codecov-action@v4
         with:
-          file: SAP_MIGRATION_AGENT/coverage.xml
+          file: coverage.xml
           fail_ci_if_error: false
 
-  # ── Docker Build ─────────────────────────────────────────────────────────────
   docker:
     name: Docker Build
     runs-on: ubuntu-latest
@@ -107,8 +105,8 @@ jobs:
       - name: Build and push API image
         uses: docker/build-push-action@v5
         with:
-          context: ./SAP_MIGRATION_AGENT
-          file: ./SAP_MIGRATION_AGENT/docker/Dockerfile.api
+          context: .
+          file: ./docker/Dockerfile.api
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}-api:latest
@@ -119,8 +117,8 @@ jobs:
       - name: Build and push Frontend image
         uses: docker/build-push-action@v5
         with:
-          context: ./SAP_MIGRATION_AGENT
-          file: ./SAP_MIGRATION_AGENT/docker/Dockerfile.frontend
+          context: .
+          file: ./docker/Dockerfile.frontend
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}-frontend:latest
