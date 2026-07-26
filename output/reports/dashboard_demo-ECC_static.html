@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SAP Migration Dashboard — ECC (demo-ECC)</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"Segoe UI",system-ui,sans-serif;font-size:13px;line-height:1.55;background:#eef0f4;color:#1f2328}
+.page{max-width:860px;margin:0 auto;padding:20px 14px 60px}
+
+/* header */
+.hdr{background:linear-gradient(135deg,#1a1f26 0%,#2d3748 100%);border-radius:10px;padding:20px 24px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.hdr-l .t1{font-size:17px;font-weight:700;color:#fff;margin-bottom:3px}
+.hdr-l .t2{font-size:11px;color:#8b949e}
+.hdr-r{text-align:right}
+.hdr-r .sid{font-size:38px;font-weight:800;color:#3b82d4;letter-spacing:-1px;line-height:1}
+.hdr-r .hsub{font-size:10px;color:#8b949e;margin-top:2px}
+.rpill{display:inline-block;padding:3px 10px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-top:6px}
+.rpill-med{background:#fef3c7;color:#92400e}
+.rpill-hi{background:#fee2e2;color:#991b1b}
+.rpill-low{background:#d1fae5;color:#065f46}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.chip{background:#d1fae5;color:#065f46;font-size:10px;font-weight:600;padding:2px 9px;border-radius:10px}
+.chip::before{content:"✓ "}
+
+/* KPIs */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.kpi{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:13px 13px 10px;border-top:3px solid #e5e7eb}
+.kpi-lbl{font-size:10px;color:#57606a;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.kpi-val{font-size:22px;font-weight:700;line-height:1.1}
+.kpi-sub{font-size:10px;color:#57606a;margin-top:4px}
+
+/* cards */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:14px 16px}
+.card-full{margin-bottom:12px}
+.ctitle{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#57606a;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.ctitle-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* bars */
+.bar-row{display:flex;align-items:center;gap:7px;margin-bottom:7px}
+.bar-label{width:130px;flex-shrink:0;font-size:11px}
+.bar-sub{font-size:9px;color:#57606a;margin-left:3px}
+.bar-track{flex:1;background:#f0f2f5;border-radius:4px;height:13px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px}
+.bar-val{width:28px;text-align:right;font-size:11px;color:#57606a;flex-shrink:0}
+
+/* gauge */
+.gauge-wrap{display:flex;flex-direction:column;align-items:center;padding:4px 0 6px}
+.gauge-legend{display:flex;gap:14px;font-size:10px;color:#57606a;margin-top:4px}
+
+/* table */
+table{width:100%;border-collapse:collapse;font-size:11px}
+th{text-align:left;padding:5px 7px;border-bottom:2px solid #e5e7eb;font-size:10px;color:#57606a;text-transform:uppercase;letter-spacing:.04em}
+td{padding:6px 7px;border-bottom:1px solid #f0f2f5;vertical-align:top}
+tr:last-child td{border-bottom:none}
+td code{font-size:10px;background:#f0f2f5;padding:1px 4px;border-radius:3px;font-family:monospace}
+
+/* badges */
+.badge-crit{display:inline-block;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:700;background:#fee2e2;color:#991b1b}
+.badge-high{display:inline-block;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:700;background:#ffedd5;color:#9a3412}
+.badge-med{display:inline-block;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:700;background:#fef3c7;color:#92400e}
+.badge-low{display:inline-block;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:700;background:#d1fae5;color:#065f46}
+
+/* runbook steps */
+.steps{list-style:none}
+.steps li{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid #f0f2f5;font-size:11px;align-items:flex-start}
+.steps li:last-child{border-bottom:none}
+.snum{flex-shrink:0;width:18px;height:18px;border-radius:50%;background:#3b82d4;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.smeta{font-size:10px;color:#57606a;margin-top:1px}
+
+/* stat grid */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+.stat-box{background:#f7f8fa;border:1px solid #e5e7eb;border-radius:6px;padding:8px;text-align:center}
+.stat-box .sv{font-size:19px;font-weight:700}
+.stat-box .sl{font-size:9px;color:#57606a;margin-top:1px}
+
+/* pie legend */
+.pie-wrap{display:flex;align-items:center;gap:12px}
+.leg{flex:1}
+.leg-row{display:flex;align-items:center;justify-content:space-between;font-size:11px;margin-bottom:5px}
+.leg-l{display:flex;align-items:center;gap:5px}
+.dot9{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+/* output files table */
+.file-tbl td:first-child{font-family:monospace;font-size:11px;color:#1f2328}
+.file-tbl td:last-child{color:#57606a;white-space:nowrap}
+
+hr.div{border:none;border-top:1px solid #e5e7eb;margin:10px 0}
+
+footer{text-align:center;font-size:11px;color:#8b949e;padding-top:14px;border-top:1px solid #e5e7eb;margin-top:20px}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="hdr-l">
+      <div class="t1">SAP ECC → S/4HANA Migration Assessment Dashboard</div>
+      <div class="t2">Assessment ID: demo-ECC &nbsp;·&nbsp; Generated: 2026-07-26 12:57 UTC &nbsp;·&nbsp; Mock RFC · Rule-based AI</div>
+      <span class="rpill rpill-med">⚠ MEDIUM &nbsp;·&nbsp; Readiness 66.6/100</span>
+    </div>
+    <div class="hdr-r">
+      <div class="sid">ECC</div>
+      <div class="hsub">sapeccprd.company.com</div>
+      <div class="hsub">SAP ECC 6.0 EHP8 (Release 740)</div>
+      <div class="hsub">HANA SAP HANA 2.0 SP07</div>
+    </div>
+  </div>
+
+  <!-- PIPELINE STEPS -->
+  <div class="chips"><span class="chip">landscape_discovery</span><span class="chip">custom_code_discovery</span><span class="chip">atc_assessment</span><span class="chip">simplification_analysis</span><span class="chip">dependency_analysis</span><span class="chip">risk_assessment</span><span class="chip">recommendation_generation</span><span class="chip">runbook_generation</span><span class="chip">dashboard_generation</span></div>
+
+  <!-- KPI STRIP (8 KPIs, 4 per row) -->
+  <div class="kpi-grid">
+    <div class="kpi" style="border-top-color:#3b82d4">
+      <div class="kpi-lbl">Readiness Score</div>
+      <div class="kpi-val" style="color:#3b82d4">66.6<small>/100</small></div>
+      <div class="kpi-sub"><span class="rpill-med" style="font-size:10px;padding:1px 7px;border-radius:10px;font-weight:700">MEDIUM</span></div>
+    </div>
+    <div class="kpi" style="border-top-color:#7c5cd8">
+      <div class="kpi-lbl">Custom Objects</div>
+      <div class="kpi-val" style="color:#7c5cd8">419</div>
+      <div class="kpi-sub">688,585 lines of code</div>
+    </div>
+    <div class="kpi" style="border-top-color:#dc2626">
+      <div class="kpi-lbl">ATC Findings</div>
+      <div class="kpi-val" style="color:#dc2626">65</div>
+      <div class="kpi-sub">26 crit · 28 high · 11 med</div>
+    </div>
+    <div class="kpi" style="border-top-color:#10b981">
+      <div class="kpi-lbl">Simplification</div>
+      <div class="kpi-val" style="color:#10b981">48</div>
+      <div class="kpi-sub">S/4HANA impact items</div>
+    </div>
+    <div class="kpi" style="border-top-color:#f97316">
+      <div class="kpi-lbl">Est. Effort</div>
+      <div class="kpi-val" style="color:#f97316">30 <small>days</small></div>
+      <div class="kpi-sub">20 recommendations</div>
+    </div>
+    <div class="kpi" style="border-top-color:#06b6d4">
+      <div class="kpi-lbl">Timeline</div>
+      <div class="kpi-val" style="color:#06b6d4">12 <small>wks</small></div>
+      <div class="kpi-sub">11-phase runbook</div>
+    </div>
+    <div class="kpi" style="border-top-color:#10b981">
+      <div class="kpi-lbl">RFC Destinations</div>
+      <div class="kpi-val" style="color:#10b981">10</div>
+      <div class="kpi-sub">5 active clients</div>
+    </div>
+    <div class="kpi" style="border-top-color:#7c5cd8">
+      <div class="kpi-lbl">Components</div>
+      <div class="kpi-val" style="color:#7c5cd8">10</div>
+      <div class="kpi-sub">HANA SAP HANA 2.0 SP07</div>
+    </div></div>
+
+  <!-- ROW 1: Gauge + ATC bar -->
+  <div class="g2">
+    <div class="card">
+      <div class="ctitle"><span class="ctitle-dot" style="background:#3b82d4"></span>Agent 6 — Migration Readiness Score</div>
+      <div class="gauge-wrap">
+        
+    <svg viewBox="0 0 200 118" width="200" height="118" style="overflow:visible">
+      <path d="M18,100 A82,82 0 0,1 80.3,24.3"  fill="none" stroke="#fee2e2" stroke-width="17" stroke-linecap="butt"/>
+      <path d="M80.3,24.3 A82,82 0 0,1 141,21.5" fill="none" stroke="#fef3c7" stroke-width="17" stroke-linecap="butt"/>
+      <path d="M141,21.5 A82,82 0 0,1 182,100"   fill="none" stroke="#d1fae5" stroke-width="17" stroke-linecap="butt"/>
+      <path d="M18,100 A82,82 0 0,1 182,100" fill="none" stroke="#e5e7eb" stroke-width="17" stroke-linecap="round" opacity=".3"/>
+      <path d="M18,100 A82,82 0 1,1 140.9,28.9" fill="none" stroke="#10b981" stroke-width="17" stroke-linecap="round"/>
+      <circle cx="140.9" cy="28.9" r="5" fill="#10b981"/>
+      <text x="100" y="84"  text-anchor="middle" font-size="30" font-weight="800" fill="#1f2328">66.6</text>
+      <text x="100" y="100" text-anchor="middle" font-size="10" fill="#57606a">out of 100</text>
+      <text x="100" y="114" text-anchor="middle" font-size="9"  font-weight="700" fill="#10b981">LOW RISK</text>
+      <text x="14"  y="115" font-size="8" fill="#dc2626">RISK</text>
+      <text x="186" y="115" text-anchor="end" font-size="8" fill="#10b981">SAFE</text>
+    </svg>
+        <div class="gauge-legend">
+          <span><span style="color:#dc2626;font-weight:700">■</span> 0–40 High risk</span>
+          <span><span style="color:#eab308;font-weight:700">■</span> 40–65 Medium</span>
+          <span><span style="color:#10b981;font-weight:700">■</span> 65–100 Low risk</span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ctitle"><span class="ctitle-dot" style="background:#dc2626"></span>Agent 3 — ATC Findings by Severity</div>
+      
+    <svg viewBox="0 0 240 150" width="100%" style="display:block;overflow:visible">
+      <line x1="34" y1="10" x2="34" y2="122" stroke="#e5e7eb"/>
+      <line x1="34" y1="122" x2="230" y2="122" stroke="#e5e7eb"/>
+      <rect x="40" y="18" width="38" height="102" rx="3" fill="#dc2626"/><text x="59" y="14" text-anchor="middle" font-size="11" font-weight="700" fill="#dc2626">26</text><text x="59" y="138" text-anchor="middle" font-size="10" fill="#57606a">Critical</text><rect x="88" y="10" width="38" height="110" rx="3" fill="#f97316"/><text x="107" y="6" text-anchor="middle" font-size="11" font-weight="700" fill="#f97316">28</text><text x="107" y="138" text-anchor="middle" font-size="10" fill="#57606a">High</text><rect x="136" y="77" width="38" height="43" rx="3" fill="#eab308"/><text x="155" y="73" text-anchor="middle" font-size="11" font-weight="700" fill="#eab308">11</text><text x="155" y="138" text-anchor="middle" font-size="10" fill="#57606a">Medium</text><rect x="184" y="120" width="38" height="0" rx="3" fill="#22c55e"/><text x="203" y="116" text-anchor="middle" font-size="11" font-weight="700" fill="#22c55e">0</text><text x="203" y="138" text-anchor="middle" font-size="10" fill="#57606a">Low</text>
+      <text x="132" y="150" text-anchor="middle" font-size="9" fill="#57606a">65 total findings</text>
+    </svg>
+    </div>
+  </div>
+
+  <!-- ROW 2: Custom Code + Simplification -->
+  <div class="g2">
+    <div class="card">
+      <div class="ctitle"><span class="ctitle-dot" style="background:#7c5cd8"></span>Agent 2 — Custom Code Inventory</div>
+      
+      <div class="bar-row">
+        <div class="bar-label">Z Programs</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#3b82d4"></div></div>
+        <div class="bar-val">250</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Function Modules</div>
+        <div class="bar-track"><div class="bar-fill" style="width:32%;background:#7c5cd8"></div></div>
+        <div class="bar-val">80</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Classes</div>
+        <div class="bar-track"><div class="bar-fill" style="width:20%;background:#06b6d4"></div></div>
+        <div class="bar-val">50</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Custom Tables</div>
+        <div class="bar-track"><div class="bar-fill" style="width:10%;background:#10b981"></div></div>
+        <div class="bar-val">25</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">BADIs</div>
+        <div class="bar-track"><div class="bar-fill" style="width:3%;background:#f59e0b"></div></div>
+        <div class="bar-val">8</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">User Exits</div>
+        <div class="bar-track"><div class="bar-fill" style="width:2%;background:#ef4444"></div></div>
+        <div class="bar-val">6</div>
+      </div>
+      <p style='font-size:10px;color:#57606a;margin-top:8px'><strong>688,585 total LOC</strong> &nbsp;·&nbsp; 419 objects</p>
+    </div>
+    <div class="card">
+      <div class="ctitle"><span class="ctitle-dot" style="background:#10b981"></span>Agent 4 — S/4HANA Simplification Impact</div>
+      
+      <div class="bar-row">
+        <div class="bar-label">Deprecated FMs</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#7c5cd8"></div></div>
+        <div class="bar-val">10</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Deprecated Tables</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#06b6d4"></div></div>
+        <div class="bar-val">10</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Removed TX</div>
+        <div class="bar-track"><div class="bar-fill" style="width:80%;background:#ef4444"></div></div>
+        <div class="bar-val">8</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Business Partner</div>
+        <div class="bar-track"><div class="bar-fill" style="width:60%;background:#f97316"></div></div>
+        <div class="bar-val">6</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Universal Journal</div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%;background:#10b981"></div></div>
+        <div class="bar-val">5</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Compat Views</div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%;background:#f59e0b"></div></div>
+        <div class="bar-val">5</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Material Ledger</div>
+        <div class="bar-track"><div class="bar-fill" style="width:40%;background:#3b82d4"></div></div>
+        <div class="bar-val">4</div>
+      </div>
+      <p style='font-size:10px;color:#57606a;margin-top:8px'>48 total · 0 critical affected</p>
+    </div>
+  </div>
+
+  <!-- ROW 3: Risk factors + Landscape -->
+  <div class="g2">
+    <div class="card">
+      <div class="ctitle"><span class="ctitle-dot" style="background:#f97316"></span>Agent 6 — Risk Score Breakdown</div>
+      
+      <div class="bar-row">
+        <div class="bar-label">ATC Findings<span class="bar-sub">×30%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:65%;background:#dc2626"></div></div>
+        <div class="bar-val">64.9</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Complexity LOC<span class="bar-sub">×15%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:85%;background:#f97316"></div></div>
+        <div class="bar-val">85</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Deprecated APIs<span class="bar-sub">×25%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:0%;background:#eab308"></div></div>
+        <div class="bar-val">0</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Dependencies<span class="bar-sub">×10%</span></div>
+        <div class="bar-track"><div class="bar-fill" style="width:12%;background:#3b82d4"></div></div>
+        <div class="bar-val">12</div>
+      </div>
+      <hr class="div">
+      <div class="stat-grid">
+        <div class="stat-box"><div class="sv" style="color:#f97316">33.4</div><div class="sl">Aggregate risk / 100</div></div>
+        <div class="stat-box"><div class="sv" style="color:#3b82d4">66.6</div><div class="sl">Readiness (100 − risk)</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ctitle"><span class="ctitle-dot" style="background:#06b6d4"></span>Agent 1 — System Landscape</div>
+      <table>
+        <tr><th>Property</th><th>Value</th></tr>
+        
+        <tr><td>System ID</td><td><strong>ECC</strong></td></tr>
+        <tr><td>SAP Version</td><td>SAP ECC 6.0 EHP8 (Release 740)</td></tr>
+        <tr><td>HANA Version</td><td>SAP HANA 2.0 SP07</td></tr>
+        <tr><td>App Servers</td><td>10</td></tr>
+        <tr><td>Active Clients</td><td>5</td></tr>
+        <tr><td>RFC Destinations</td><td>10</td></tr>
+        <tr><td>Components</td><td>10</td></tr>
+        <tr><td>Transport Domains</td><td>4-tier system</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ROW 4: Timeline (full width) -->
+  <div class="card card-full">
+    <div class="ctitle"><span class="ctitle-dot" style="background:#3b82d4"></span>Agent 8 — Project Timeline — 12 Weeks</div>
+    
+    <svg viewBox="0 0 760 120" width="100%" style="min-width:460px;display:block;overflow:visible">
+      <line x1="10" y1="104" x2="750" y2="104" stroke="#e5e7eb"/>
+      <rect x="10" y="8" width="122" height="20" rx="3" fill="#3b82d4"/><text x="71" y="22.0" text-anchor="middle" font-size="8.5" fill="#fff" font-weight="600">Project Charter</text><rect x="253" y="8" width="243" height="20" rx="3" fill="#10b981"/><text x="375" y="22.0" text-anchor="middle" font-size="8.5" fill="#fff" font-weight="600">Business Partner Conv.</text><rect x="10" y="32" width="243" height="20" rx="3" fill="#7c5cd8"/><text x="132" y="46.0" text-anchor="middle" font-size="8.5" fill="#fff" font-weight="600">Landscape &amp; Prep</text><rect x="375" y="32" width="365" height="20" rx="3" fill="#ef4444"/><text x="558" y="46.0" text-anchor="middle" font-size="8.5" fill="#fff" font-weight="600">UAT &amp; Integration Testing</text><rect x="132" y="56" width="487" height="20" rx="3" fill="#f97316"/><text x="375" y="70.0" text-anchor="middle" font-size="8.5" fill="#fff" font-weight="600">Custom Code Adaptation (8 wks)</text><rect x="253" y="80" width="182" height="18" rx="3" fill="#06b6d4"/><text x="345" y="93.0" text-anchor="middle" font-size="8.5" fill="#fff" font-weight="600">Material Ledger</text><rect x="618" y="80" width="122" height="18" rx="3" fill="#1f2328"/><text x="679" y="93.0" text-anchor="middle" font-size="8.5" fill="#fff" font-weight="600">Cutover</text>
+      <text x="10" y="113" font-size="8" fill="#57606a" text-anchor="middle">W0</text><text x="132" y="113" font-size="8" fill="#57606a" text-anchor="middle">W2</text><text x="253" y="113" font-size="8" fill="#57606a" text-anchor="middle">W4</text><text x="375" y="113" font-size="8" fill="#57606a" text-anchor="middle">W6</text><text x="497" y="113" font-size="8" fill="#57606a" text-anchor="middle">W8</text><text x="618" y="113" font-size="8" fill="#57606a" text-anchor="middle">W10</text><text x="740" y="113" font-size="8" fill="#57606a" text-anchor="middle">W12</text>
+    </svg>
+  </div>
+
+  <!-- ROW 5: Recommendations (full width) -->
+  <div class="card card-full">
+    <div class="ctitle"><span class="ctitle-dot" style="background:#dc2626"></span>Agent 7 — Top Recommendations (20 generated · 20 person-days)</div>
+    <table>
+      <tr><th>Priority</th><th>Object</th><th>Problem</th><th>Recommended Fix</th><th>Effort</th></tr>
+      
+            <tr>
+              <td><span class="badge-crit">Critical</span></td>
+              <td><code>ZGL_REPORT_0001</code></td>
+              <td>ATC finding: Obsolete Statement / API Usage</td>
+              <td>Review SAP simplification item and refactor accordingly.</td>
+              <td style="white-space:nowrap">To be estimated during detailed analysis</td>
+            </tr>
+            <tr>
+              <td><span class="badge-high">High</span></td>
+              <td><code>ZFI_REPORT_0003</code></td>
+              <td>ATC finding: Obsolete Statement / API Usage</td>
+              <td>Review SAP simplification item and refactor accordingly.</td>
+              <td style="white-space:nowrap">To be estimated during detailed analysis</td>
+            </tr>
+            <tr>
+              <td><span class="badge-crit">Critical</span></td>
+              <td><code>ZAR_REPORT_0004</code></td>
+              <td>ATC finding: Obsolete Statement / API Usage</td>
+              <td>Review SAP simplification item and refactor accordingly.</td>
+              <td style="white-space:nowrap">To be estimated during detailed analysis</td>
+            </tr>
+            <tr>
+              <td><span class="badge-high">High</span></td>
+              <td><code>ZPO_REPORT_0001</code></td>
+              <td>ATC finding: Obsolete Statement / API Usage</td>
+              <td>Review SAP simplification item and refactor accordingly.</td>
+              <td style="white-space:nowrap">To be estimated during detailed analysis</td>
+            </tr>
+            <tr>
+              <td><span class="badge-high">High</span></td>
+              <td><code>ZPO_REPORT_0002</code></td>
+              <td>ATC finding: Obsolete Statement / API Usage</td>
+              <td>Review SAP simplification item and refactor accordingly.</td>
+              <td style="white-space:nowrap">To be estimated during detailed analysis</td>
+            </tr>
+            <tr>
+              <td><span class="badge-crit">Critical</span></td>
+              <td><code>ZPO_REPORT_0003</code></td>
+              <td>ATC finding: Obsolete Statement / API Usage</td>
+              <td>Review SAP simplification item and refactor accordingly.</td>
+              <td style="white-space:nowrap">To be estimated during detailed analysis</td>
+            </tr>
+            <tr>
+              <td><span class="badge-crit">Critical</span></td>
+              <td><code>ZPO_REPORT_0004</code></td>
+              <td>ATC finding: Obsolete Statement / API Usage</td>
+              <td>Review SAP simplification item and refactor accordingly.</td>
+              <td style="white-space:nowrap">To be estimated during detailed analysis</td>
+            </tr>
+            <tr>
+              <td><span class="badge-high">High</span></td>
+              <td><code>ZSD_REPORT_0001</code></td>
+              <td>ATC finding: Obsolete Statement / API Usage</td>
+              <td>Review SAP simplification item and refactor accordingly.</td>
+              <td style="white-space:nowrap">To be estimated during detailed analysis</td>
+            </tr>
+            <tr>
+              <td><span class="badge-crit">Critical</span></td>
+              <td><code>ZDL_REPORT_0002</code></td>
+              <td>ATC finding: Obsolete Statement / API Usage</td>
+              <td>Review SAP simplification item and refactor accordingly.</td>
+              <td style="white-space:nowrap">To be estimated during detailed analysis</td>
+            </tr>
+            <tr>
+              <td><span class="badge-crit">Critical</span></td>
+              <td><code>ZBI_REPORT_0003</code></td>
+              <td>ATC finding: Obsolete Statement / API Usage</td>
+              <td>Review SAP simplification item and refactor accordingly.</td>
+              <td style="white-space:nowrap">To be estimated during detailed analysis</td>
+            </tr>
+    </table>
+  </div>
+
+  <!-- ROW 6: Runbook + Output files -->
+  <div class="g2">
+    <div class="card">
+      <div class="ctitle"><span class="ctitle-dot" style="background:#3b82d4"></span>Agent 8 — Migration Runbook (11 phases)</div>
+      <ul class="steps"><li>
+              <div class="snum">1</div>
+              <div>
+                <strong>1. Executive Summary & Project Charter</strong>
+                <div class="smeta">PMO & Executive Leadership &nbsp;·&nbsp; 2 weeks</div>
+              </div>
+            </li><li>
+              <div class="snum">2</div>
+              <div>
+                <strong>2. Project Preparation & Landscape Assessment</strong>
+                <div class="smeta">SAP BASIS + ABAP Team &nbsp;·&nbsp; 4 weeks</div>
+              </div>
+            </li><li>
+              <div class="snum">3</div>
+              <div>
+                <strong>3. Custom Code Adaptation</strong>
+                <div class="smeta">ABAP Development Team &nbsp;·&nbsp; 8 weeks</div>
+              </div>
+            </li><li>
+              <div class="snum">4</div>
+              <div>
+                <strong>4. Business Partner Conversion</strong>
+                <div class="smeta">Finance Functional Team + ABAP &nbsp;·&nbsp; 4 weeks</div>
+              </div>
+            </li><li>
+              <div class="snum">5</div>
+              <div>
+                <strong>5. Material Ledger Activation</strong>
+                <div class="smeta">Finance & Controlling Team &nbsp;·&nbsp; 3 weeks</div>
+              </div>
+            </li><li>
+              <div class="snum">6</div>
+              <div>
+                <strong>6. Universal Journal Migration</strong>
+                <div class="smeta">Finance Functional + ABAP Team &nbsp;·&nbsp; 4 weeks</div>
+              </div>
+            </li><li>
+              <div class="snum">7</div>
+              <div>
+                <strong>7. Integration & Interface Testing</strong>
+                <div class="smeta">Integration Team + BASIS &nbsp;·&nbsp; 4 weeks</div>
+              </div>
+            </li><li>
+              <div class="snum">8</div>
+              <div>
+                <strong>8. User Acceptance Testing (UAT)</strong>
+                <div class="smeta">Business Process Owners + QA Team &nbsp;·&nbsp; 6 weeks</div>
+              </div>
+            </li><li>
+              <div class="snum">9</div>
+              <div>
+                <strong>9. Cutover Planning & Execution</strong>
+                <div class="smeta">BASIS + PMO + All Teams &nbsp;·&nbsp; 2 weeks</div>
+              </div>
+            </li><li>
+              <div class="snum">10</div>
+              <div>
+                <strong>10. Rollback Plan</strong>
+                <div class="smeta">BASIS + PMO &nbsp;·&nbsp; 1 week (preparation)</div>
+              </div>
+            </li><li>
+              <div class="snum">11</div>
+              <div>
+                <strong>11. Post Go-Live & Hypercare</strong>
+                <div class="smeta">Full Project Team &nbsp;·&nbsp; 4 weeks</div>
+              </div>
+            </li></ul>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="card">
+        <div class="ctitle"><span class="ctitle-dot" style="background:#10b981"></span>Assessment Summary</div>
+        
+    <div class="stat-grid">
+      <div class="stat-box"><div class="sv" style="color:#3b82d4">66.6</div><div class="sl">Readiness / 100</div></div>
+      <div class="stat-box"><div class="sv" style="color:#7c5cd8">419</div><div class="sl">Custom Objects</div></div>
+      <div class="stat-box"><div class="sv" style="color:#dc2626">65</div><div class="sl">ATC Findings</div></div>
+      <div class="stat-box"><div class="sv" style="color:#10b981">48</div><div class="sl">Simplif. Items</div></div>
+      <div class="stat-box"><div class="sv" style="color:#f97316">20</div><div class="sl">Recommendations</div></div>
+      <div class="stat-box"><div class="sv" style="color:#06b6d4">12</div><div class="sl">Weeks Timeline</div></div>
+    </div>
+      </div>
+      <div class="card">
+        <div class="ctitle"><span class="ctitle-dot" style="background:#7c5cd8"></span>Agent 9 — Output Files</div>
+        <table class="file-tbl">
+          <tr><th>File</th><th>Size</th></tr>
+          <tr><td>dashboard_demo-001.html</td><td>4.6 MB</td></tr><tr><td>dashboard_demo-001.json</td><td>1.4 KB</td></tr><tr><td>dashboard_demo-001_static.html</td><td>29.0 KB</td></tr><tr><td>dashboard_demo-APO.html</td><td>4.6 MB</td></tr><tr><td>dashboard_demo-APO.json</td><td>1.4 KB</td></tr><tr><td>dashboard_demo-CRM.html</td><td>4.6 MB</td></tr><tr><td>dashboard_demo-CRM.json</td><td>1.4 KB</td></tr><tr><td>dashboard_demo-ECC.html</td><td>4.6 MB</td></tr><tr><td>dashboard_demo-ECC.json</td><td>1.4 KB</td></tr><tr><td>dashboard_demo-ECC_static.html</td><td>31.0 KB</td></tr><tr><td>dashboard_demo-GRC.html</td><td>4.6 MB</td></tr><tr><td>dashboard_demo-GRC.json</td><td>1.4 KB</td></tr><tr><td>dashboard_demo-HR1.html</td><td>4.6 MB</td></tr><tr><td>dashboard_demo-HR1.json</td><td>1.4 KB</td></tr><tr><td>dashboard_demo-MM1.html</td><td>4.6 MB</td></tr><tr><td>dashboard_demo-MM1.json</td><td>1.4 KB</td></tr><tr><td>dashboard_demo-SD1.html</td><td>4.6 MB</td></tr><tr><td>dashboard_demo-SD1.json</td><td>1.4 KB</td></tr><tr><td>dashboard_multi_system.html</td><td>46.6 KB</td></tr><tr><td>dashboard_unified_agentic_ai.html</td><td>82.7 KB</td></tr><tr><td>runbook_demo-001.docx</td><td>36.8 KB</td></tr><tr><td>runbook_demo-001.md</td><td>5.4 KB</td></tr><tr><td>runbook_demo-001.pdf</td><td>7.6 KB</td></tr><tr><td>runbook_demo-APO.docx</td><td>36.8 KB</td></tr><tr><td>runbook_demo-APO.md</td><td>5.4 KB</td></tr><tr><td>runbook_demo-APO.pdf</td><td>7.6 KB</td></tr><tr><td>runbook_demo-CRM.docx</td><td>36.8 KB</td></tr><tr><td>runbook_demo-CRM.md</td><td>5.4 KB</td></tr><tr><td>runbook_demo-CRM.pdf</td><td>7.6 KB</td></tr><tr><td>runbook_demo-ECC.docx</td><td>36.8 KB</td></tr><tr><td>runbook_demo-ECC.md</td><td>5.4 KB</td></tr><tr><td>runbook_demo-ECC.pdf</td><td>7.6 KB</td></tr><tr><td>runbook_demo-GRC.docx</td><td>36.8 KB</td></tr><tr><td>runbook_demo-GRC.md</td><td>5.4 KB</td></tr><tr><td>runbook_demo-GRC.pdf</td><td>7.6 KB</td></tr><tr><td>runbook_demo-HR1.docx</td><td>36.8 KB</td></tr><tr><td>runbook_demo-HR1.md</td><td>5.4 KB</td></tr><tr><td>runbook_demo-HR1.pdf</td><td>7.6 KB</td></tr><tr><td>runbook_demo-MM1.docx</td><td>36.8 KB</td></tr><tr><td>runbook_demo-MM1.md</td><td>5.4 KB</td></tr><tr><td>runbook_demo-MM1.pdf</td><td>7.6 KB</td></tr><tr><td>runbook_demo-SD1.docx</td><td>36.8 KB</td></tr><tr><td>runbook_demo-SD1.md</td><td>5.4 KB</td></tr><tr><td>runbook_demo-SD1.pdf</td><td>7.6 KB</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Assessment ID: demo-ECC &nbsp;·&nbsp; System: ECC &nbsp;·&nbsp;
+    Generated: 2026-07-26 12:57 UTC &nbsp;·&nbsp; SAP Migration Agent (9-agent LangGraph pipeline)
+  </footer>
+
+</div>
+</body>
+</html>

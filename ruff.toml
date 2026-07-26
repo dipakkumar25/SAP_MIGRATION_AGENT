@@ -1,0 +1,48 @@
+# Ruff configuration for SAP Migration Assessment Agent
+# https://docs.astral.sh/ruff/configuration/
+
+# Directories ruff should check
+src = ["app", "config"]
+
+# Python target version (matches CI)
+target-version = "py312"
+
+line-length = 120
+
+[lint]
+# Rules enabled: pycodestyle errors, pyflakes, isort, and a subset of pylint
+select = ["E", "F", "I", "W", "UP"]
+
+# Ignored rules
+ignore = [
+  "E501",   # line too long — handled by formatter, not enforced here
+  "E402",   # module-level import not at top (run_sample.py stubs sys.modules first)
+  "F401",   # imported but unused (TYPE_CHECKING imports)
+  "UP007",  # use X | Y instead of Optional (keep Optional for broader compat)
+]
+
+# Files / directories to skip entirely
+exclude = [
+  ".venv",
+  "venv",
+  "env",
+  "__pycache__",
+  "*.pyc",
+  "output/",
+  "sample_data/",
+  "docs/",
+  "frontend/",
+  "docker/",
+]
+
+# Per-file ignores
+[lint.per-file-ignores]
+"run_sample.py"      = ["E402", "F811"]  # sys.modules stubs before imports
+"tests/*"            = ["F811", "F401"]  # test helpers redefine names freely
+"app/models/schemas.py" = ["UP006", "UP007"]  # keep Optional / List for pydantic compat
+
+[format]
+# Use double quotes, 4-space indent
+quote-style = "double"
+indent-style = "space"
+line-ending  = "auto"

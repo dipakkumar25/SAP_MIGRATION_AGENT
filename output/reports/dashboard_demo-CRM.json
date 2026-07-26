@@ -1,0 +1,80 @@
+{
+  "assessment_id": "demo-CRM1",
+  "system_id": "CRM1",
+  "generated_at": "2026-07-26T12:57:45.143085",
+  "charts": {
+    "atc_bar": {
+      "x": [
+        "Critical",
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "y": [
+        26,
+        28,
+        11,
+        0
+      ],
+      "colors": [
+        "#dc2626",
+        "#f97316",
+        "#eab308",
+        "#22c55e"
+      ]
+    },
+    "custom_code_pie": {
+      "labels": [
+        "Z Programs",
+        "Function Modules",
+        "Classes",
+        "Tables",
+        "BADIs",
+        "User Exits"
+      ],
+      "values": [
+        250,
+        80,
+        50,
+        25,
+        8,
+        6
+      ]
+    },
+    "simplif_bar": {
+      "categories": [
+        "Removed TX",
+        "Deprecated FMs",
+        "Deprecated Tables",
+        "Compat Views",
+        "Universal Journal",
+        "Business Partner",
+        "Material Ledger"
+      ],
+      "counts": [
+        8,
+        10,
+        10,
+        5,
+        5,
+        6,
+        4
+      ]
+    },
+    "risk_dist": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 30,
+      "info": 0
+    }
+  },
+  "overall_score": 66.6,
+  "risk_level": "medium",
+  "custom_code_stats": {
+    "total_objects": 419,
+    "total_loc": 688585
+  },
+  "project_timeline_weeks": 12,
+  "runbook_sections": 11
+}

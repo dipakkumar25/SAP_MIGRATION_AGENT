@@ -1,4 +1,4 @@
-# ── Python ────────────────────────────────────────────────────────────────────
+﻿# -- Python -------------------------------------------------------------------
 __pycache__/
 *.pyc
 *.pyo
@@ -12,32 +12,33 @@ build/
 venv/
 env/
 
-# ── Output ────────────────────────────────────────────────────────────────────
-output/
-*.pdf
-*.docx
-*.png
-*.html
+# -- Output: Plotly-generated dashboards (4.7 MB each, Plotly.js embedded) ---
+# These contain Plotly minified JS which trips secret scanners.
+# Regenerate locally with: python run_sample.py
+output/reports/dashboard_demo-*.html
 
-# ── Environment ───────────────────────────────────────────────────────────────
+# All other output files (static HTML dashboards, PDF, DOCX, JSON, MD) are tracked.
+
+# -- Environment: NEVER commit real secrets -----------------------------------
 .env
 .env.local
 .env.*.local
+# NOTE: .env.example is intentionally tracked (placeholder values only)
 
-# ── Database ──────────────────────────────────────────────────────────────────
+# -- Database -----------------------------------------------------------------
 *.db
 *.sqlite
 
-# ── Tests ─────────────────────────────────────────────────────────────────────
+# -- Tests --------------------------------------------------------------------
 .pytest_cache/
 .coverage
 coverage.xml
 htmlcov/
 
-# ── IDE ───────────────────────────────────────────────────────────────────────
+# -- IDE ----------------------------------------------------------------------
 .vscode/
 .idea/
 *.swp
 
-# ── Docker ────────────────────────────────────────────────────────────────────
+# -- Docker -------------------------------------------------------------------
 docker-compose.override.yml
