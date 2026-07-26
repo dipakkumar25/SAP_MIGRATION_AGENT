@@ -2,9 +2,9 @@ name: CI/CD Pipeline – SAP Migration Assessment Agent
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, develop, fea]
   pull_request:
-    branches: [main]
+    branches: [main, fea]
 
 env:
   PYTHON_VERSION: "3.12"
@@ -28,10 +28,10 @@ jobs:
         run: pip install ruff mypy
 
       - name: Ruff lint
-        run: ruff check sap-migration-agent/
+        run: ruff check SAP_MIGRATION_AGENT/
 
       - name: Ruff format check
-        run: ruff format --check sap-migration-agent/
+        run: ruff format --check SAP_MIGRATION_AGENT/
 
   # ── Tests ────────────────────────────────────────────────────────────────────
   test:
@@ -64,11 +64,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd sap-migration-agent
+          cd SAP_MIGRATION_AGENT
           pip install -r requirements.txt
 
       - name: Run tests
-        working-directory: sap-migration-agent
+        working-directory: SAP_MIGRATION_AGENT
         env:
           SAP_USE_MOCK: "true"
           DATABASE_URL: "postgresql+asyncpg://sap_agent:sap_agent@localhost:5432/sap_migration"
@@ -82,7 +82,7 @@ jobs:
       - name: Upload coverage
         uses: codecov/codecov-action@v4
         with:
-          file: sap-migration-agent/coverage.xml
+          file: SAP_MIGRATION_AGENT/coverage.xml
           fail_ci_if_error: false
 
   # ── Docker Build ─────────────────────────────────────────────────────────────
@@ -107,8 +107,8 @@ jobs:
       - name: Build and push API image
         uses: docker/build-push-action@v5
         with:
-          context: ./sap-migration-agent
-          file: ./sap-migration-agent/docker/Dockerfile.api
+          context: ./SAP_MIGRATION_AGENT
+          file: ./SAP_MIGRATION_AGENT/docker/Dockerfile.api
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}-api:latest
@@ -119,8 +119,8 @@ jobs:
       - name: Build and push Frontend image
         uses: docker/build-push-action@v5
         with:
-          context: ./sap-migration-agent
-          file: ./sap-migration-agent/docker/Dockerfile.frontend
+          context: ./SAP_MIGRATION_AGENT
+          file: ./SAP_MIGRATION_AGENT/docker/Dockerfile.frontend
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}-frontend:latest
