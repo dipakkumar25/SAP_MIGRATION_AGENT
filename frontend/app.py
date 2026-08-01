@@ -283,7 +283,7 @@ with st.sidebar:
         st.rerun()
 
     st.markdown("---")
-    st.markdown("<div style='font-size:0.7rem;color:#4b5563'>SAP MM Migration Agent v2.0<br>Powered by LangGraph + GPT-4o</div>",
+    st.markdown("<div style='font-size:0.7rem;color:#4b5563'>SAP MM Migration Agent v2.0<br>Powered by LangGraph + IBM Consulting Advantage</div>",
                 unsafe_allow_html=True)
 
 
@@ -1217,10 +1217,70 @@ with tabs[8]:
         output_dir = Path("output/reports")
         aid_short = (_live.assessment_id or "")[:8]
 
+        # ── LLM Recommendations ───────────────────────────────────────────
+        st.markdown("#### 🤖 LLM Recommendations (IBM Consulting Advantage)")
+        rr = _live.recommendation_report
+        if rr and rr.recommendations:
+            rec_count = len(rr.recommendations)
+            critical_count = sum(1 for r in rr.recommendations if r.priority.value == "critical")
+            st.success(
+                f"**{rec_count} recommendations** generated · "
+                f"{critical_count} critical · "
+                f"Total effort: {rr.total_effort_days} days · "
+                f"Generated: {rr.generated_at.strftime('%Y-%m-%d %H:%M UTC')}"
+            )
+            col_rec1, col_rec2 = st.columns(2)
+            with col_rec1:
+                if rr.excel_path and Path(rr.excel_path).exists():
+                    with open(rr.excel_path, "rb") as f:
+                        st.download_button(
+                            "⬇️ Download Recommendations (.xlsx)",
+                            f,
+                            file_name=Path(rr.excel_path).name,
+                            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            use_container_width=True,
+                            type="primary",
+                        )
+                    st.caption(f"📂 `{rr.excel_path}`")
+                else:
+                    st.warning("Excel file not found — re-run assessment to regenerate")
+            with col_rec2:
+                if rr.csv_path and Path(rr.csv_path).exists():
+                    with open(rr.csv_path, "rb") as f:
+                        st.download_button(
+                            "⬇️ Download Recommendations (.csv)",
+                            f,
+                            file_name=Path(rr.csv_path).name,
+                            mime="text/csv",
+                            use_container_width=True,
+                        )
+                    st.caption(f"📂 `{rr.csv_path}`")
+                else:
+                    st.warning("CSV file not found — re-run assessment to regenerate")
+
+            # Quick inline preview
+            with st.expander("👁️ Preview recommendations (top 10)"):
+                preview = [{
+                    "Priority":    r.priority.value.upper(),
+                    "Object":      r.object_name,
+                    "Problem":     r.problem[:80] + "…" if len(r.problem) > 80 else r.problem,
+                    "Fix":         r.recommended_fix[:80] + "…" if len(r.recommended_fix) > 80 else r.recommended_fix,
+                    "Effort":      r.estimated_effort,
+                    "Days":        r.estimated_duration_days,
+                    "Consultant":  r.required_consultant,
+                } for r in rr.recommendations[:10]]
+                st.dataframe(preview, use_container_width=True)
+        else:
+            st.info("No LLM recommendations available. Run a live assessment.")
+
+        st.markdown("---")
+
+        # ── Runbook downloads ─────────────────────────────────────────────
+        st.markdown("#### 📘 Migration Runbook")
         col_dl1, col_dl2, col_dl3 = st.columns(3)
 
         with col_dl1:
-            st.markdown("#### 📄 PDF Runbook")
+            st.markdown("##### 📄 PDF")
             if _live.runbook and _live.runbook.pdf_path:
                 p = Path(_live.runbook.pdf_path)
                 if p.exists():
@@ -1230,10 +1290,10 @@ with tabs[8]:
                 else:
                     st.info("PDF not yet generated")
             else:
-                st.info("Run a live assessment to generate PDF")
+                st.info("Run assessment to generate")
 
         with col_dl2:
-            st.markdown("#### 📝 DOCX Runbook")
+            st.markdown("##### 📝 DOCX")
             if _live.runbook and _live.runbook.docx_path:
                 p = Path(_live.runbook.docx_path)
                 if p.exists():
@@ -1244,10 +1304,10 @@ with tabs[8]:
                 else:
                     st.info("DOCX not yet generated")
             else:
-                st.info("Run a live assessment to generate DOCX")
+                st.info("Run assessment to generate")
 
         with col_dl3:
-            st.markdown("#### 📋 Markdown Runbook")
+            st.markdown("##### 📋 Markdown")
             if _live.runbook and _live.runbook.markdown_path:
                 p = Path(_live.runbook.markdown_path)
                 if p.exists():
@@ -1257,10 +1317,11 @@ with tabs[8]:
                 else:
                     st.info("Markdown not yet generated")
             else:
-                st.info("Run a live assessment to generate Markdown")
+                st.info("Run assessment to generate")
 
         dash_path = output_dir / f"dashboard_{aid_short}.html"
         if dash_path.exists():
+            st.markdown("---")
             st.markdown("#### 📊 Interactive HTML Dashboard")
             with open(dash_path, "rb") as f:
                 st.download_button("⬇️ Download Dashboard HTML", f,
@@ -1276,6 +1337,7 @@ with tabs[8]:
             f"Status         : {_live.status.value}",
             f"Steps Completed: {', '.join(_live.steps_completed)}",
             f"Current Step   : {_live.current_step}",
+            f"LLM Backend    : {_live.recommendation_report.generated_at.strftime('%Y-%m-%d %H:%M UTC') if _live.recommendation_report else 'N/A'}",
         ]
         if _live.error_messages:
             log_lines.append("")

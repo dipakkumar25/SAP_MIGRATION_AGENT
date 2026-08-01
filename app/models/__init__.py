@@ -6,7 +6,11 @@ from .schemas import (
     RiskLevel, RiskScore, RunbookSection, SAPSystem,
     SimplificationItem, SimplificationReport,
 )
-from .orm_models import Assessment, ATCRecord, CustomCodeRecord, LandscapeRecord, RiskRecord, ReportFile
+
+# ORM models are only needed by the FastAPI layer (routes/database).
+# They are NOT imported here to avoid triggering database engine creation
+# at import time when running the Streamlit frontend or agent pipeline
+# without a live PostgreSQL connection.
 
 __all__ = [
     "AgentState", "ATCCategory", "ATCFinding", "ATCReport",
@@ -15,5 +19,4 @@ __all__ = [
     "MigrationStatus", "ObjectType", "RecommendationReport", "Recommendation",
     "RiskLevel", "RiskScore", "RunbookSection", "SAPSystem",
     "SimplificationItem", "SimplificationReport",
-    "Assessment", "ATCRecord", "CustomCodeRecord", "LandscapeRecord", "RiskRecord", "ReportFile",
 ]

@@ -240,6 +240,9 @@ class RecommendationReport(BaseModel):
     recommendations: List[Recommendation] = Field(default_factory=list)
     total_effort_days: int = 0
     generated_at: datetime = Field(default_factory=datetime.utcnow)
+    # Export file paths written by agent_07 after generation
+    excel_path: Optional[str] = None
+    csv_path: Optional[str] = None
 
 
 # ─────────────────────────────────────────────────────────────────────────────
