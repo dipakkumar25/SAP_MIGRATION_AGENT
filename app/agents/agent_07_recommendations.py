@@ -77,7 +77,13 @@ _RULE_BASED: dict = {
 
 @retry(stop=stop_after_attempt(2), wait=wait_exponential(multiplier=1, min=1, max=4))
 def _llm_recommend(finding: ATCFinding, llm) -> Recommendation:
-    prompt = build_finding_prompt(finding)
+    from app.services.rag_service import retrieve_for_finding
+    rag_context = retrieve_for_finding(
+        object_name=finding.object_name,
+        check_title=finding.check_title,
+        message=finding.message,
+    )
+    prompt = build_finding_prompt(finding, rag_context=rag_context)
     response = llm.invoke([
         {"role": "system", "content": RECOMMENDATION_SYSTEM_PROMPT},
         {"role": "user",   "content": prompt},

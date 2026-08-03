@@ -286,6 +286,8 @@ class AgentState(BaseModel):
     readiness_score: Optional[MigrationReadinessScore] = None
     recommendation_report: Optional[RecommendationReport] = None
     runbook: Optional[MigrationRunbook] = None
+    # RAG — number of knowledge chunks ingested into ChromaDB at workflow start
+    rag_chunks_ingested: int = 0
     error_messages: List[str] = Field(default_factory=list)
     current_step: str = "start"
     steps_completed: List[str] = Field(default_factory=list)

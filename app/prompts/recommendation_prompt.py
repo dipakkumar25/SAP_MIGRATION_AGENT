@@ -10,6 +10,9 @@ You are a Senior SAP S/4HANA Migration Consultant with deep expertise in ABAP, S
 and SAP S/4HANA conversion projects. Your task is to analyze ATC findings and provide
 structured, actionable recommendations.
 
+When relevant knowledge context is provided below, use it to ground your answer with
+specific SAP Notes, transaction codes, and field mappings from the context.
+
 Always respond with valid JSON matching this exact schema:
 {
   "problem": "Clear description of the problem",
@@ -26,9 +29,16 @@ Always respond with valid JSON matching this exact schema:
 """
 
 
-def build_finding_prompt(finding: ATCFinding) -> str:
-    return f"""
-Analyze the following SAP ATC finding and provide a migration recommendation:
+def build_finding_prompt(finding: ATCFinding, rag_context: str = "") -> str:
+    context_block = ""
+    if rag_context:
+        context_block = f"""
+--- RELEVANT SAP MIGRATION KNOWLEDGE (use this to ground your answer) ---
+{rag_context}
+--- END OF KNOWLEDGE CONTEXT ---
+
+"""
+    return f"""{context_block}Analyze the following SAP ATC finding and provide a migration recommendation:
 
 Object Name: {finding.object_name}
 Object Type: {finding.object_type}

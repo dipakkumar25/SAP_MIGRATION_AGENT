@@ -20,6 +20,7 @@ from langgraph.graph import END, START, StateGraph
 from langgraph.checkpoint.memory import MemorySaver
 
 from app.agents import (
+    run_rag_ingestion,
     run_atc_assessment,
     run_custom_code_discovery,
     run_dashboard_generation,
@@ -81,6 +82,7 @@ def build_graph(use_memory_checkpointer: bool = True):
     builder = StateGraph(dict)
 
     # Register nodes
+    builder.add_node("rag_ingestion",  _node(run_rag_ingestion))
     builder.add_node("landscape",      _node(run_landscape_discovery))
     builder.add_node("custom_code",    _node(run_custom_code_discovery))
     builder.add_node("atc",            _node(run_atc_assessment))
@@ -92,8 +94,9 @@ def build_graph(use_memory_checkpointer: bool = True):
     builder.add_node("runbook",        _node(run_runbook_generation))
     builder.add_node("dashboard",      _node(run_dashboard_generation))
 
-    # Linear edges
-    builder.add_edge(START, "landscape")
+    # Linear edges — RAG ingestion runs first, then landscape
+    builder.add_edge(START,            "rag_ingestion")
+    builder.add_edge("rag_ingestion",  "landscape")
     builder.add_edge("landscape",      "custom_code")
     builder.add_edge("custom_code",    "atc")
     builder.add_edge("atc",            "simplification")

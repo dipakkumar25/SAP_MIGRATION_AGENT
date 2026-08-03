@@ -1,3 +1,4 @@
+from .agent_00_rag_ingestion import run_rag_ingestion
 from .agent_01_landscape import run_landscape_discovery
 from .agent_02_custom_code import run_custom_code_discovery
 from .agent_03_atc import run_atc_assessment
@@ -9,6 +10,7 @@ from .agent_08_runbook import run_runbook_generation
 from .agent_09_dashboard import run_dashboard_generation
 
 __all__ = [
+    "run_rag_ingestion",
     "run_landscape_discovery",
     "run_custom_code_discovery",
     "run_atc_assessment",

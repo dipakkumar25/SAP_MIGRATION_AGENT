@@ -32,6 +32,7 @@ psycopg[binary]==2.9.9
 
 # ── Vector DB ────────────────────────────────────────────────────────────────
 chromadb==0.5.3
+sentence-transformers==3.0.1
 
 # ── SAP Connectivity ─────────────────────────────────────────────────────────
 # pyrfc==2.8.0          # Uncomment when SAP NW RFC SDK is available
