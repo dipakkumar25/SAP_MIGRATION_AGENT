@@ -13,6 +13,7 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 from app.models.schemas import AgentState, MigrationRunbook, RiskLevel, RunbookSection
 from app.prompts.runbook_prompt import RUNBOOK_SYSTEM_PROMPT, RUNBOOK_USER_TEMPLATE
 from app.services import get_logger, get_llm
+from app.services.llm_client import is_llm_available
 from config.settings import get_settings
 
 log = get_logger(__name__)
@@ -331,9 +332,8 @@ def run_runbook_generation(state: AgentState) -> AgentState:
         # Try LLM-generated runbook, fall back to rule-based
         sections = _DEFAULT_SECTIONS
         try:
-            llm = get_llm()
-            use_llm = bool(llm.openai_api_key and "dummy" not in str(llm.openai_api_key))
-            if use_llm:
+            if is_llm_available():
+                llm = get_llm()
                 sections = _llm_generate_runbook(state, llm)
                 log.info("Runbook generated via LLM")
         except Exception as exc:

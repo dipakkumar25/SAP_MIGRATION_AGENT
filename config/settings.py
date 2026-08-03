@@ -47,6 +47,31 @@ class Settings(BaseSettings):
     openai_temperature: float = 0.1
     openai_max_tokens: int = 4096
 
+    # ── LLM Backend selector ─────────────────────────────────────────────────
+    # "ica"     → IBM Consulting Advantage  (recommended)
+    # "openai"  → OpenAI directly
+    # "watsonx" → ibm-watsonx-ai SDK (needs project_id)
+    llm_backend: str = "ica"
+
+    # ── IBM Consulting Advantage (ICA) ────────────────────────────────────────
+    # ICA exposes an OpenAI-compatible REST API — no special SDK required.
+    # Get your key from: nextgen-beta.ica.ibm.com/ica/settings/api-keys
+    ica_api_key: Optional[SecretStr] = None
+    # ICA OpenAI-compatible chat endpoint
+    ica_base_url: str = "https://us-south.ml.cloud.ibm.com/ml/v1/text/chat"
+    # Free-tier model visible on the ICA Usage page
+    ica_model: str = "meta-llama/llama-4-maverick-17b-instruct-fp8"
+    ica_temperature: float = 0.1
+    ica_max_tokens: int = 4096
+
+    # ── IBM watsonx direct SDK (only needed when llm_backend="watsonx") ──────
+    watsonx_api_key: Optional[SecretStr] = None
+    watsonx_url: str = "https://us-south.ml.cloud.ibm.com"
+    watsonx_project_id: Optional[str] = None
+    watsonx_model_id: str = "ibm/granite-13b-chat-v2"
+    watsonx_max_new_tokens: int = 4096
+    watsonx_temperature: float = 0.1
+
     # ── LangSmith ────────────────────────────────────────────────────────────
     langchain_tracing_v2: bool = False
     langchain_api_key: Optional[SecretStr] = None
