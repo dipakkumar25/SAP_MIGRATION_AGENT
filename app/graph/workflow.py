@@ -20,11 +20,13 @@ from langgraph.graph import END, START, StateGraph
 from langgraph.checkpoint.memory import MemorySaver
 
 from app.agents import (
+    run_rag_ingestion,
     run_atc_assessment,
     run_custom_code_discovery,
     run_dashboard_generation,
     run_dependency_analysis,
     run_landscape_discovery,
+    run_ml_prediction,
     run_recommendation_generation,
     run_risk_assessment,
     run_runbook_generation,
@@ -81,25 +83,29 @@ def build_graph(use_memory_checkpointer: bool = True):
     builder = StateGraph(dict)
 
     # Register nodes
+    builder.add_node("rag_ingestion",  _node(run_rag_ingestion))
     builder.add_node("landscape",      _node(run_landscape_discovery))
     builder.add_node("custom_code",    _node(run_custom_code_discovery))
     builder.add_node("atc",            _node(run_atc_assessment))
     builder.add_node("simplification", _node(run_simplification_analysis))
     builder.add_node("dependencies",   _node(run_dependency_analysis))
     builder.add_node("risk",           _node(run_risk_assessment))
+    builder.add_node("ml_prediction",  _node(run_ml_prediction))
     builder.add_node("human_approval", _human_approval_node)
     builder.add_node("recommendations",_node(run_recommendation_generation))
     builder.add_node("runbook",        _node(run_runbook_generation))
     builder.add_node("dashboard",      _node(run_dashboard_generation))
 
-    # Linear edges
-    builder.add_edge(START, "landscape")
+    # Linear edges — RAG ingestion first, ML prediction after rule-based risk
+    builder.add_edge(START,            "rag_ingestion")
+    builder.add_edge("rag_ingestion",  "landscape")
     builder.add_edge("landscape",      "custom_code")
     builder.add_edge("custom_code",    "atc")
     builder.add_edge("atc",            "simplification")
     builder.add_edge("simplification", "dependencies")
     builder.add_edge("dependencies",   "risk")
-    builder.add_edge("risk",           "human_approval")
+    builder.add_edge("risk",           "ml_prediction")
+    builder.add_edge("ml_prediction",  "human_approval")
 
     # Conditional edge after human approval
     builder.add_conditional_edges(

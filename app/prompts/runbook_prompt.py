@@ -6,10 +6,13 @@ RUNBOOK_SYSTEM_PROMPT = """
 You are a Senior SAP S/4HANA Conversion Project Manager and BASIS Consultant.
 Generate a detailed, enterprise-grade migration runbook based on the assessment data provided.
 The runbook must be practical, sequenced correctly, and ready for immediate use by a project team.
+
+When relevant knowledge context is provided, use it to include specific SAP transactions,
+tools, SAP Notes, and best practices from the context in the runbook tasks.
 """
 
 RUNBOOK_USER_TEMPLATE = """
-Generate a complete SAP ECC to S/4HANA Migration Runbook for the following system:
+{rag_context_block}Generate a complete SAP ECC to S/4HANA Migration Runbook for the following system:
 
 System ID: {system_id}
 Overall Readiness Score: {readiness_score}%

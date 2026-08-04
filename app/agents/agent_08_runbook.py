@@ -205,7 +205,22 @@ def _llm_generate_runbook(state: AgentState, llm) -> list[RunbookSection]:
     if state.simplification_report:
         key_risks += [i.title for i in state.simplification_report.business_partner_items[:2]]
 
+    from app.services.rag_service import retrieve_for_runbook
+    rag_context = retrieve_for_runbook(
+        system_id=state.sap_system.sid,
+        risk_level=state.readiness_score.risk_level.value if state.readiness_score else "unknown",
+        key_risks=", ".join(key_risks) or "migration",
+    )
+    rag_context_block = ""
+    if rag_context:
+        rag_context_block = (
+            "--- RELEVANT SAP MIGRATION KNOWLEDGE (use to enrich runbook tasks) ---\n"
+            + rag_context
+            + "\n--- END OF KNOWLEDGE CONTEXT ---\n\n"
+        )
+
     prompt = RUNBOOK_USER_TEMPLATE.format(
+        rag_context_block=rag_context_block,
         system_id=state.sap_system.sid,
         readiness_score=state.readiness_score.overall_score if state.readiness_score else "N/A",
         risk_level=state.readiness_score.risk_level.value if state.readiness_score else "unknown",

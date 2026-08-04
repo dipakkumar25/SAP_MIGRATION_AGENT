@@ -11,18 +11,20 @@ python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 
 # ── LangChain / LangGraph ─────────────────────────────────────────────────────
-langchain==0.2.5
-langchain-openai==0.1.8
-langchain-community==0.2.5
-langgraph==0.1.5
-langsmith==0.1.77
+# NOTE: langchain 0.2.x pins numpy<2 which cannot build on Python 3.14 (no C compiler).
+#       All langchain packages are therefore pinned to the 0.3.x / compatible range.
+langchain>=0.3.0,<0.4
+langchain-openai>=0.3.0,<0.4
+langchain-community>=0.3.0,<0.4
+langgraph>=0.2.0,<0.3
+langsmith>=0.1.17,<1.0
 
 # ── OpenAI ────────────────────────────────────────────────────────────────────
-openai==1.35.3
+openai>=1.35.0,<3.0
 
 # ── IBM watsonx (LLM backend) ─────────────────────────────────────────────────
-langchain-ibm==0.1.12
-ibm-watsonx-ai==1.1.2
+langchain-ibm>=0.3.0,<0.4
+ibm-watsonx-ai>=1.1.16,<2.0
 
 # ── Database ──────────────────────────────────────────────────────────────────
 sqlalchemy==2.0.31
@@ -32,6 +34,7 @@ psycopg[binary]==2.9.9
 
 # ── Vector DB ────────────────────────────────────────────────────────────────
 chromadb==0.5.3
+sentence-transformers>=5.0.0
 
 # ── SAP Connectivity ─────────────────────────────────────────────────────────
 # pyrfc==2.8.0          # Uncomment when SAP NW RFC SDK is available
@@ -50,6 +53,10 @@ openpyxl==3.1.4
 python-docx==1.1.2
 jinja2==3.1.4
 markdown==3.6
+
+# ── Machine Learning ─────────────────────────────────────────────────────────
+scikit-learn==1.5.0
+joblib==1.4.2
 
 # ── Streamlit ────────────────────────────────────────────────────────────────
 streamlit==1.36.0
