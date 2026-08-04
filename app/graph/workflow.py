@@ -26,6 +26,7 @@ from app.agents import (
     run_dashboard_generation,
     run_dependency_analysis,
     run_landscape_discovery,
+    run_ml_prediction,
     run_recommendation_generation,
     run_risk_assessment,
     run_runbook_generation,
@@ -89,12 +90,13 @@ def build_graph(use_memory_checkpointer: bool = True):
     builder.add_node("simplification", _node(run_simplification_analysis))
     builder.add_node("dependencies",   _node(run_dependency_analysis))
     builder.add_node("risk",           _node(run_risk_assessment))
+    builder.add_node("ml_prediction",  _node(run_ml_prediction))
     builder.add_node("human_approval", _human_approval_node)
     builder.add_node("recommendations",_node(run_recommendation_generation))
     builder.add_node("runbook",        _node(run_runbook_generation))
     builder.add_node("dashboard",      _node(run_dashboard_generation))
 
-    # Linear edges — RAG ingestion runs first, then landscape
+    # Linear edges — RAG ingestion first, ML prediction after rule-based risk
     builder.add_edge(START,            "rag_ingestion")
     builder.add_edge("rag_ingestion",  "landscape")
     builder.add_edge("landscape",      "custom_code")
@@ -102,7 +104,8 @@ def build_graph(use_memory_checkpointer: bool = True):
     builder.add_edge("atc",            "simplification")
     builder.add_edge("simplification", "dependencies")
     builder.add_edge("dependencies",   "risk")
-    builder.add_edge("risk",           "human_approval")
+    builder.add_edge("risk",           "ml_prediction")
+    builder.add_edge("ml_prediction",  "human_approval")
 
     # Conditional edge after human approval
     builder.add_conditional_edges(

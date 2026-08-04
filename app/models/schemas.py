@@ -217,6 +217,36 @@ class MigrationReadinessScore(BaseModel):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# ML Predictions (Random Forest)
+# ─────────────────────────────────────────────────────────────────────────────
+
+class MLPrediction(BaseModel):
+    """Stores predictions and evaluation metrics from both RF models."""
+
+    # ── Effort Regression (RandomForestRegressor) ─────────────────────────────
+    predicted_effort_days: float = 0.0          # RF predicted effort in working days
+    regressor_mae: float = 0.0                  # Cross-val mean absolute error (days)
+    regressor_rmse: float = 0.0                 # Root mean squared error (days)
+    regressor_r2: float = 0.0                   # R² coefficient of determination
+    regressor_cv_mae: str = ""                  # "mean±std" string for display
+
+    # ── Risk Classification (RandomForestClassifier) ──────────────────────────
+    predicted_risk_level: str = "medium"        # Predicted class: low/medium/high/critical
+    risk_probabilities: Dict[str, float] = Field(default_factory=dict)  # class → probability
+    classifier_accuracy: float = 0.0            # Hold-out accuracy
+    classifier_cv_accuracy: str = ""            # "mean±std" string for display
+
+    # ── Feature importances ───────────────────────────────────────────────────
+    regressor_feature_importances: Dict[str, float] = Field(default_factory=dict)
+    classifier_feature_importances: Dict[str, float] = Field(default_factory=dict)
+
+    # ── Model metadata ────────────────────────────────────────────────────────
+    n_training_samples: int = 0
+    model_used: str = "RandomForest"
+    predicted_at: datetime = Field(default_factory=datetime.utcnow)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Recommendations
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -284,6 +314,7 @@ class AgentState(BaseModel):
     simplification_report: Optional[SimplificationReport] = None
     dependency_graph: Optional[DependencyGraph] = None
     readiness_score: Optional[MigrationReadinessScore] = None
+    ml_prediction: Optional[MLPrediction] = None          # RF regression + classification
     recommendation_report: Optional[RecommendationReport] = None
     runbook: Optional[MigrationRunbook] = None
     # RAG — number of knowledge chunks ingested into ChromaDB at workflow start

@@ -1,4 +1,4 @@
-﻿# -- Python -------------------------------------------------------------------
+# -- Python -------------------------------------------------------------------
 __pycache__/
 *.pyc
 *.pyo
@@ -16,6 +16,8 @@ env/
 # These contain Plotly minified JS which trips secret scanners.
 # Regenerate locally with: python run_sample.py
 output/reports/dashboard_demo-*.html
+output/reports/dependency_graph_*.html
+output/reports/*.html
 
 # All other output files (static HTML dashboards, PDF, DOCX, JSON, MD) are tracked.
 
@@ -44,3 +46,4 @@ htmlcov/
 docker-compose.override.yml
 
 frontend/output/
+

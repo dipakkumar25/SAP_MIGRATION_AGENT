@@ -5,6 +5,7 @@ from .agent_03_atc import run_atc_assessment
 from .agent_04_simplification import run_simplification_analysis
 from .agent_05_dependencies import run_dependency_analysis
 from .agent_06_risk import run_risk_assessment
+from .agent_06b_ml_prediction import run_ml_prediction
 from .agent_07_recommendations import run_recommendation_generation
 from .agent_08_runbook import run_runbook_generation
 from .agent_09_dashboard import run_dashboard_generation
@@ -17,6 +18,7 @@ __all__ = [
     "run_simplification_analysis",
     "run_dependency_analysis",
     "run_risk_assessment",
+    "run_ml_prediction",
     "run_recommendation_generation",
     "run_runbook_generation",
     "run_dashboard_generation",
